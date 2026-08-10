@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Oratoria | Aprende a comunicar</title>
+
+    <meta 
+        name="description" 
+        content="Página educativa sobre oratoria para aprender a hablar en público, argumentar y comunicarse mejor."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         BARRA DE NAVEGACIÓN
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            ORATORIA
+        </div>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">¿Qué es?</a>
+            <a href="#videos">Videos</a>
+            <a href="#practica">Practica</a>
+            <a href="#recursos">Recursos</a>
+            <a href="#preguntas">Preguntas</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- =========================
+             SECCIÓN INICIO
+        ========================== -->
+
+        <section id="inicio" class="hero">
+
+            <div class="hero-content">
+
+                <p class="hero-tag">
+                    PROYECTO EDUCATIVO
+                </p>
+
+                <h1>
+                    Aprende a hablar.
+                    <br>
+                    Aprende a comunicar.
+                </h1>
+
+                <p class="hero-text">
+                    Descubre cómo mejorar tu expresión oral, hablar
+                    frente a otras personas, construir argumentos y
+                    comunicar tus ideas con mayor claridad y seguridad.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#videos" class="button primary-button">
+                        Empezar a aprender
+                    </a>
+
+                    <a href="#nosotros" class="button secondary-button">
+                        Conoce el proyecto
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SECCIÓN ¿QUÉ ES?
+        ========================== -->
+
+        <section id="nosotros" class="section">
+
+            <div class="section-heading">
+
+                <p class="section-tag">
+                    CONOCE EL PROYECTO
+                </p>
+
+                <h2>
+                    ¿Qué es la oratoria?
+                </h2>
+
+                <p>
+                    La oratoria es el arte y la práctica de hablar
+                    ante otras personas de manera clara, organizada
+                    y eficaz.
+                </p>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <article class="info-card">
+
+                    <span class="card-number">01</span>
+
+                    <h3>
+                        Comunicar
+                    </h3>
+
+                    <p>
+                        Aprender a expresar ideas de manera clara
+                        para que otras personas puedan comprender
+                        el mensaje.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <span class="card-number">02</span>
+
+                    <h3>
+                        Expresarse
+                    </h3>
+
+                    <p>
+                        Utilizar la voz, las palabras y el lenguaje
+                        corporal para acompañar aquello que queremos
+                        comunicar.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <span class="card-number">03</span>
+
+                    <h3>
+                        Argumentar
+                    </h3>
+
+                    <p>
+                        Presentar ideas y razones de manera organizada
+                        y responder a diferentes puntos de vista.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SECCIÓN VIDEOS
+        ========================== -->
+
+        <section id="videos" class="section videos-section">
+
+            <div class="section-heading">
+
+                <p class="section-tag">
+                    APRENDE PASO A PASO
+                </p>
+
+                <h2>
+                    Curso de oratoria
+                </h2>
+
+                <p>
+                    Diez videos para aprender progresivamente
+                    diferentes aspectos de la oratoria.
+                </p>
+
+            </div>
+
+
+            <div class="video-grid">
+
+                <article class="video-card">
+
+                    <span>01</span>
+
+                    <h3>
+                        ¿Qué es realmente la oratoria?
+                    </h3>
+
+                    <p>
+                        Introducción a la oratoria y su importancia.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>02</span>
+
+                    <h3>
+                        ¿Cómo funciona la comunicación?
+                    </h3>
+
+                    <p>
+                        Elementos fundamentales del proceso comunicativo.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>03</span>
+
+                    <h3>
+                        El miedo a hablar en público
+                    </h3>
+
+                    <p>
+                        Comprender los nervios y aprender a afrontarlos.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>04</span>
+
+                    <h3>
+                        ¿Cómo construir un discurso?
+                    </h3>
+
+                    <p>
+                        Organización de las ideas y estructura del discurso.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>05</span>
+
+                    <h3>
+                        La voz del orador
+                    </h3>
+
+                    <p>
+                        Volumen, ritmo, pausas y otros elementos vocales.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>06</span>
+
+                    <h3>
+                        Lenguaje corporal
+                    </h3>
+
+                    <p>
+                        Postura, gestos, mirada y presencia frente al público.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>07</span>
+
+                    <h3>
+                        ¿Cómo mantener la atención?
+                    </h3>
+
+                    <p>
+                        Estrategias para facilitar la atención y comprensión.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>08</span>
+
+                    <h3>
+                        Argumentación y persuasión
+                    </h3>
+
+                    <p>
+                        Cómo construir argumentos y presentar una posición.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>09</span>
+
+                    <h3>
+                        ¿Cómo se entrena la oratoria?
+                    </h3>
+
+                    <p>
+                        Práctica, observación, retroalimentación y mejora.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+
+                <article class="video-card">
+
+                    <span>10</span>
+
+                    <h3>
+                        La oratoria en la vida real
+                    </h3>
+
+                    <p>
+                        Aplicación de estas habilidades en diferentes situaciones.
+                    </p>
+
+                    <a href="#" class="video-button">
+                        Ver video
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SECCIÓN PRÁCTICA
+        ========================== -->
+
+        <section id="practica" class="section practice-section">
+
+            <div class="section-heading">
+
+                <p class="section-tag">
+                    PONLO EN PRÁCTICA
+                </p>
+
+                <h2>
+                    No solo aprendas. Practica.
+                </h2>
+
+                <p>
+                    La oratoria se desarrolla mediante la práctica.
+                    Aquí encontrarás actividades para aplicar lo aprendido.
+                </p>
+
+            </div>
+
+
+            <div class="practice-grid">
+
+                <article class="practice-card">
+
+                    <h3>
+                        🎤 Habla durante 30 segundos
+                    </h3>
+
+                    <p>
+                        Elige un tema y explica tu idea principal
+                        sin leer.
+                    </p>
+
+                    <button type="button">
+                        Comenzar ejercicio
+                    </button>
+
+                </article>
+
+
+                <article class="practice-card">
+
+                    <h3>
+                        🧠 Construye un argumento
+                    </h3>
+
+                    <p>
+                        Presenta una opinión y acompáñala con razones
+                        que la respalden.
+                    </p>
+
+                    <button type="button">
+                        Comenzar ejercicio
+                    </button>
+
+                </article>
+
+
+                <article class="practice-card">
+
+                    <h3>
+                        ⏱️ Reto de improvisación
+                    </h3>
+
+                    <p>
+                        Recibe un tema y prepara una respuesta
+                        en un tiempo limitado.
+                    </p>
+
+                    <button type="button">
+                        Comenzar ejercicio
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SECCIÓN RECURSOS
+        ========================== -->
+
+        <section id="recursos" class="section">
+
+            <div class="section-heading">
+
+                <p class="section-tag">
+                    PARA SEGUIR APRENDIENDO
+                </p>
+
+                <h2>
+                    Libros y fuentes recomendadas
+                </h2>
+
+                <p>
+                    Recursos utilizados como base para investigar
+                    los contenidos del proyecto.
+                </p>
+
+            </div>
+
+
+            <div class="resources-grid">
+
+                <article class="resource-card">
+
+                    <h3>
+                        La Retórica
+                    </h3>
+
+                    <p>
+                        Aristóteles
+                    </p>
+
+                    <span>
+                        Obra clásica sobre retórica y persuasión.
+                    </span>
+
+                </article>
+
+
+                <article class="resource-card">
+
+                    <h3>
+                        The Art of Public Speaking
+                    </h3>
+
+                    <p>
+                        Stephen E. Lucas
+                    </p>
+
+                    <span>
+                        Obra académica dedicada al desarrollo de
+                        habilidades de expresión oral.
+                    </span>
+
+                </article>
+
+
+                <article class="resource-card">
+
+                    <h3>
+                        A Speaker's Guidebook
+                    </h3>
+
+                    <p>
+                        Dan O'Hair, Hannah Rubenstein y Rob Stewart
+                    </p>
+
+                    <span>
+                        Guía sobre preparación y presentación de discursos.
+                    </span>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SECCIÓN PREGUNTAS
+        ========================== -->
+
+        <section id="preguntas" class="section questions-section">
+
+            <div class="section-heading">
+
+                <p class="section-tag">
+                    RESUELVE TUS DUDAS
+                </p>
+
+                <h2>
+                    Preguntas frecuentes
+                </h2>
+
+            </div>
+
+
+            <div class="questions">
+
+                <details>
+                    <summary>
+                        ¿Tengo que ser extrovertido para aprender oratoria?
+                    </summary>
+
+                    <p>
+                        No. La oratoria es una habilidad que puede
+                        entrenarse mediante preparación y práctica.
+                    </p>
+
+                </details>
+
+
+                <details>
+                    <summary>
+                        ¿Qué hago si me pongo nervioso al hablar?
+                    </summary>
+
+                    <p>
+                        Los nervios pueden aparecer al hablar en público.
+                        Prepararse, practicar y exponerse progresivamente
+                        a situaciones de habla puede ayudar a afrontarlos.
+                    </p>
+
+                </details>
+
+
+                <details>
+                    <summary>
+                        ¿La oratoria solo sirve para hacer exposiciones?
+                    </summary>
+
+                    <p>
+                        No. También puede utilizarse en conversaciones,
+                        debates, entrevistas, presentaciones y diferentes
+                        situaciones académicas y profesionales.
+                    </p>
+
+                </details>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         PIE DE PÁGINA
+    ========================== -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <h2>
+                ORATORIA
+            </h2>
+
+            <p>
+                Proyecto educativo — SENA
+            </p>
+
+            <p>
+                Una iniciativa para aprender a comunicar ideas
+                de manera clara, organizada y efectiva.
+            </p>
+
+        </div>
+
+        <p class="copyright">
+            Proyecto de Oratoria
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
