@@ -648,3 +648,816 @@ footer {
     }
 
 }
+/* ==========================================
+   PANTALLA DE EJERCICIOS
+========================================== */
+
+body.exercise-open {
+    overflow: hidden;
+}
+
+
+/* Pantalla completa */
+
+.exercise-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+
+    background: #f5f7fb;
+
+    z-index: 9999;
+
+    animation: exerciseAppear 0.3s ease;
+
+}
+
+
+/* Animación */
+
+@keyframes exerciseAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Contenedor principal */
+
+.exercise-container {
+
+    width: min(1100px, 92%);
+
+    margin: 0 auto;
+
+    padding: 70px 0 50px;
+
+    position: relative;
+
+}
+
+
+/* Botón cerrar */
+
+.exercise-close {
+
+    position: fixed;
+
+    top: 25px;
+    right: 30px;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.12);
+
+    z-index: 10001;
+
+    transition: 0.2s ease;
+
+}
+
+
+.exercise-close:hover {
+
+    transform: rotate(90deg);
+
+}
+
+
+/* Encabezado */
+
+.exercise-header {
+
+    margin-bottom: 45px;
+
+    max-width: 800px;
+
+}
+
+
+.exercise-tag {
+
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #2563eb;
+
+}
+
+
+.exercise-header h1 {
+
+    margin: 0;
+
+    font-size: clamp(36px, 5vw, 64px);
+
+    line-height: 1.05;
+
+    color: #111827;
+
+}
+
+
+/* Cuerpo */
+
+.exercise-body {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+
+}
+
+
+/* ==========================================
+   EXPLICACIÓN DEL EJERCICIO
+========================================== */
+
+.learning-box {
+
+    display: grid;
+
+    grid-template-columns: 80px 1fr;
+
+    gap: 25px;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,0.07);
+
+    border: 1px solid #e5e7eb;
+
+}
+
+
+.learning-icon {
+
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #eef4ff;
+
+    font-size: 30px;
+
+}
+
+
+.learning-box h2 {
+
+    margin-top: 0;
+
+    color: #111827;
+
+}
+
+
+.learning-box p {
+
+    color: #4b5563;
+
+    line-height: 1.7;
+
+}
+
+
+/* ==========================================
+   TARJETAS DE INSTRUCCIONES
+========================================== */
+
+.instruction-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.instruction-card {
+
+    padding: 28px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    border: 1px solid #e5e7eb;
+
+}
+
+
+.instruction-card span {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #2563eb;
+
+}
+
+
+.instruction-card h3 {
+
+    margin-bottom: 10px;
+
+    color: #111827;
+
+}
+
+
+.instruction-card p {
+
+    color: #6b7280;
+
+    line-height: 1.6;
+
+}
+
+
+/* ==========================================
+   ESTRUCTURA DEL ARGUMENTO
+========================================== */
+
+.argument-structure {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+}
+
+
+.argument-structure > div {
+
+    background: #111827;
+
+    color: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+}
+
+
+.argument-structure span {
+
+    font-size: 13px;
+
+    color: #93c5fd;
+
+    font-weight: bold;
+
+}
+
+
+.argument-structure h3 {
+
+    margin-bottom: 8px;
+
+}
+
+
+.argument-structure p {
+
+    color: #d1d5db;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================================
+   RETO
+========================================== */
+
+.challenge-box {
+
+    padding: 45px;
+
+    background: linear-gradient(
+        135deg,
+        #111827,
+        #1e3a8a
+    );
+
+    border-radius: 28px;
+
+    text-align: center;
+
+    color: white;
+
+    box-shadow:
+        0 20px 50px rgba(15,23,42,0.18);
+
+}
+
+
+.small-label {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    opacity: 0.75;
+
+}
+
+
+.challenge-box h2 {
+
+    font-size: 32px;
+
+    margin: 5px 0 10px;
+
+}
+
+
+.challenge-box p {
+
+    color: #dbeafe;
+
+}
+
+
+/* ==========================================
+   CRONÓMETRO
+========================================== */
+
+.timer-large {
+
+    margin: 30px auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+.timer-large span {
+
+    font-size: 80px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+}
+
+
+.timer-large small {
+
+    margin-top: 8px;
+
+    color: #bfdbfe;
+
+}
+
+
+/* ==========================================
+   BOTONES
+========================================== */
+
+.main-exercise-button {
+
+    border: none;
+
+    padding: 15px 28px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    color: #1d4ed8;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.main-exercise-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+
+.main-exercise-button:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+}
+
+
+/* ==========================================
+   EVALUACIÓN
+========================================== */
+
+.evaluation-box {
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    border: 1px solid #e5e7eb;
+
+}
+
+
+.evaluation-box h2 {
+
+    color: #111827;
+
+}
+
+
+.evaluation-box > p {
+
+    color: #6b7280;
+
+    line-height: 1.7;
+
+}
+
+
+.check-item {
+
+    display: block;
+
+    padding: 15px;
+
+    margin: 10px 0;
+
+    background: #f8fafc;
+
+    border-radius: 12px;
+
+    color: #374151;
+
+    cursor: pointer;
+
+}
+
+
+.check-item input {
+
+    margin-right: 10px;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
+
+
+/* ==========================================
+   RESULTADOS
+========================================== */
+
+.result-box {
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    background: #eff6ff;
+
+    color: #1e3a8a;
+
+    line-height: 1.6;
+
+}
+
+
+/* ==========================================
+   FORMULARIO DE ARGUMENTACIÓN
+========================================== */
+
+.form-exercise {
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 24px;
+
+    border: 1px solid #e5e7eb;
+
+}
+
+
+.form-exercise label {
+
+    display: block;
+
+    margin-top: 20px;
+
+    margin-bottom: 8px;
+
+    font-weight: 700;
+
+    color: #111827;
+
+}
+
+
+.form-exercise textarea {
+
+    width: 100%;
+
+    min-height: 110px;
+
+    padding: 15px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    resize: vertical;
+
+    box-sizing: border-box;
+
+}
+
+
+.form-exercise textarea:focus {
+
+    outline: none;
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,0.1);
+
+}
+
+
+.form-exercise .main-exercise-button {
+
+    margin-top: 25px;
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+/* ==========================================
+   INFORMACIÓN SOBRE ARGUMENTACIÓN
+========================================== */
+
+.truth-box {
+
+    padding: 30px;
+
+    background: #fefce8;
+
+    border: 1px solid #fde68a;
+
+    border-radius: 20px;
+
+}
+
+
+.truth-box h2 {
+
+    color: #713f12;
+
+}
+
+
+.truth-box p,
+.truth-box li {
+
+    color: #713f12;
+
+    line-height: 1.7;
+
+}
+
+
+.truth-box li {
+
+    margin-bottom: 8px;
+
+}
+
+
+/* ==========================================
+   TEMA DE IMPROVISACIÓN
+========================================== */
+
+.random-topic {
+
+    margin: 25px auto;
+
+    max-width: 750px;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.12);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+}
+
+
+/* ==========================================
+   PIE DE LA PANTALLA
+========================================== */
+
+.exercise-footer {
+
+    margin-top: 40px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e7eb;
+
+}
+
+
+.back-practice {
+
+    border: none;
+
+    background: transparent;
+
+    color: #2563eb;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+
+    .instruction-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .argument-structure {
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+
+    .learning-box {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .exercise-container {
+
+        padding-top: 80px;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .argument-structure {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .challenge-box {
+
+        padding: 30px 20px;
+
+    }
+
+
+    .timer-large span {
+
+        font-size: 65px;
+
+    }
+
+
+    .exercise-close {
+
+        right: 15px;
+        top: 15px;
+
+    }
+
+}
