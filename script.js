@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div id="result-questions" class="result-options" style="display:flex; flex-direction:column; gap:12px; margin: 15px 0; text-align:left;"></div>
                     
                     <button id="save-result" class="exercise-main-button" type="button">Guardar resultado</button>
-                    <p id="result-message" class="result-message" style="margin-top:15px; font-weight:bold;"></p>
+                    <div id="result-message" class="result-message" style="margin-top:15px; padding:15px; background:#eef4fc; border-radius:6px; font-size:0.92em; line-height:1.6; text-align:left; color:#1e293b; display:none;"></div>
                     
                     <div id="academic-backing" style="margin-top:20px; padding:15px; background:#f8f9fa; border-left:4px solid #0056b3; border-radius:4px; font-size:0.86em; color:#495057; text-align:left; line-height:1.5;"></div>
                 </div>
@@ -225,7 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         comprobacion.innerHTML = ejercicio.comprobacion;
         interactivo.innerHTML = "";
-        mensaje.textContent = "";
+        mensaje.style.display = "none";
+        mensaje.innerHTML = "";
 
         // Insertar dinómicamente las 5 preguntas (Checkboxes)
         preguntasContenedor.innerHTML = "";
@@ -345,13 +346,47 @@ document.addEventListener("DOMContentLoaded", () => {
     cerrar.addEventListener("click", cerrarEjercicio);
     overlay.addEventListener("click", cerrarEjercicio);
 
+    // SISTEMA DE RETROALIMENTACIÓN CUALITATIVA DETALLADA
     guardar.addEventListener("click", () => {
         const marcados = document.querySelectorAll(".eval-check:checked").length;
+        mensaje.style.display = "block";
+
         if (marcados === 0) {
-            mensaje.textContent = "Selecciona al menos un criterio para guardar tu resultado.";
+            mensaje.style.borderLeft = "4px solid #ef4444";
+            mensaje.innerHTML = `
+                <strong>⚠️ Evaluación incompleta:</strong><br>
+                No has marcado ningún criterio. Para realizar una autoevaluación efectiva, analiza conscientemente tu ejercicio y selecciona las metas que lograste cumplir.
+            `;
             return;
         }
-        mensaje.textContent = `Resultado registrado: Cumpliste ${marcados} de 5 criterios.`;
+
+        let tituloDiagnostico = "";
+        let analisis = "";
+        let recomendacion = "";
+
+        if (marcados === 1 || marcados === 2) {
+            mensaje.style.borderLeft = "4px solid #f59e0b";
+            tituloDiagnostico = "📌 Diagnóstico: Fase Inicial de Dominio";
+            analisis = `Has logrado consolidar <strong>${marcados} de 5 criterios</strong> clave. Esto indica que existen bases iniciales en tu discurso, pero se presentan interrupciones en la fluidez, la estructura lógica o el control del tiempo. Es un punto de partida natural en el entrenamiento de la oratoria.`;
+            recomendacion = "<strong>Recomendación pedagógica:</strong> En tu próxima práctica, concéntrate en cumplir un único aspecto a la vez. Prioriza sostener la idea principal sin desviarte antes de preocuparte por la velocidad o el volumen.";
+        } else if (marcados === 3 || marcados === 4) {
+            mensaje.style.borderLeft = "4px solid #3b82f6";
+            tituloDiagnostico = "📈 Diagnóstico: Desempeño Competente";
+            analisis = `Has alcanzado <strong>${marcados} de 5 criterios</strong>. Demuestras un manejo sólido de tu discurso, manteniendo la coherencia y transmitiendo tu mensaje de manera comprensible para el oyente.`;
+            recomendacion = "<strong>Recomendación pedagógica:</strong> Revisa los criterios que no marcaste en esta ocasión. Trabajar en el control sintáctico y en la reducción gradual de pausas prolongadas te permitirá alcanzar la máxima solidez argumentativa.";
+        } else if (marcados === 5) {
+            mensaje.style.borderLeft = "4px solid #10b981";
+            tituloDiagnostico = "🌟 Diagnóstico: Excelencia Discursiva";
+            analisis = `¡Felicitaciones! Cumpliste los <strong>5 de 5 criterios de autoevaluación</strong>. Has mantenido una continuidad verbal efectiva, articulación clara, solidez conceptual y un adecuado control del tiempo.`;
+            recomendacion = "<strong>Recomendación pedagógica:</strong> Mantén este nivel practicando con temas de mayor complejidad o reduciendo el tiempo de preparación. La constancia es la clave para fijar estos hábitos de forma automática.";
+        }
+
+        mensaje.innerHTML = `
+            <h4 style="margin:0 0 8px 0; color:#0f172a; font-size:1.05em;">${tituloDiagnostico}</h4>
+            <p style="margin:0 0 8px 0;">${analisis}</p>
+            <p style="margin:0;">${recomendacion}</p>
+        `;
+
         localStorage.setItem("resultado-oratoria", marcados);
     });
 });
