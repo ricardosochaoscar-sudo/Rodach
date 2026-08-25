@@ -1,6 +1,6 @@
 // ==========================================
 // PROYECTO DE ORATORIA - RODACH
-// CUESTIONARIOS DE AUTOEVALUACIÓN CON RESPALDO
+// SISTEMA DE EJERCICIOS CON RESPALDO ACADÉMICO
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Gestión de ejercicios
+    // Escuchadores para abrir ejercicios
     const botonesEjercicio = document.querySelectorAll(".practice-card button");
     botonesEjercicio.forEach((boton, indice) => {
         boton.addEventListener("click", () => {
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Gestión de resultados
     function obtenerResultados() {
         return JSON.parse(localStorage.getItem("rodachResultados")) || { hablar: 0, argumento: 0, improvisacion: 0 };
     }
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("rodachResultados", JSON.stringify(resultados));
     }
 
+    // Estructura modal base
     function crearPantalla(titulo, contenido) {
         const pantallaAnterior = document.querySelector(".exercise-screen");
         if (pantallaAnterior) pantallaAnterior.remove();
@@ -71,7 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
         volver.addEventListener("click", cerrarPantalla);
     }
 
+    // ==========================================
     // EJERCICIO 1: HABLA DURANTE 30 SEGUNDOS
+    // ==========================================
     function abrirEjercicioHablar() {
         crearPantalla("Habla durante 30 segundos", `
             <div class="learning-box">
@@ -93,21 +97,21 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div id="talk-evaluation" class="evaluation-box hidden">
-                <span class="small-label">AUTOEVALUACIÓN DE FLUIDEZ</span>
-                <h2>Criterios de Desempeño</h2>
-                <p>Evalúa tu intervención marcando las casillas según corresponda:</p>
+                <span class="small-label">EVALUACIÓN DE COMPROMISO COMUNICATIVO</span>
+                <h2>Autoevaluación de Fluidez</h2>
+                <p>Responde con honestidad los 5 criterios de desempeño:</p>
 
-                <label class="check-item"><input type="checkbox" class="talk-check"> 1. Mantuve el flujo del habla sin pausas o silencios superiores a 3 segundos.</label>
+                <label class="check-item"><input type="checkbox" class="talk-check"> 1. Mantuve una tasa de articulación continua sin silencios mayores a 3 segundos.</label>
                 <label class="check-item"><input type="checkbox" class="talk-check"> 2. Utilicé conectores lógicos para hilar las ideas sin repetir muletillas excesivas.</label>
-                <label class="check-item"><input type="checkbox" class="talk-check"> 3. Conservé la coherencia temática con el asunto seleccionado durante todo el tiempo.</label>
-                <label class="check-item"><input type="checkbox" class="talk-check"> 4. Articulé las palabras con volumen y claridad comprensible.</label>
-                <label class="check-item"><input type="checkbox" class="talk-check"> 5. Logré expresar una idea completa al finalizar la señal del cronómetro.</label>
+                <label class="check-item"><input type="checkbox" class="talk-check"> 3. Mantuve la coherencia temática con el asunto seleccionado durante todo el tiempo.</label>
+                <label class="check-item"><input type="checkbox" class="talk-check"> 4. Articulé las palabras con volumen y proyección comprensible.</label>
+                <label class="check-item"><input type="checkbox" class="talk-check"> 5. Logré finalizar una idea completa al sonar la señal de tiempo.</label>
 
-                <button id="finish-talk" class="main-exercise-button">Guardar Resultado</button>
+                <button id="finish-talk" class="main-exercise-button">Ver mi resultado</button>
                 <div id="talk-result" class="result-box"></div>
 
                 <div class="academic-backstory" style="margin-top:20px; padding:15px; background:#f4f6f8; border-left:4px solid #0056b3; font-size:0.85em; color:#444;">
-                    <strong>📚 Fundamentación Científica:</strong> Esta evaluación se diseñó con base en la <em>Teoría de la Competencia Comunicativa de Dell Hymes (1972)</em> y los parámetros de fluidez oral de <em>Peter Skehan (1998)</em> para medir la producción del lenguaje en tiempo real bajo presión temporal.
+                    <strong>📚 Respaldo Académico:</strong> Esta autoevaluación se basa en la <em>Teoría de la Competencia Comunicativa de Dell Hymes (1972)</em> y en los parámetros de fluidez oral de <em>Peter Skehan (1998)</em>. Evalúa la capacidad del hablante para formular enunciados coherentes en tiempo real bajo presión temporal moderada.
                 </div>
             </div>
         `);
@@ -138,47 +142,51 @@ document.addEventListener("DOMContentLoaded", () => {
         finalizar.addEventListener("click", () => {
             const marcados = document.querySelectorAll(".talk-check:checked").length;
             guardarResultado("hablar");
-            resultado.innerHTML = `<strong>Puntaje obtenida: ${marcados}/5 criterios logrados.</strong>`;
+            resultado.innerHTML = `<strong>Puntaje: ${marcados}/5 criterios cumplidos.</strong><br>${
+                marcados >= 4 ? "¡Excelente desempeño! Demuestras alta fluidez verbal." : "Buen intento. Practica reducir las pausas lógicas para mejorar tu puntaje."
+            }`;
         });
     }
 
+    // ==========================================
     // EJERCICIO 2: CONSTRUYE UN ARGUMENTO
+    // ==========================================
     function abrirEjercicioArgumento() {
         crearPantalla("Construye un argumento", `
             <div class="learning-box">
                 <div class="learning-icon">🧠</div>
                 <div>
                     <h2>Propósito del Ejercicio</h2>
-                    <p>Estructurar razonamientos lógicos con validez discursiva evitando sesgos o falacias.</p>
+                    <p>Estructurar razonamientos lógicos con validez discursiva evitando falacias comunes.</p>
                 </div>
             </div>
 
             <div class="argument-inputs">
-                <label>1. Tesis o Afirmación:</label>
+                <label>1. Tesis / Afirmación inicial:</label>
                 <textarea id="arg-tesis" rows="2" placeholder="Escribe tu postura clara sobre un tema..."></textarea>
                 
                 <label>2. Razonamiento o Premisa base:</label>
                 <textarea id="arg-razon" rows="2" placeholder="¿Por qué sostienes esta postura?"></textarea>
             </div>
 
-            <button id="evaluar-argumento" class="main-exercise-button">Evaluar Estructura</button>
+            <button id="evaluar-argumento" class="main-exercise-button">Validar Estructura</button>
 
             <div id="arg-evaluation" class="evaluation-box hidden" style="margin-top:20px;">
-                <span class="small-label">AUTOEVALUACIÓN ARGUMENTATIVA</span>
-                <h2>Criterios de Validez</h2>
-                <p>Verifica si tu planteamiento cumple con los principios lógicos básicos:</p>
+                <span class="small-label">EVALUACIÓN DE ESTRUCTURA LÓGICA</span>
+                <h2>Autoevaluación Argumentativa</h2>
+                <p>Verifica si tu planteamiento cumple con los principios lógicos:</p>
 
-                <label class="check-item"><input type="checkbox" class="arg-check"> 1. Planteé una postura inicial comprensible y declarativa.</label>
-                <label class="check-item"><input type="checkbox" class="arg-check"> 2. La razón responde de manera directa al '¿por qué?' de mi postura.</label>
-                <label class="check-item"><input type="checkbox" class="arg-check"> 3. Evité incurrir en ataques personales o generalizaciones sin sustento.</label>
-                <label class="check-item"><input type="checkbox" class="arg-check"> 4. Aporté información o datos concretos y no únicamente una opinión subjetiva.</label>
-                <label class="check-item"><input type="checkbox" class="arg-check"> 5. La estructura permite ser debatida o analizada por un interlocutor.</label>
+                <label class="check-item"><input type="checkbox" class="arg-check"> 1. Mi afirmación presenta una postura clara y defendible (no ambigua).</label>
+                <label class="check-item"><input type="checkbox" class="arg-check"> 2. La razón responde directamente a la pregunta '¿por qué?' respecto a mi tesis.</label>
+                <label class="check-item"><input type="checkbox" class="arg-check"> 3. Evité incurrir en ataques personales o generalizaciones apresuradas.</label>
+                <label class="check-item"><input type="checkbox" class="arg-check"> 4. La razón aporta evidencia lógica o factual, no solo una emoción personal.</label>
+                <label class="check-item"><input type="checkbox" class="arg-check"> 5. Si un opositor me escuchara, mi argumento requeriría un contraargumento válido para ser debatido.</label>
 
-                <button id="finish-arg" class="main-exercise-button">Guardar Resultado</button>
+                <button id="finish-arg" class="main-exercise-button">Registrar Evaluación</button>
                 <div id="arg-result" class="result-box"></div>
 
                 <div class="academic-backstory" style="margin-top:20px; padding:15px; background:#f4f6f8; border-left:4px solid #0056b3; font-size:0.85em; color:#444;">
-                    <strong>📚 Fundamentación Científica:</strong> Cuestionario basado en el <em>Modelo Argumentativo de Stephen Toulmin (1958)</em>, estándar académico para la validación de la lógica discursiva y la argumentación crítica.
+                    <strong>📚 Respaldo Académico:</strong> Esta rúbrica toma como base el <em>Modelo Argumentativo de Stephen Toulmin (1958)</em>, utilizado internacionalmente en la enseñanza del debate analítico y la lógica formal para validar la solidez discursiva.
                 </div>
             </div>
         `);
@@ -193,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const razon = document.getElementById("arg-razon").value.trim();
 
             if (!tesis || !razon) {
-                alert("Completa ambos campos para validar.");
+                alert("Por favor completa ambos campos antes de evaluar.");
                 return;
             }
             evaluacion.classList.remove("hidden");
@@ -202,11 +210,15 @@ document.addEventListener("DOMContentLoaded", () => {
         finalizar.addEventListener("click", () => {
             const marcados = document.querySelectorAll(".arg-check:checked").length;
             guardarResultado("argumento");
-            resultado.innerHTML = `<strong>Puntaje obtenido: ${marcados}/5 criterios validados.</strong>`;
+            resultado.innerHTML = `<strong>Estructura argumentativa: ${marcados}/5 elementos validados.</strong><br>${
+                marcados >= 4 ? "Tu argumento posee solidez lógica formal." : "Revisa las razones aportadas para asegurar que respaldan directamente tu postura."
+            }`;
         });
     }
 
+    // ==========================================
     // EJERCICIO 3: RETO DE IMPROVISACIÓN
+    // ==========================================
     function abrirEjercicioImprovisacion() {
         const temas = [
             "¿Por qué es fundamental escuchar antes de responder?",
@@ -221,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="learning-icon">⏱️</div>
                 <div>
                     <h2>Propósito del Ejercicio</h2>
-                    <p>Desarrollar adaptabilidad discursiva y capacidad de respuesta impromptu.</p>
+                    <p>Capacidad de respuesta rápida, adaptabilidad del mensaje y estructuración bajo escenarios imprevistos.</p>
                 </div>
             </div>
 
@@ -236,21 +248,21 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div id="impro-evaluation" class="evaluation-box hidden" style="margin-top:20px;">
-                <span class="small-label">AUTOEVALUACIÓN DE IMPROVISACIÓN</span>
-                <h2>Criterios de Adaptabilidad</h2>
-                <p>Analiza tu desempeño extemporáneo:</p>
+                <span class="small-label">EVALUACIÓN DE DISCURSO EXTEMPORÁNEO</span>
+                <h2>Autoevaluación de Improvisación</h2>
+                <p>Mide tu capacidad de respuesta impromptu:</p>
 
-                <label class="check-item"><input type="checkbox" class="impro-check"> 1. Definí un eje central en los primeros segundos de mi intervención.</label>
-                <label class="check-item"><input type="checkbox" class="impro-check"> 2. Mantuve una postura corporal erguida y segura durante la respuesta.</label>
-                <label class="check-item"><input type="checkbox" class="impro-check"> 3. Atendí directamente el tema asignado sin desviarme a tópicos ajenos.</label>
-                <label class="check-item"><input type="checkbox" class="impro-check"> 4. Conservé un ritmo de voz constante sin acelerarme por el nerviosismo.</label>
-                <label class="check-item"><input type="checkbox" class="impro-check"> 5. Finalicé mi exposición con una conclusión o frase de cierre definida.</label>
+                <label class="check-item"><input type="checkbox" class="impro-check"> 1. Definí una idea central en los primeros 10 segundos de hablar.</label>
+                <label class="check-item"><input type="checkbox" class="impro-check"> 2. Mantuve una postura corporal erguida y segura durante la intervención.</label>
+                <label class="check-item"><input type="checkbox" class="impro-check"> 3. Respondí directamente al tema asignado sin desviarme a otros tópicos.</label>
+                <label class="check-item"><input type="checkbox" class="impro-check"> 4. Utilicé un ritmo de voz constante sin acelerarme por el nerviosismo.</label>
+                <label class="check-item"><input type="checkbox" class="impro-check"> 5. Concluí mi intervención con una frase de cierre definida.</label>
 
                 <button id="finish-impro" class="main-exercise-button">Guardar Resultado</button>
                 <div id="impro-result" class="result-box"></div>
 
                 <div class="academic-backstory" style="margin-top:20px; padding:15px; background:#f4f6f8; border-left:4px solid #0056b3; font-size:0.85em; color:#444;">
-                    <strong>📚 Fundamentación Científica:</strong> Rúbrica elaborada conforme a las directrices de habla extemporánea de la <em>National Communication Association (NCA)</em> y el modelo de autocontrol comunicativo de <em>James McCroskey (1984)</em>.
+                    <strong>📚 Respaldo Académico:</strong> Cuestionario basado en los parámetros de autoevaluación de habla impromptu desarrollados por la <em>National Communication Association (NCA)</em> y los modelos de adaptabilidad discursiva de <em>McCroskey (1984)</em>.
                 </div>
             </div>
         `);
@@ -281,8 +293,11 @@ document.addEventListener("DOMContentLoaded", () => {
         finalizar.addEventListener("click", () => {
             const marcados = document.querySelectorAll(".impro-check:checked").length;
             guardarResultado("improvisacion");
-            resultado.innerHTML = `<strong>Puntaje obtenido: ${marcados}/5 criterios cumplidos.</strong>`;
+            resultado.innerHTML = `<strong>Capacidad de respuesta: ${marcados}/5 criterios logrados.</strong><br>${
+                marcados >= 4 ? "Excelente control discursivo bajo presión." : "Sigue practicando la estructuración rápida de ideas."
+            }`;
         });
     }
 
+    console.log("Rodach - Proyecto de Oratoria con respaldo académico cargado correctamente.");
 });
