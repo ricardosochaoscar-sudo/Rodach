@@ -284,24 +284,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (ejercicio.tipo === "improvisacion") {
+            // Lista ampliada con 20 temas educativos diversos
             const temas = [
-                "¿Deberían los estudiantes leer más?",
-                "¿Es importante practicar un deporte?",
-                "¿Qué hace que una persona sea un buen líder?",
-                "¿Las redes sociales ayudan a comunicarnos?"
+                "¿Deberían los estudiantes leer más libros en lugar de usar pantallas?",
+                "¿Es importante practicar un deporte para el desarrollo personal?",
+                "¿Qué cualidades definen a un buen líder comunitario o laboral?",
+                "¿Las redes sociales ayudan o dificultan la comunicación humana?",
+                "¿Por qué es fundamental cuidar el medio ambiente desde nuestro hogar?",
+                "¿Cuál es el impacto de la Inteligencia Artificial en el futuro de los trabajos?",
+                "¿Debería priorizarse la salud mental en las instituciones educativas?",
+                "¿Qué papel juega la disciplina frente al talento en el éxito personal?",
+                "¿Por qué es vital aprender a trabajar en equipo de manera respetuosa?",
+                "¿Cómo influye la educación financiera en la vida de los jóvenes?",
+                "¿Es necesario aprender un segundo idioma en la actualidad?",
+                "¿Qué valor tiene el trabajo duro frente a la suerte?",
+                "¿Por qué debemos fomentar el pensamiento crítico al consumir noticias?",
+                "¿Cómo afecta el uso excesivo del teléfono móvil al rendimiento académico?",
+                "¿De qué manera el arte y la música mejoran el desarrollo cognitivo?",
+                "¿Por qué la puntualidad es una muestra de respeto hacia los demás?",
+                "¿Qué acciones simples podemos tomar para reducir el desperdicio de agua?",
+                "¿Es importante promover la igualdad de oportunidades en la educación?",
+                "¿Cómo influyen los hábitos de lectura en la capacidad de hablar en público?",
+                "¿Por qué es indispensable aprender a gestionar el estrés ante la presión?"
             ];
-            const tema = temas[Math.floor(Math.random() * temas.length)];
+
+            const obtenerTemaAleatorio = () => temas[Math.floor(Math.random() * temas.length)];
+            const temaInicial = obtenerTemaAleatorio();
 
             interactivo.innerHTML = `
                 <div class="improvisation-box">
                     <p class="topic-label">SU TEMA ES:</p>
-                    <h3>${tema}</h3>
+                    <h3>${temaInicial}</h3>
                     <p>Tiene unos segundos para organizar sus ideas y comenzar a hablar.</p>
                     <button id="new-topic" class="exercise-secondary-button" type="button">Otro tema</button>
                 </div>
             `;
+
             document.getElementById("new-topic").addEventListener("click", () => {
-                const nuevoTema = temas[Math.floor(Math.random() * temas.length)];
+                let nuevoTema = obtenerTemaAleatorio();
+                // Evita que vuelva a salir el mismo tema de forma consecutiva
+                while (nuevoTema === interactivo.querySelector("h3").textContent && temas.length > 1) {
+                    nuevoTema = obtenerTemaAleatorio();
+                }
                 interactivo.querySelector("h3").textContent = nuevoTema;
             });
         }
