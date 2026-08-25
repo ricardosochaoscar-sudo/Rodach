@@ -1,303 +1,706 @@
 // ==========================================
 // PROYECTO DE ORATORIA - RODACH
-// SISTEMA DE EJERCICIOS CON RESPALDO ACADÉMICO
+// INTERACTIVIDAD
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Navegación suave
+    // ==========================================
+    // NAVEGACIÓN SUAVE
+    // ==========================================
+
     const enlaces = document.querySelectorAll('a[href^="#"]');
+
     enlaces.forEach(enlace => {
+
         enlace.addEventListener("click", evento => {
-            const destino = document.querySelector(enlace.getAttribute("href"));
+
+            const destino = document.querySelector(
+                enlace.getAttribute("href")
+            );
+
             if (destino) {
+
                 evento.preventDefault();
-                destino.scrollIntoView({ behavior: "smooth" });
+
+                destino.scrollIntoView({
+                    behavior: "smooth"
+                });
+
             }
+
         });
+
     });
 
-    // Escuchadores para abrir ejercicios
-    const botonesEjercicio = document.querySelectorAll(".practice-card button");
-    botonesEjercicio.forEach((boton, indice) => {
-        boton.addEventListener("click", () => {
-            if (indice === 0) abrirEjercicioHablar();
-            if (indice === 1) abrirEjercicioArgumento();
-            if (indice === 2) abrirEjercicioImprovisacion();
-        });
-    });
 
-    // Gestión de resultados
-    function obtenerResultados() {
-        return JSON.parse(localStorage.getItem("rodachResultados")) || { hablar: 0, argumento: 0, improvisacion: 0 };
-    }
+    // ==========================================
+    // SISTEMA DE EJERCICIOS
+    // ==========================================
 
-    function guardarResultado(tipo) {
-        const resultados = obtenerResultados();
-        resultados[tipo]++;
-        localStorage.setItem("rodachResultados", JSON.stringify(resultados));
-    }
+    const botones = document.querySelectorAll(
+        ".practice-card button"
+    );
 
-    // Estructura modal base
-    function crearPantalla(titulo, contenido) {
-        const pantallaAnterior = document.querySelector(".exercise-screen");
-        if (pantallaAnterior) pantallaAnterior.remove();
+    const ejercicios = [
 
-        const pantalla = document.createElement("div");
-        pantalla.className = "exercise-screen";
-        pantalla.innerHTML = `
-            <div class="exercise-container">
-                <button class="exercise-close" aria-label="Cerrar ejercicio">×</button>
-                <div class="exercise-header">
-                    <span class="exercise-tag">PRÁCTICA DE ORATORIA SENA</span>
-                    <h1>${titulo}</h1>
-                </div>
-                <div class="exercise-body">${contenido}</div>
-                <div class="exercise-footer">
-                    <button class="back-practice" type="button">← Volver a práctica</button>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(pantalla);
-        document.body.classList.add("exercise-open");
+        {
+            titulo: "Habla durante 30 segundos",
+            etiqueta: "EJERCICIO DE FLUIDEZ",
 
-        const cerrar = pantalla.querySelector(".exercise-close");
-        const volver = pantalla.querySelector(".back-practice");
+            descripcion:
+                "Elige un tema que conozcas y habla durante 30 segundos sin leer ni memorizar un texto.",
 
-        function cerrarPantalla() {
-            pantalla.remove();
-            document.body.classList.remove("exercise-open");
+            paraQueSirve:
+                "Este ejercicio ayuda a practicar la fluidez verbal, la organización espontánea de ideas y la capacidad de mantener un discurso sin depender de un texto escrito.",
+
+            instrucciones: [
+                "Elige un tema que conozcas bien.",
+                "Pulsa el botón para iniciar el cronómetro.",
+                "Habla durante 30 segundos sin leer.",
+                "Intenta mantener una idea principal y desarrollarla.",
+                "Al terminar, evalúa cómo fue tu desempeño."
+            ],
+
+            comprobacion: `
+                <p><strong>¿Cómo saber si lo hiciste correctamente?</strong></p>
+
+                <ul>
+                    <li>¿Hablaste durante aproximadamente 30 segundos?</li>
+                    <li>¿Pudiste mantener una idea sin quedarte completamente en blanco?</li>
+                    <li>¿Evitaste leer o memorizar un texto?</li>
+                    <li>¿Tus ideas pudieron entenderse?</li>
+                    <li>¿Utilizaste pausas sin perder completamente el hilo?</li>
+                </ul>
+
+                <p class="exercise-note">
+                    Hablar con fluidez no significa hablar rápidamente.
+                    La fluidez implica poder expresar las ideas de manera
+                    continua y comprensible, utilizando pausas cuando sean necesarias.
+                </p>
+            `,
+
+            tipo: "fluidez"
+        },
+
+
+        {
+            titulo: "Construye un argumento",
+            etiqueta: "EJERCICIO DE ARGUMENTACIÓN",
+
+            descripcion:
+                "Escribe una opinión sobre un tema y acompáñala con una razón que la respalde.",
+
+            paraQueSirve:
+                "Este ejercicio permite practicar la construcción de argumentos: presentar una postura y justificarla mediante razones que tengan relación con ella.",
+
+            instrucciones: [
+                "Elige un tema sobre el que tengas una opinión.",
+                "Escribe claramente tu postura.",
+                "Escribe una razón que la respalde.",
+                "Revisa si la razón realmente tiene relación con tu opinión.",
+                "Comprueba si otra persona podría entender por qué piensas así."
+            ],
+
+            comprobacion: `
+                <p><strong>¿Cómo saber si tu argumento está bien construido?</strong></p>
+
+                <ul>
+                    <li>¿Tu opinión está expresada claramente?</li>
+                    <li>¿La razón realmente respalda esa opinión?</li>
+                    <li>¿Existe una relación lógica entre ambas?</li>
+                    <li>¿Puedes explicar por qué tu razón apoya tu postura?</li>
+                    <li>¿Evitas contradecir tu propia posición?</li>
+                </ul>
+
+                <p class="exercise-note">
+                    Un argumento no se vuelve verdadero simplemente porque
+                    esté bien escrito. Para evaluar su solidez también es
+                    necesario revisar la calidad y veracidad de las razones
+                    y evidencias utilizadas.
+                </p>
+            `,
+
+            tipo: "argumento"
+        },
+
+
+        {
+            titulo: "Reto de improvisación",
+            etiqueta: "EJERCICIO DE IMPROVISACIÓN",
+
+            descripcion:
+                "Recibe un tema y prepara una respuesta en un tiempo limitado.",
+
+            paraQueSirve:
+                "La improvisación permite practicar la capacidad de organizar ideas rápidamente y responder ante situaciones en las que no se dispone de mucho tiempo para preparar un discurso.",
+
+            instrucciones: [
+                "Elige uno de los temas disponibles.",
+                "Lee el tema una sola vez.",
+                "Piensa durante unos segundos qué quieres decir.",
+                "Habla intentando mantener una estructura sencilla.",
+                "Al finalizar, revisa cómo organizaste tus ideas."
+            ],
+
+            comprobacion: `
+                <p><strong>¿Cómo saber si realizaste bien el reto?</strong></p>
+
+                <ul>
+                    <li>¿Pudiste comenzar a hablar sin necesitar un texto?</li>
+                    <li>¿Presentaste una idea principal?</li>
+                    <li>¿Pudiste desarrollar esa idea?</li>
+                    <li>¿Mantuviste cierta coherencia?</li>
+                    <li>¿Lograste terminar tu intervención con una conclusión?</li>
+                </ul>
+
+                <p class="exercise-note">
+                    Improvisar correctamente no significa hablar sin pausas
+                    ni producir una respuesta perfecta. El objetivo es
+                    aprender a organizar y comunicar ideas bajo una
+                    limitación de tiempo.
+                </p>
+            `,
+
+            tipo: "improvisacion"
         }
 
-        cerrar.addEventListener("click", cerrarPantalla);
-        volver.addEventListener("click", cerrarPantalla);
+    ];
+
+
+    // ==========================================
+    // CREAR INTERFAZ DEL EJERCICIO
+    // ==========================================
+
+    const modal = document.createElement("div");
+
+    modal.className = "exercise-modal";
+
+    modal.innerHTML = `
+        <div class="exercise-overlay"></div>
+
+        <div class="exercise-window">
+
+            <button
+                class="exercise-close"
+                type="button"
+                aria-label="Cerrar ejercicio">
+                ×
+            </button>
+
+            <div class="exercise-header">
+
+                <p class="exercise-label">
+                    EJERCICIO DE ORATORIA
+                </p>
+
+                <h2 id="exercise-title">
+                    Ejercicio
+                </h2>
+
+                <p id="exercise-description"></p>
+
+            </div>
+
+
+            <div class="exercise-content">
+
+                <div class="exercise-purpose">
+
+                    <span>¿PARA QUÉ SIRVE?</span>
+
+                    <p id="exercise-purpose-text"></p>
+
+                </div>
+
+
+                <div class="exercise-instructions">
+
+                    <h3>¿Cómo realizarlo?</h3>
+
+                    <ol id="exercise-instructions-list"></ol>
+
+                </div>
+
+
+                <div
+                    id="exercise-interactive"
+                    class="exercise-interactive">
+                </div>
+
+
+                <div
+                    id="exercise-check"
+                    class="exercise-check">
+                </div>
+
+
+                <div class="exercise-result">
+
+                    <h3>Mi resultado</h3>
+
+                    <p>
+                        Evalúa tu desempeño después de completar
+                        el ejercicio.
+                    </p>
+
+                    <div class="result-options">
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="resultado"
+                                value="1">
+                            Necesito practicar más
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="resultado"
+                                value="2">
+                            Lo hice parcialmente bien
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="resultado"
+                                value="3">
+                            Lo hice correctamente
+                        </label>
+
+                    </div>
+
+                    <button
+                        id="save-result"
+                        class="exercise-main-button"
+                        type="button">
+                        Guardar resultado
+                    </button>
+
+                    <p
+                        id="result-message"
+                        class="result-message">
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+
+    // ==========================================
+    // ELEMENTOS
+    // ==========================================
+
+    const titulo = document.getElementById("exercise-title");
+    const descripcion =
+        document.getElementById("exercise-description");
+
+    const proposito =
+        document.getElementById("exercise-purpose-text");
+
+    const instrucciones =
+        document.getElementById("exercise-instructions-list");
+
+    const interactivo =
+        document.getElementById("exercise-interactive");
+
+    const comprobacion =
+        document.getElementById("exercise-check");
+
+    const cerrar =
+        document.querySelector(".exercise-close");
+
+    const overlay =
+        document.querySelector(".exercise-overlay");
+
+    const guardar =
+        document.getElementById("save-result");
+
+    const mensaje =
+        document.getElementById("result-message");
+
+
+    let intervalo = null;
+    let tiempo = 30;
+
+
+    // ==========================================
+    // ABRIR EJERCICIO
+    // ==========================================
+
+    function abrirEjercicio(numero) {
+
+        const ejercicio = ejercicios[numero];
+
+        titulo.textContent = ejercicio.titulo;
+        descripcion.textContent = ejercicio.descripcion;
+        proposito.textContent = ejercicio.paraQueSirve;
+
+        instrucciones.innerHTML = "";
+
+        ejercicio.instrucciones.forEach(paso => {
+
+            const li = document.createElement("li");
+
+            li.textContent = paso;
+
+            instrucciones.appendChild(li);
+
+        });
+
+        comprobacion.innerHTML = ejercicio.comprobacion;
+
+        interactivo.innerHTML = "";
+
+        mensaje.textContent = "";
+
+        document
+            .querySelectorAll('input[name="resultado"]')
+            .forEach(input => {
+                input.checked = false;
+            });
+
+
+        // ==========================================
+        // EJERCICIO 30 SEGUNDOS
+        // ==========================================
+
+        if (ejercicio.tipo === "fluidez") {
+
+            interactivo.innerHTML = `
+
+                <div class="timer-box">
+
+                    <p class="timer-label">
+                        CRONÓMETRO
+                    </p>
+
+                    <div
+                        id="timer"
+                        class="timer">
+                        30
+                    </div>
+
+                    <button
+                        id="start-timer"
+                        class="exercise-main-button"
+                        type="button">
+                        Comenzar
+                    </button>
+
+                    <p id="timer-status">
+                        Cuando esté listo, comience a hablar.
+                    </p>
+
+                </div>
+
+            `;
+
+            const timer =
+                document.getElementById("timer");
+
+            const iniciar =
+                document.getElementById("start-timer");
+
+            const estado =
+                document.getElementById("timer-status");
+
+            tiempo = 30;
+
+            iniciar.addEventListener("click", () => {
+
+                clearInterval(intervalo);
+
+                tiempo = 30;
+
+                timer.textContent = tiempo;
+
+                iniciar.disabled = true;
+
+                estado.textContent =
+                    "Hable ahora. Intente mantener el hilo de sus ideas.";
+
+                intervalo = setInterval(() => {
+
+                    tiempo--;
+
+                    timer.textContent = tiempo;
+
+                    if (tiempo <= 0) {
+
+                        clearInterval(intervalo);
+
+                        timer.textContent = "✓";
+
+                        estado.textContent =
+                            "Tiempo terminado. Ahora evalúe su desempeño.";
+
+                        iniciar.disabled = false;
+                    }
+
+                }, 1000);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // EJERCICIO DE ARGUMENTACIÓN
+        // ==========================================
+
+        if (ejercicio.tipo === "argumento") {
+
+            interactivo.innerHTML = `
+
+                <div class="argument-box">
+
+                    <label>
+                        Mi opinión
+                    </label>
+
+                    <textarea
+                        id="opinion"
+                        placeholder="Escriba aquí su opinión...">
+                    </textarea>
+
+                    <label>
+                        Mi razón
+                    </label>
+
+                    <textarea
+                        id="razon"
+                        placeholder="¿Por qué piensa eso?">
+                    </textarea>
+
+                    <button
+                        id="review-argument"
+                        class="exercise-main-button"
+                        type="button">
+                        Revisar mi argumento
+                    </button>
+
+                    <div
+                        id="argument-feedback"
+                        class="argument-feedback">
+                    </div>
+
+                </div>
+
+            `;
+
+            document
+                .getElementById("review-argument")
+                .addEventListener("click", () => {
+
+                    const opinion =
+                        document
+                        .getElementById("opinion")
+                        .value.trim();
+
+                    const razon =
+                        document
+                        .getElementById("razon")
+                        .value.trim();
+
+                    const feedback =
+                        document
+                        .getElementById("argument-feedback");
+
+                    if (!opinion || !razon) {
+
+                        feedback.innerHTML =
+                            "<p>Complete la opinión y la razón antes de revisar el argumento.</p>";
+
+                        return;
+                    }
+
+                    feedback.innerHTML = `
+                        <h4>Revisión inicial</h4>
+
+                        <p>
+                            Su argumento tiene una postura y una razón.
+                            Ahora pregúntese:
+                        </p>
+
+                        <ul>
+                            <li>
+                                ¿La razón realmente respalda mi opinión?
+                            </li>
+
+                            <li>
+                                ¿Podría explicar la relación entre ambas?
+                            </li>
+
+                            <li>
+                                ¿Tengo algún dato o ejemplo que pueda respaldar mi razón?
+                            </li>
+
+                            <li>
+                                ¿Existe alguna contradicción entre lo que afirmo y mi razón?
+                            </li>
+                        </ul>
+
+                        <p>
+                            Esta revisión no determina automáticamente
+                            si su opinión es verdadera o falsa. Evalúa
+                            principalmente la estructura y coherencia
+                            básica del argumento.
+                        </p>
+                    `;
+
+                });
+
+        }
+
+
+        // ==========================================
+        // IMPROVISACIÓN
+        // ==========================================
+
+        if (ejercicio.tipo === "improvisacion") {
+
+            const temas = [
+                "¿Deberían los estudiantes leer más?",
+                "¿Es importante practicar un deporte?",
+                "¿Qué hace que una persona sea un buen líder?",
+                "¿Las redes sociales ayudan a comunicarnos?",
+                "¿Qué habilidad debería aprender todo estudiante?"
+            ];
+
+            const tema =
+                temas[Math.floor(Math.random() * temas.length)];
+
+            interactivo.innerHTML = `
+
+                <div class="improvisation-box">
+
+                    <p class="topic-label">
+                        SU TEMA ES:
+                    </p>
+
+                    <h3>
+                        ${tema}
+                    </h3>
+
+                    <p>
+                        Tiene unos segundos para organizar
+                        sus ideas y comenzar a hablar.
+                    </p>
+
+                    <button
+                        id="new-topic"
+                        class="exercise-secondary-button"
+                        type="button">
+                        Otro tema
+                    </button>
+
+                </div>
+
+            `;
+
+            document
+                .getElementById("new-topic")
+                .addEventListener("click", () => {
+
+                    const nuevoTema =
+                        temas[Math.floor(
+                            Math.random() * temas.length
+                        )];
+
+                    interactivo.querySelector("h3")
+                        .textContent = nuevoTema;
+
+                });
+
+        }
+
+
+        modal.classList.add("active");
+
+        document.body.classList.add("exercise-open");
+
     }
 
+
     // ==========================================
-    // EJERCICIO 1: HABLA DURANTE 30 SEGUNDOS
+    // BOTONES DE PRACTICA
     // ==========================================
-    function abrirEjercicioHablar() {
-        crearPantalla("Habla durante 30 segundos", `
-            <div class="learning-box">
-                <div class="learning-icon">🎤</div>
-                <div>
-                    <h2>Propósito del Ejercicio</h2>
-                    <p>Desarrollar la fluidez verbal y reducir la latencia de respuesta sin dependencia de guiones escritos.</p>
-                </div>
-            </div>
 
-            <div class="challenge-box">
-                <span class="small-label">TU RETO</span>
-                <h2>Habla sin parar durante 30 segundos</h2>
-                <div class="timer-large">
-                    <span id="talk-timer">30</span>
-                    <small>segundos</small>
-                </div>
-                <button id="start-talk" class="main-exercise-button">Comenzar</button>
-            </div>
-
-            <div id="talk-evaluation" class="evaluation-box hidden">
-                <span class="small-label">EVALUACIÓN DE COMPROMISO COMUNICATIVO</span>
-                <h2>Autoevaluación de Fluidez</h2>
-                <p>Responde con honestidad los 5 criterios de desempeño:</p>
-
-                <label class="check-item"><input type="checkbox" class="talk-check"> 1. Mantuve una tasa de articulación continua sin silencios mayores a 3 segundos.</label>
-                <label class="check-item"><input type="checkbox" class="talk-check"> 2. Utilicé conectores lógicos para hilar las ideas sin repetir muletillas excesivas.</label>
-                <label class="check-item"><input type="checkbox" class="talk-check"> 3. Mantuve la coherencia temática con el asunto seleccionado durante todo el tiempo.</label>
-                <label class="check-item"><input type="checkbox" class="talk-check"> 4. Articulé las palabras con volumen y proyección comprensible.</label>
-                <label class="check-item"><input type="checkbox" class="talk-check"> 5. Logré finalizar una idea completa al sonar la señal de tiempo.</label>
-
-                <button id="finish-talk" class="main-exercise-button">Ver mi resultado</button>
-                <div id="talk-result" class="result-box"></div>
-
-                <div class="academic-backstory" style="margin-top:20px; padding:15px; background:#f4f6f8; border-left:4px solid #0056b3; font-size:0.85em; color:#444;">
-                    <strong>📚 Respaldo Académico:</strong> Esta autoevaluación se basa en la <em>Teoría de la Competencia Comunicativa de Dell Hymes (1972)</em> y en los parámetros de fluidez oral de <em>Peter Skehan (1998)</em>. Evalúa la capacidad del hablante para formular enunciados coherentes en tiempo real bajo presión temporal moderada.
-                </div>
-            </div>
-        `);
-
-        const boton = document.getElementById("start-talk");
-        const contador = document.getElementById("talk-timer");
-        const evaluacion = document.getElementById("talk-evaluation");
-        const finalizar = document.getElementById("finish-talk");
-        const resultado = document.getElementById("talk-result");
-        let tiempo = 30;
-        let intervalo = null;
+    botones.forEach((boton, indice) => {
 
         boton.addEventListener("click", () => {
-            boton.disabled = true;
-            boton.textContent = "En curso...";
-            intervalo = setInterval(() => {
-                tiempo--;
-                contador.textContent = tiempo;
-                if (tiempo <= 0) {
-                    clearInterval(intervalo);
-                    contador.textContent = "✓";
-                    boton.textContent = "Tiempo finalizado";
-                    evaluacion.classList.remove("hidden");
-                }
-            }, 1000);
+
+            abrirEjercicio(indice);
+
         });
 
-        finalizar.addEventListener("click", () => {
-            const marcados = document.querySelectorAll(".talk-check:checked").length;
-            guardarResultado("hablar");
-            resultado.innerHTML = `<strong>Puntaje: ${marcados}/5 criterios cumplidos.</strong><br>${
-                marcados >= 4 ? "¡Excelente desempeño! Demuestras alta fluidez verbal." : "Buen intento. Practica reducir las pausas lógicas para mejorar tu puntaje."
-            }`;
-        });
+    });
+
+
+    // ==========================================
+    // CERRAR
+    // ==========================================
+
+    function cerrarEjercicio() {
+
+        clearInterval(intervalo);
+
+        modal.classList.remove("active");
+
+        document.body.classList.remove("exercise-open");
+
     }
 
-    // ==========================================
-    // EJERCICIO 2: CONSTRUYE UN ARGUMENTO
-    // ==========================================
-    function abrirEjercicioArgumento() {
-        crearPantalla("Construye un argumento", `
-            <div class="learning-box">
-                <div class="learning-icon">🧠</div>
-                <div>
-                    <h2>Propósito del Ejercicio</h2>
-                    <p>Estructurar razonamientos lógicos con validez discursiva evitando falacias comunes.</p>
-                </div>
-            </div>
+    cerrar.addEventListener("click", cerrarEjercicio);
 
-            <div class="argument-inputs">
-                <label>1. Tesis / Afirmación inicial:</label>
-                <textarea id="arg-tesis" rows="2" placeholder="Escribe tu postura clara sobre un tema..."></textarea>
-                
-                <label>2. Razonamiento o Premisa base:</label>
-                <textarea id="arg-razon" rows="2" placeholder="¿Por qué sostienes esta postura?"></textarea>
-            </div>
+    overlay.addEventListener("click", cerrarEjercicio);
 
-            <button id="evaluar-argumento" class="main-exercise-button">Validar Estructura</button>
-
-            <div id="arg-evaluation" class="evaluation-box hidden" style="margin-top:20px;">
-                <span class="small-label">EVALUACIÓN DE ESTRUCTURA LÓGICA</span>
-                <h2>Autoevaluación Argumentativa</h2>
-                <p>Verifica si tu planteamiento cumple con los principios lógicos:</p>
-
-                <label class="check-item"><input type="checkbox" class="arg-check"> 1. Mi afirmación presenta una postura clara y defendible (no ambigua).</label>
-                <label class="check-item"><input type="checkbox" class="arg-check"> 2. La razón responde directamente a la pregunta '¿por qué?' respecto a mi tesis.</label>
-                <label class="check-item"><input type="checkbox" class="arg-check"> 3. Evité incurrir en ataques personales o generalizaciones apresuradas.</label>
-                <label class="check-item"><input type="checkbox" class="arg-check"> 4. La razón aporta evidencia lógica o factual, no solo una emoción personal.</label>
-                <label class="check-item"><input type="checkbox" class="arg-check"> 5. Si un opositor me escuchara, mi argumento requeriría un contraargumento válido para ser debatido.</label>
-
-                <button id="finish-arg" class="main-exercise-button">Registrar Evaluación</button>
-                <div id="arg-result" class="result-box"></div>
-
-                <div class="academic-backstory" style="margin-top:20px; padding:15px; background:#f4f6f8; border-left:4px solid #0056b3; font-size:0.85em; color:#444;">
-                    <strong>📚 Respaldo Académico:</strong> Esta rúbrica toma como base el <em>Modelo Argumentativo de Stephen Toulmin (1958)</em>, utilizado internacionalmente en la enseñanza del debate analítico y la lógica formal para validar la solidez discursiva.
-                </div>
-            </div>
-        `);
-
-        const boton = document.getElementById("evaluar-argumento");
-        const evaluacion = document.getElementById("arg-evaluation");
-        const finalizar = document.getElementById("finish-arg");
-        const resultado = document.getElementById("arg-result");
-
-        boton.addEventListener("click", () => {
-            const tesis = document.getElementById("arg-tesis").value.trim();
-            const razon = document.getElementById("arg-razon").value.trim();
-
-            if (!tesis || !razon) {
-                alert("Por favor completa ambos campos antes de evaluar.");
-                return;
-            }
-            evaluacion.classList.remove("hidden");
-        });
-
-        finalizar.addEventListener("click", () => {
-            const marcados = document.querySelectorAll(".arg-check:checked").length;
-            guardarResultado("argumento");
-            resultado.innerHTML = `<strong>Estructura argumentativa: ${marcados}/5 elementos validados.</strong><br>${
-                marcados >= 4 ? "Tu argumento posee solidez lógica formal." : "Revisa las razones aportadas para asegurar que respaldan directamente tu postura."
-            }`;
-        });
-    }
 
     // ==========================================
-    // EJERCICIO 3: RETO DE IMPROVISACIÓN
+    // GUARDAR RESULTADO
     // ==========================================
-    function abrirEjercicioImprovisacion() {
-        const temas = [
-            "¿Por qué es fundamental escuchar antes de responder?",
-            "¿La tecnología une o distorsiona el contacto humano?",
-            "¿Qué cualidad define verdaderamente a un líder?",
-            "¿Por qué el fracaso es una herramienta de aprendizaje?"
-        ];
-        const tema = temas[Math.floor(Math.random() * temas.length)];
 
-        crearPantalla("Reto de improvisación", `
-            <div class="learning-box">
-                <div class="learning-icon">⏱️</div>
-                <div>
-                    <h2>Propósito del Ejercicio</h2>
-                    <p>Capacidad de respuesta rápida, adaptabilidad del mensaje y estructuración bajo escenarios imprevistos.</p>
-                </div>
-            </div>
+    guardar.addEventListener("click", () => {
 
-            <div class="challenge-box">
-                <span class="small-label">TEMA ASIGNADO</span>
-                <h2 style="color:#0056b3;">"${tema}"</h2>
-                <div class="timer-large">
-                    <span id="impro-timer">30</span>
-                    <small>segundos de preparación</small>
-                </div>
-                <button id="start-impro" class="main-exercise-button">Comenzar preparación</button>
-            </div>
+        const seleccionado =
+            document.querySelector(
+                'input[name="resultado"]:checked'
+            );
 
-            <div id="impro-evaluation" class="evaluation-box hidden" style="margin-top:20px;">
-                <span class="small-label">EVALUACIÓN DE DISCURSO EXTEMPORÁNEO</span>
-                <h2>Autoevaluación de Improvisación</h2>
-                <p>Mide tu capacidad de respuesta impromptu:</p>
+        if (!seleccionado) {
 
-                <label class="check-item"><input type="checkbox" class="impro-check"> 1. Definí una idea central en los primeros 10 segundos de hablar.</label>
-                <label class="check-item"><input type="checkbox" class="impro-check"> 2. Mantuve una postura corporal erguida y segura durante la intervención.</label>
-                <label class="check-item"><input type="checkbox" class="impro-check"> 3. Respondí directamente al tema asignado sin desviarme a otros tópicos.</label>
-                <label class="check-item"><input type="checkbox" class="impro-check"> 4. Utilicé un ritmo de voz constante sin acelerarme por el nerviosismo.</label>
-                <label class="check-item"><input type="checkbox" class="impro-check"> 5. Concluí mi intervención con una frase de cierre definida.</label>
+            mensaje.textContent =
+                "Seleccione una opción antes de guardar.";
 
-                <button id="finish-impro" class="main-exercise-button">Guardar Resultado</button>
-                <div id="impro-result" class="result-box"></div>
+            return;
 
-                <div class="academic-backstory" style="margin-top:20px; padding:15px; background:#f4f6f8; border-left:4px solid #0056b3; font-size:0.85em; color:#444;">
-                    <strong>📚 Respaldo Académico:</strong> Cuestionario basado en los parámetros de autoevaluación de habla impromptu desarrollados por la <em>National Communication Association (NCA)</em> y los modelos de adaptabilidad discursiva de <em>McCroskey (1984)</em>.
-                </div>
-            </div>
-        `);
+        }
 
-        const boton = document.getElementById("start-impro");
-        const contador = document.getElementById("impro-timer");
-        const evaluacion = document.getElementById("impro-evaluation");
-        const finalizar = document.getElementById("finish-impro");
-        const resultado = document.getElementById("impro-result");
-        let tiempo = 30;
-        let intervalo = null;
+        const valor =
+            seleccionado.value;
 
-        boton.addEventListener("click", () => {
-            boton.disabled = true;
-            boton.textContent = "Preparándote...";
-            intervalo = setInterval(() => {
-                tiempo--;
-                contador.textContent = tiempo;
-                if (tiempo <= 0) {
-                    clearInterval(intervalo);
-                    contador.textContent = "¡HABLA!";
-                    boton.textContent = "Presentación en curso";
-                    evaluacion.classList.remove("hidden");
-                }
-            }, 1000);
-        });
+        const textos = {
+            "1": "Debe seguir practicando. Lo importante es identificar qué aspecto necesita mejorar.",
+            "2": "Buen comienzo. Ya logró realizar parte del ejercicio, pero todavía puede mejorar.",
+            "3": "Buen trabajo. Puede intentar nuevamente para seguir desarrollando la habilidad."
+        };
 
-        finalizar.addEventListener("click", () => {
-            const marcados = document.querySelectorAll(".impro-check:checked").length;
-            guardarResultado("improvisacion");
-            resultado.innerHTML = `<strong>Capacidad de respuesta: ${marcados}/5 criterios logrados.</strong><br>${
-                marcados >= 4 ? "Excelente control discursivo bajo presión." : "Sigue practicando la estructuración rápida de ideas."
-            }`;
-        });
-    }
+        mensaje.textContent =
+            textos[valor];
 
-    console.log("Rodach - Proyecto de Oratoria con respaldo académico cargado correctamente.");
+        localStorage.setItem(
+            "resultado-oratoria",
+            valor
+        );
+
+    });
+
 });
