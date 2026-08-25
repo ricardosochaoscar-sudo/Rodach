@@ -128,6 +128,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
+    // LISTA DE 20 TEMAS EDUCATIVOS
+    const temasImprovisacion = [
+        "1. ¿Deberían los estudiantes leer más libros en lugar de usar pantallas?",
+        "2. ¿Es importante practicar un deporte para el desarrollo personal?",
+        "3. ¿Qué cualidades definen a un buen líder comunitario o laboral?",
+        "4. ¿Las redes sociales ayudan o dificultan la comunicación humana?",
+        "5. ¿Por qué es fundamental cuidar el medio ambiente desde nuestro hogar?",
+        "6. ¿Cuál es el impacto de la Inteligencia Artificial en el futuro de los trabajos?",
+        "7. ¿Debería priorizarse la salud mental en las instituciones educativas?",
+        "8. ¿Qué papel juega la disciplina frente al talento en el éxito personal?",
+        "9. ¿Por qué es vital aprender a trabajar en equipo de manera respetuosa?",
+        "10. ¿Cómo influye la educación financiera en la vida de los jóvenes?",
+        "11. ¿Es necesario aprender un segundo idioma en la actualidad?",
+        "12. ¿Qué valor tiene el trabajo duro frente a la suerte?",
+        "13. ¿Por qué debemos fomentar el pensamiento crítico al consumir noticias?",
+        "14. ¿Cómo afecta el uso excesivo del teléfono móvil al rendimiento académico?",
+        "15. ¿De qué manera el arte y la música mejoran el desarrollo cognitivo?",
+        "16. ¿Por qué la puntualidad es una muestra de respeto hacia los demás?",
+        "17. ¿Qué acciones simples podemos tomar para reducir el desperdicio de agua?",
+        "18. ¿Es importante promover la igualdad de oportunidades en la educación?",
+        "19. ¿Cómo influyen los hábitos de lectura en la capacidad de hablar en público?",
+        "20. ¿Por qué es indispensable aprender a gestionar el estrés ante la presión?"
+    ];
+
     // CREAR INTERFAZ DEL EJERCICIO
     const modal = document.createElement("div");
     modal.className = "exercise-modal";
@@ -284,49 +308,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (ejercicio.tipo === "improvisacion") {
-            // Lista ampliada con 20 temas educativos diversos
-            const temas = [
-                "¿Deberían los estudiantes leer más libros en lugar de usar pantallas?",
-                "¿Es importante practicar un deporte para el desarrollo personal?",
-                "¿Qué cualidades definen a un buen líder comunitario o laboral?",
-                "¿Las redes sociales ayudan o dificultan la comunicación humana?",
-                "¿Por qué es fundamental cuidar el medio ambiente desde nuestro hogar?",
-                "¿Cuál es el impacto de la Inteligencia Artificial en el futuro de los trabajos?",
-                "¿Debería priorizarse la salud mental en las instituciones educativas?",
-                "¿Qué papel juega la disciplina frente al talento en el éxito personal?",
-                "¿Por qué es vital aprender a trabajar en equipo de manera respetuosa?",
-                "¿Cómo influye la educación financiera en la vida de los jóvenes?",
-                "¿Es necesario aprender un segundo idioma en la actualidad?",
-                "¿Qué valor tiene el trabajo duro frente a la suerte?",
-                "¿Por qué debemos fomentar el pensamiento crítico al consumir noticias?",
-                "¿Cómo afecta el uso excesivo del teléfono móvil al rendimiento académico?",
-                "¿De qué manera el arte y la música mejoran el desarrollo cognitivo?",
-                "¿Por qué la puntualidad es una muestra de respeto hacia los demás?",
-                "¿Qué acciones simples podemos tomar para reducir el desperdicio de agua?",
-                "¿Es importante promover la igualdad de oportunidades en la educación?",
-                "¿Cómo influyen los hábitos de lectura en la capacidad de hablar en público?",
-                "¿Por qué es indispensable aprender a gestionar el estrés ante la presión?"
-            ];
-
-            const obtenerTemaAleatorio = () => temas[Math.floor(Math.random() * temas.length)];
-            const temaInicial = obtenerTemaAleatorio();
+            let indiceActual = 0;
 
             interactivo.innerHTML = `
                 <div class="improvisation-box">
                     <p class="topic-label">SU TEMA ES:</p>
-                    <h3>${temaInicial}</h3>
+                    <h3 id="topic-text">${temasImprovisacion[indiceActual]}</h3>
                     <p>Tiene unos segundos para organizar sus ideas y comenzar a hablar.</p>
                     <button id="new-topic" class="exercise-secondary-button" type="button">Otro tema</button>
                 </div>
             `;
 
-            document.getElementById("new-topic").addEventListener("click", () => {
-                let nuevoTema = obtenerTemaAleatorio();
-                // Evita que vuelva a salir el mismo tema de forma consecutiva
-                while (nuevoTema === interactivo.querySelector("h3").textContent && temas.length > 1) {
-                    nuevoTema = obtenerTemaAleatorio();
-                }
-                interactivo.querySelector("h3").textContent = nuevoTema;
+            const topicText = document.getElementById("topic-text");
+            const btnNewTopic = document.getElementById("new-topic");
+
+            btnNewTopic.addEventListener("click", () => {
+                indiceActual = (indiceActual + 1) % temasImprovisacion.length;
+                topicText.textContent = temasImprovisacion[indiceActual];
             });
         }
 
