@@ -1,6 +1,6 @@
 // ==========================================
 // PROYECTO DE ORATORIA - RODACH
-// SISTEMA DE EVALUACIÓN INTELIGENTE DE HABLA
+// SISTEMA DE EVALUACIÓN INTERACTIVA DE HABLA
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // BANCOS DE 20 TEMAS EDUCATIVOS POR EJERCICIO
+    // BANCOS DE 20 TEMAS EDUCATIVOS
     const bancoTemas = {
         fluidez: [
             "1. Mi libro, serie o película favorita y por qué me impactó",
@@ -92,23 +92,22 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             titulo: "Habla durante 30 segundos",
             etiqueta: "EJERCICIO DE FLUIDEZ Y VOZ",
-            descripcion: "Elige un tema, presiona el micrófono y habla durante 30 segundos. El sistema evaluará tus pausas, ritmo y coherencia.",
-            paraQueSirve: "Desarrolla la tasa de articulación continua y reduce la ansiedad verbal mediante la exposición cronometrada.",
+            descripcion: "Elige un tema, presiona el micrófono y habla durante 30 segundos. El sistema evaluará el fondo, la coherencia de tus frases y la fluidez real.",
+            paraQueSirve: "Desarrolla la articulación continua, evita la redundancia de palabras y entrena la cohesión de ideas bajo presión de tiempo.",
             instrucciones: [
                 "Selecciona un tema o genera uno aleatorio.",
                 "Haz clic en 'Activar Micrófono e Iniciar'.",
-                "Habla con claridad intentando mantener tus ideas fluidas.",
-                "El transcriptor registrará con (...) tus momentos de vacilación o pausas prolongadas.",
-                "Al finalizar los 30s, el Tutor IA analizará científicamente tu locución."
+                "Habla intentando conectar tus ideas con variedad de palabras.",
+                "Al finalizar, el Tutor IA analizará la sintaxis, repeticiones y lógica de lo que dijiste."
             ],
-            respaldo: "Evaluación basada en la Teoría de la Competencia Comunicativa de Dell Hymes (1972) y los parámetros de Tasa de Articulación y Pausas Vacilantes de Peter Skehan (1998).",
+            respaldo: "Evaluación basada en la Teoría de Cohesión y Coherencia Textual de Halliday & Hasan (1976) y la Tasa de Articulación y Vacilación de Peter Skehan (1998).",
             tipo: "fluidez"
         },
         {
             titulo: "Construye un argumento",
             etiqueta: "EJERCICIO DE ARGUMENTACIÓN",
-            descripcion: "Selecciona un tema, dicta o escribe tu postura y la razón que la sostiene para evaluar su validez lógica.",
-            paraQueSirve: "Entrena la capacidad de estructurar enunciados con validez pragmática, identificando si la premisa apoya a la tesis.",
+            descripcion: "Selecciona un tema, escribe o dicta tu postura y la razón que la sostiene para evaluar su validez lógica.",
+            paraQueSirve: "Entrena la capacidad de estructurar enunciados con validez pragmática, identificando si la razón apoya a la postura.",
             instrucciones: [
                 "Elige un tema del banco de argumentación.",
                 "Escribe o dicta tu postura (Tesis).",
@@ -116,21 +115,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Haz clic en 'Analizar Argumento con IA'.",
                 "Recibe un diagnóstico sobre la solidez estructural de tu propuesta."
             ],
-            respaldo: "Análisis fundamentado en el Modelo Argumentativo de Stephen Toulmin (1958, 'The Uses of Argument'), que establece la relación necesaria entre Pretensión, Datos y Garantía.",
+            respaldo: "Análisis fundamentado en el Modelo Argumentativo de Stephen Toulmin (1958), que establece la relación entre Pretensión, Datos y Garantía.",
             tipo: "argumento"
         },
         {
             titulo: "Reto de improvisación",
             etiqueta: "EJERCICIO DE IMPROVISACIÓN",
             descripcion: "Recibe un tema sin preparación previa y habla durante 30 segundos demostrando capacidad de reacción oral.",
-            paraQueSirve: "Fortalece la autorregulación discursiva y la organización mental ágil bajo presión de tiempo.",
+            paraQueSirve: "Fortalece la autorregulación discursiva y la organización mental ágil sin caer en rodeos excesivos.",
             instrucciones: [
                 "Genera un tema al azar.",
                 "Tómate solo 3 segundos para respirar.",
-                "Activa el micrófono y habla sin detenerte.",
-                "Observa cómo el sistema analiza tu capacidad de improvisación sin bloqueos."
+                "Activa el micrófono y habla construyendo una idea central.",
+                "Observa cómo el sistema analiza tu nivel de improvisación y estructura."
             ],
-            respaldo: "Basado en los marcos de Evaluación de Oratoria Impromptu de la National Communication Association (NCA) y los principios de Aprehensión Comunicativa de James McCroskey (1984).",
+            respaldo: "Basado en los marcos de Evaluación de Oratoria Impromptu de la NCA y los principios de Aprehensión Comunicativa de James McCroskey (1984).",
             tipo: "improvisacion"
         }
     ];
@@ -160,9 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div id="exercise-interactive" class="exercise-interactive"></div>
 
                 <div class="exercise-result" style="margin-top:30px;">
-                    <h3>🤖 Tutor de Oratoria IA (Análisis en Tiempo Real)</h3>
+                    <h3>🤖 Tutor de Oratoria IA (Análisis Cualitativo del Discurso)</h3>
                     <div id="ai-feedback-box" class="ai-feedback-container">
-                        <p class="ai-placeholder">Realiza la práctica con el micrófono para que el Tutor IA analice tu voz, ritmo, pausas y estructura.</p>
+                        <p class="ai-placeholder">Realiza la práctica con el micrófono para que el Tutor IA analice tu manera de hablar, coherencia y conectores.</p>
                     </div>
                     <div id="academic-backing" class="academic-backing-tag"></div>
                 </div>
@@ -186,12 +185,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let tiempoRestante = 30;
     let recognizer = null;
     let isListening = false;
-    let lastSpeechTime = 0;
-    let pauseCheckInterval = null;
+    let lastAudioTimestamp = Date.now();
+    let pauseMonitorInterval = null;
     let transcripcionCompleta = "";
     let conteoPausas = 0;
 
-    // INICIALIZACIÓN DE SPEECH RECOGNITION (WEB SPEECH API)
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     function abrirEjercicio(numero) {
@@ -215,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         detenerProcesos();
 
-        // RENDERIZAR INTERFAZ SEGÚN TIPO
         if (ejercicio.tipo === "fluidez" || ejercicio.tipo === "improvisacion") {
             let temasList = bancoTemas[ejercicio.tipo];
             let idTemaActual = 0;
@@ -241,8 +238,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
 
                     <div class="transcript-wrapper">
-                        <label>Transcripción y Pausas Detección (...) en Tiempo Real:</label>
-                        <div id="transcript-box" class="transcript-box">El texto y las pausas detectadas aparecerán aquí mientras hablas...</div>
+                        <label>Transcripción y detección de vacilaciones/pausas en tiempo real:</label>
+                        <div id="transcript-box" class="transcript-box">Presiona el botón e inicia tu intervención...</div>
                     </div>
                 </div>
             `;
@@ -296,10 +293,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.add("exercise-open");
     }
 
-    // LÓGICA DEL RECONOCIMIENTO DE VOZ Y TIMER
+    // CONTROL DEL RECONOCIMIENTO Y DETECCIÓN REAL DE SILENCIOS
     function iniciarPrácticaVoz(tipoEjercicio, temaSeleccionado) {
         if (!SpeechRecognition) {
-            alert("Tu navegador no soporta Reconocimiento de Voz en tiempo real. Te recomendamos usar Google Chrome, Microsoft Edge o Safari.");
+            alert("Tu navegador no soporta Reconocimiento de Voz en tiempo real. Te recomendamos Google Chrome o Microsoft Edge.");
             return;
         }
 
@@ -313,12 +310,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // RESETEAR VARIABLES DE SESIÓN
         transcripcionCompleta = "";
         conteoPausas = 0;
         tiempoRestante = 30;
         timerCount.textContent = tiempoRestante;
-        transcriptBox.innerHTML = "Escuchando... empieza a hablar ahora.";
+        transcriptBox.innerHTML = "Escuchando... puedes hablar ahora.";
         btnMic.classList.add("recording");
         btnText.textContent = "Detener Práctica";
 
@@ -327,26 +323,30 @@ document.addEventListener("DOMContentLoaded", () => {
         recognizer.interimResults = true;
         recognizer.lang = "es-ES";
 
-        lastSpeechTime = Date.now();
+        lastAudioTimestamp = Date.now();
         isListening = true;
 
+        recognizer.onspeechstart = () => {
+            lastAudioTimestamp = Date.now();
+        };
+
         recognizer.onresult = (event) => {
-            lastSpeechTime = Date.now();
-            let currentInterim = "";
+            lastAudioTimestamp = Date.now();
+            let temporal = "";
 
             for (let i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     transcripcionCompleta += event.results[i][0].transcript + " ";
                 } else {
-                    currentInterim += event.results[i][0].transcript;
+                    temporal += event.results[i][0].transcript;
                 }
             }
 
-            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong> <span style="color:#64748b;">${currentInterim}</span>`;
+            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong> <span style="color:#64748b;">${temporal}</span>`;
         };
 
         recognizer.onerror = (err) => {
-            console.error("Error Speech:", err.error);
+            console.warn("Aviso SpeechRecognition:", err.error);
         };
 
         recognizer.onend = () => {
@@ -357,28 +357,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         recognizer.start();
 
-        // CONTROL DE PAUSAS EN TIEMPO REAL (MÁS DE 1.2 SEGUNDOS DE SILENCIO)
-        pauseCheckInterval = setInterval(() => {
+        // MONITOR DE SILENCIOS: Detecta si pasan más de 1.1 segundos sin emitir palabras
+        pauseMonitorInterval = setInterval(() => {
             if (isListening) {
-                const lapse = Date.now() - lastSpeechTime;
-                if (lapse > 1300 && transcripcionCompleta.length > 5) {
-                    if (!transcripcionCompleta.trim().endsWith("...")) {
-                        transcripcionCompleta = transcripcionCompleta.trim() + " ... ";
+                const tiempoInactivo = Date.now() - lastAudioTimestamp;
+                if (tiempoInactivo > 1100 && transcripcionCompleta.trim().length > 3) {
+                    if (!transcripcionCompleta.trim().endsWith("[PAUSA]")) {
+                        transcripcionCompleta = transcripcionCompleta.trim() + " [PAUSA] ";
                         conteoPausas++;
                         transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong>`;
                     }
                 }
             }
-        }, 600);
+        }, 400);
 
-        // CONTADOR DE TIEMPO
+        // REPO DEL TEMPORIZADOR
         intervaloTimer = setInterval(() => {
             tiempoRestante--;
             timerCount.textContent = tiempoRestante;
 
             if (tiempoRestante <= 0) {
                 detenerProcesos();
-                evaluarLocucionVoz(tipoEjercicio, temaSeleccionado);
+                evaluarLocucionVozCualitativa(tipoEjercicio, temaSeleccionado);
             }
         }, 1000);
     }
@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function detenerProcesos() {
         isListening = false;
         clearInterval(intervaloTimer);
-        clearInterval(pauseCheckInterval);
+        clearInterval(pauseMonitorInterval);
 
         if (recognizer) {
             try { recognizer.stop(); } catch(e){}
@@ -400,61 +400,109 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // EVALUACIÓN DE ORATORIA BASADA EN DATOS REALES (FLUIDEZ Y IMPROVISACIÓN)
-    function evaluarLocucionVoz(tipo, tema) {
-        const textoLimpio = transcripcionCompleta.replace(/\.\.\./g, "").trim();
-        const palabras = textoLimpio.length > 0 ? textoLimpio.split(/\s+/).filter(w => w.length > 0) : [];
+    // EVALUACIÓN CUALITATIVA REAL (COHERENCIA, ESTRUCTURA Y MULETILLAS REPETITIVAS)
+    function evaluarLocucionVozCualitativa(tipo, tema) {
+        const textoOriginal = transcripcionCompleta.trim();
+        const textoSinPausas = textoOriginal.replace(/\[PAUSA\]/g, "").replace(/\s+/g, " ").trim();
+        const palabras = textoSinPausas.length > 0 ? textoSinPausas.toLowerCase().split(/\s+/) : [];
         const numPalabras = palabras.length;
-        
-        // Métricas científicas
-        // Velocidad promedio recomendada en oratoria: 110 - 160 Palabras Por Minuto (PPM). En 30s = 55 a 80 palabras.
-        const velocidadPPM = numPalabras * 2; 
 
-        let nivelFluidez = "";
-        let analisisDetallado = "";
-        let observacionCientifica = "";
-        let estadoColor = "#2563eb";
-
-        if (numPalabras < 12) {
-            estadoColor = "#ef4444";
-            nivelFluidez = "Pobre / Bloqueo Severo";
-            analisisDetallado = `Se registraron únicamente <strong>${numPalabras} palabras</strong> en 30 segundos. Esto evidencia una inhibición del discurso o timidez extrema durante la prueba.`;
-            observacionCientifica = `Según la rúbrica de Peter Skehan (1998), una tasa de articulación inferior a 40 PPM refleja una alta *aprehensión comunicativa*, afectando la continuidad sintáctica básica.`;
-        } else if (numPalabras >= 12 && numPalabras < 35) {
-            estadoColor = "#f59e0b";
-            nivelFluidez = "Aceptable con Interrupciones (Dubeitativa)";
-            analisisDetallado = `Mencionaste <strong>${numPalabras} palabras</strong> y realizaste aproximadamente <strong>${conteoPausas} pausas significativas (...)</strong>. Tienes capacidad de iniciar el discurso, pero la articulación se detiene mientras buscas las palabras.`;
-            observacionCientifica = `El lingüista Dell Hymes (1972) destaca que las pausas no planificadas en exceso interrumpen la *competencia sociolingüística*, haciendo que el oyente pierda el foco de la idea.`;
-        } else {
-            estadoColor = "#10b981";
-            nivelFluidez = "Fluidez Optima y Continua";
-            analisisDetallado = `Lograste articular <strong>${numPalabras} palabras</strong> (Proyección estimada: ${velocidadPPM} PPM) con un excelente control de pausas (solo ${conteoPausas} vacilaciones detectadas). Demostraste solidez verbal y dominio del tiempo.`;
-            observacionCientifica = `Cumples plenamente con las normativas de la National Communication Association (NCA) para discursos efectivos en tiempos reducidos.`;
+        if (numPalabras < 8) {
+            feedbackBox.style.borderLeft = "5px solid #ef4444";
+            feedbackBox.innerHTML = `
+                <div class="ai-report">
+                    <h4 style="color:#ef4444; margin-top:0;">⚠️ Intervención demasiado corta para evaluar</h4>
+                    <p>Solo logramos registrar <strong>${numPalabras} palabras</strong>. Intenta hablar continuamente durante los 30 segundos completos para poder analizar tu discurso de manera real.</p>
+                </div>
+            `;
+            return;
         }
 
-        // Análisis de Coherencia temática superficial
-        let palabrasTema = tema.toLowerCase().split(" ").filter(w => w.length > 3);
-        let coincidencias = palabrasTema.filter(p => textoLimpio.toLowerCase().includes(p));
-        let mensajeCoherencia = coincidencias.length > 0 
-            ? "Mantenimiento correcto del campo semántico del tema solicitado." 
-            : "Sugerencia: Procura mencionar de manera explícita las palabras clave del tema para no desviarte del objetivo.";
+        // 1. ANÁLISIS DE MULETILLAS Y REDUNDANCIA
+        let conteoPorque = (textoSinPausas.toLowerCase().match(/porque|por que|por qué/g) || []).length;
+        let conteoQue = (textoSinPausas.toLowerCase().match(/\bque\b/g) || []).length;
+        let conteoDeQue = (textoSinPausas.toLowerCase().match(/de que/g) || []).length;
 
-        feedbackBox.style.borderLeft = `5px solid ${estadoColor}`;
+        let advertenciasRedundancia = [];
+        if (conteoPorque >= 2) {
+            advertenciasRedundancia.push(`Abusaste de la palabra o nexo <strong>"porque"</strong> (${conteoPorque} veces). En oratoria, repetir espontáneamente este conector indica falta de vocabulario para hilar causa-efecto (puedes usar <em>"debido a"</em>, <em>"ya que"</em> o <em>"dado que"</em>).`);
+        }
+        if (conteoDeQue >= 1) {
+            advertenciasRedundancia.push(`Utilizaste la construcción <strong>"de que"</strong> ("la trama es de que..."), lo cual incurre en dequeísmo sintáctico o un giro coloquial impreciso.`);
+        }
+        if (conteoQue >= 4) {
+            advertenciasRedundancia.push(`Se detectó un exceso de muletillas de enlace con la palabra <strong>"que"</strong> (${conteoQue} veces), lo que fragmenta las oraciones.`);
+        }
+
+        // 2. ANÁLISIS DE ESTRUCTURA Y LÓGICA (Tesis -> Desarrollo -> Conclusión)
+        let conectoresLogicos = ["ya que", "por lo tanto", "sin embargo", "ademas", "además", "en conclusión", "por ejemplo", "de esta manera", "así que"];
+        let tieneConectoresVariados = conectoresLogicos.some(c => textoSinPausas.toLowerCase().includes(c));
+
+        let observacionesLógica = "";
+        if (!tieneConectoresVariados) {
+            observacionesLógica = "Tu discurso fue una concatenación de frases cortas sin conectores de transición formal. Mencionaste la idea, pero no articulaste un argumento estructurado con desarrollo lógico.";
+        } else {
+            observacionesLógica = "Utilizaste conectores de transición apropiados para enlazar las ideas principales de tu discurso.";
+        }
+
+        // 3. EVALUACIÓN DE LAS PAUSAS DETECTADAS
+        let observacionPausas = "";
+        if (conteoPausas >= 3) {
+            observacionPausas = `Se detectaron <strong>${conteoPausas} pausas o bloqueos prolongados ([PAUSA])</strong> durante la intervención. Esto demuestra que tuviste que detener el discurso para reorganizar tus pensamientos en voz alta.`;
+        } else if (conteoPausas === 0) {
+            observacionPausas = "No realizaste pausas largas, pero ten cuidado de no acelerar el discurso sacrificando la pronunciación de los conectores.";
+        } else {
+            observacionPausas = `Tuviste <strong>${conteoPausas} pausas breves</strong>. Es un ritmo aceptable, aunque se nota vacilación al enlazar las frases.`;
+        }
+
+        // CONSTRUCCIÓN DEL DIAGNÓSTICO CUALITATIVO BASADO EN INVESTIGACIÓN DISCURSIVA
+        let diagnosticoTitulo = "";
+        let colorEstado = "#2563eb";
+
+        if (advertenciasRedundancia.length >= 2 || conteoPausas >= 3) {
+            colorEstado = "#f59e0b";
+            diagnosticoTitulo = "Discurso Desestructurado y con Muletillas de Enlace";
+        } else if (advertenciasRedundancia.length === 0 && tieneConectoresVariados) {
+            colorEstado = "#10b981";
+            diagnosticoTitulo = "Discurso Coherente y Estructurado";
+        } else {
+            colorEstado = "#3b82f6";
+            diagnosticoTitulo = "Discurso Incompleto en Desarrollo Lógico";
+        }
+
+        feedbackBox.style.borderLeft = `5px solid ${colorEstado}`;
         feedbackBox.innerHTML = `
             <div class="ai-report">
                 <div class="ai-header-status">
-                    <span class="status-badge" style="background:${estadoColor}; color:white;">DIAGNÓSTICO: ${nivelFluidez}</span>
-                    <span class="ppm-badge">Velocidad: ${velocidadPPM} PPM</span>
+                    <span class="status-badge" style="background:${colorEstado}; color:white;">EVALUACIÓN: ${diagnosticoTitulo}</span>
+                    <span class="ppm-badge">Palabras: ${numPalabras} | Pausas silenciadas: ${conteoPausas}</span>
                 </div>
-                <p><strong>📝 Transcripción analizada:</strong> "${transcripcionCompleta || "Sin registro de voz"}"</p>
-                <div class="ai-stats-grid">
-                    <div><strong>Palabras habladas:</strong> ${numPalabras}</div>
-                    <div><strong>Pausas dudosas (...):</strong> ${conteoPausas}</div>
+
+                <p style="background:#f1f5f9; padding:12px; border-radius:8px; font-size:14px; margin:15px 0;">
+                    <strong>📝 Transcripción analizada (con marcador [PAUSA]):</strong><br>
+                    <em>"${textoOriginal}"</em>
+                </p>
+
+                <div class="analysis-section" style="margin-top:15px;">
+                    <h4 style="margin:0 0 8px 0; color:#0f172a;">🗣️ 1. Análisis de Coherencia y Sintaxis (Cómo hablas):</h4>
+                    <p style="font-size:14px; color:#334155;">${observacionesLógica}</p>
+                    ${advertenciasRedundancia.length > 0 ? `
+                        <div style="background:#fff7ed; border-left:4px solid #f97316; padding:10px 14px; margin:10px 0; font-size:13px;">
+                            <strong>🔴 Fallas de redundancia / vicios del lenguaje detectados:</strong>
+                            <ul style="margin:5px 0 0 18px; padding:0;">
+                                ${advertenciasRedundancia.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : '<p style="color:#10b981; font-size:13px;">No se detectaron redundancias ni muletillas marcadas en el uso de palabras.</p>'}
                 </div>
-                <p style="margin-top:10px;"><strong>🔍 Análisis pedagógico:</strong> ${analisisDetallado}</p>
-                <p><strong>🎯 Coherencia:</strong> ${mensajeCoherencia}</p>
-                <div class="ai-science-note">
-                    <strong>💡 Sustento académico real:</strong> ${observacionCientifica}
+
+                <div class="analysis-section" style="margin-top:15px;">
+                    <h4 style="margin:0 0 8px 0; color:#0f172a;">⏱️ 2. Fluidez y Ritmo (Pausas y Duda):</h4>
+                    <p style="font-size:14px; color:#334155;">${observacionPausas}</p>
+                </div>
+
+                <div class="ai-science-note" style="margin-top:18px;">
+                    <strong>💡 Sustento del Análisis Linguístico:</strong> Según la <em>Teoría de Cohesión Textual de Halliday & Hasan (1976)</em>, la coherencia de un discurso no depende de decir muchas palabras, sino de evitar la repetición constante de un solo conector (como "porque" o "que") y de enlazar las causas con explicaciones elaboradas sin cambios abruptos de tema.
                 </div>
             </div>
         `;
@@ -501,7 +549,7 @@ document.addEventListener("DOMContentLoaded", () => {
         feedbackBox.innerHTML = diagnostico;
     }
 
-    // EVENTOS DE BOTONES EN LA PÁGINA PRINCIPAL
+    // EVENTOS DE BOTONES
     const botonesPractica = document.querySelectorAll(".practice-card button");
     botonesPractica.forEach((boton, indice) => {
         boton.addEventListener("click", () => abrirEjercicio(indice));
