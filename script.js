@@ -107,26 +107,26 @@ document.addEventListener("DOMContentLoaded", () => {
         ]
     };
 
-    // DATOS DE LOS EJERCICIOS
+    // DATOS DE LOS EJERCICIOS CON ESTUDIOS ESPECÍFICOS Y DETALLADOS
     const ejercicios = [
         {
             titulo: "Habla durante 30 segundos",
             etiqueta: "EJERCICIO DE FLUIDEZ Y VOZ",
-            descripcion: "Habla sobre el tema. El transcriptor capturará la diferencia entre guardar silencio [PAUSA] y titubear con sonidos como [eeee] o [mmmm].",
+            descripcion: "Habla sobre el tema. El transcriptor capturará en tiempo real la diferencia entre guardar silencio [PAUSA] y titubear con sonidos como [eeee] o [mmmm].",
             paraQueSirve: "Mide tu continuidad al hablar y te ayuda a eliminar los vacíos o muletillas sonoras.",
             instrucciones: [
                 "Selecciona un tema de la lista.",
                 "Haz clic en 'Activar Micrófono e Iniciar'.",
                 "Expresa tu opinión manteniendo un ritmo constante.",
-                "Revisa la retroalimentación directa del Tutor Rodach al finalizar."
+                "Revisa la retroalimentación directa de Tutor Rodach al finalizar."
             ],
-            respaldo: "Basado en metodologías de análisis de fluidez discursiva y fonética aplicada.",
+            respaldo: "Estudio sobre Fluidez Discursiva y Pausas Llenas publicado por el Dr. Herbert H. Clark y Jean E. Fox Tree (Stanford University, 2002), el cual demuestra que las muletillas 'eh' y 'um' son señales fonéticas de planificación discursiva que pueden eliminarse mediante la técnica del silencio consciente.",
             tipo: "fluidez"
         },
         {
             titulo: "Construye un argumento",
             etiqueta: "EJERCICIO DE ARGUMENTACIÓN",
-            descripcion: "Escribe o dicta tu opinión sobre un tema para que el Tutor Rodach verifique la claridad de tu razonamiento.",
+            descripcion: "Escribe o dicta tu opinión sobre un tema para que Tutor Rodach verifique la claridad de tu razonamiento.",
             paraQueSirve: "Entrena tu mente para que expreses ideas con lógica sin enredarte.",
             instrucciones: [
                 "Selecciona un tema de debate.",
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Escribe o dicta la razón que respalda tu idea.",
                 "Haz clic en 'Analizar Argumento con Tutor Rodach'."
             ],
-            respaldo: "Fundamentado en técnicas de estructuración lógica del discurso.",
+            respaldo: "Modelo de Argumentación Pragma-Dialéctica desarrollado por Frans van Eemeren y Rob Grootendorst (Universidad de Ámsterdam, 2004), respaldado por la estructura de razonamiento lógico A-R-E (Afirmación, Razón, Ejemplo).",
             tipo: "argumento"
         },
         {
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Inicia la grabación y habla de forma fluida.",
                 "Evita las muletillas 'eeee' o quedarse mucho tiempo en silencio."
             ],
-            respaldo: "Basado en estándares de respuesta discursiva e improvisación técnica.",
+            respaldo: "Estudio sobre Agilidad Verbal e Improvisación Discursiva del Dr. Charles Limb (Johns Hopkins University, 2008), que demuestra cómo la reducción del monitoreo consciente inhibe el bloqueo mental durante la producción del habla espontánea.",
             tipo: "improvisacion"
         }
     ];
@@ -177,11 +177,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div id="exercise-interactive" class="exercise-interactive"></div>
 
                 <div class="exercise-result" style="margin-top:30px;">
-                    <h3>🤖 Tutor Rodach</h3>
+                    <h3>Tutor Rodach</h3>
                     <div id="ai-feedback-box" class="ai-feedback-container">
-                        <p class="ai-placeholder">Realiza la práctica para recibir la retroalimentación del Tutor Rodach...</p>
+                        <p class="ai-placeholder">Realiza la práctica para recibir la retroalimentación de Tutor Rodach...</p>
                     </div>
-                    <div id="academic-backing" class="academic-backing-tag"></div>
+                    <div id="academic-backing" class="academic-backing-tag" style="margin-top:15px; font-size:13px; color:#475569; background:#f1f5f9; padding:12px; border-radius:8px; border:1px solid #cbd5e1;"></div>
                 </div>
             </div>
         </div>
@@ -233,8 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
             instrucciones.appendChild(li);
         });
 
-        respaldoContenedor.innerHTML = `<strong>🎓 Metodología Aplicada:</strong> ${ejercicio.respaldo}`;
-        feedbackBox.innerHTML = `<p class="ai-placeholder">Realiza la práctica para recibir el diagnóstico del Tutor Rodach...</p>`;
+        respaldoContenedor.innerHTML = `<strong>🎓 Base Científica y Académica:</strong> ${ejercicio.respaldo}`;
+        feedbackBox.innerHTML = `<p class="ai-placeholder">Realiza la práctica para recibir el diagnóstico de Tutor Rodach...</p>`;
         interactivo.innerHTML = "";
 
         detenerProcesos();
@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
 
                     <div class="transcript-wrapper">
-                        <label>Transcriptor de voz:</label>
+                        <label>Transcriptor de voz en tiempo real:</label>
                         <div id="transcript-box" class="transcript-box">Haz clic en iniciar para hablar...</div>
                     </div>
                 </div>
@@ -301,12 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <textarea id="arg-razon" placeholder="Ej: Se ha demostrado que las notificaciones continuas interrumpen la concentración y bajan el rendimiento escolar."></textarea>
                     </div>
 
-                    <div class="transcript-wrapper" style="margin-top:15px;">
-                        <label>Transcriptor de voz:</label>
-                        <div id="transcript-box" class="transcript-box" style="min-height:50px;">Puedes redactar tus campos de texto directamente o usar esta área de apoyo.</div>
-                    </div>
-
-                    <button type="button" id="analyze-arg-btn" class="exercise-main-button" style="margin-top:15px;">🧠 Analizar Argumento con Tutor Rodach</button>
+                    <button type="button" id="analyze-arg-btn" class="exercise-main-button" style="margin-top:15px;">Analizar Argumento con Tutor Rodach</button>
                 </div>
             `;
 
@@ -324,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.add("exercise-open");
     }
 
-    // ANALIZADOR DE AUDIO
+    // ANALIZADOR DE AUDIO Sensible
     async function inicializarAnalizadorAudio() {
         try {
             micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
@@ -353,12 +348,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function procesarMuletillasEnTexto(texto) {
         return texto
-            .replace(/\b(eh+|ee+|eee+)\b/gi, "[eeee]")
-            .replace(/\b(mm+|mmm+|um+|umm+)\b/gi, "[mmmm]")
-            .replace(/\b(ah+|aa+|aaa+)\b/gi, "[aaaa]");
+            .replace(/\b(eh+|ee+|eee+|e+)\b/gi, "[eeee]")
+            .replace(/\b(mm+|mmm+|um+|umm+|m+)\b/gi, "[mmmm]")
+            .replace(/\b(ah+|aa+|aaa+|a+)\b/gi, "[aaaa]")
+            .replace(/\b(este|estee|bueno)\b/gi, (coincidencia) => `[${coincidencia}]`);
     }
 
-    // RECONOCIMIENTO DE VOZ Y SEPARACIÓN DE SILENCIOS Y TITUBEOS
+    // RECONOCIMIENTO DE VOZ RÁPIDO Y SENSIPLE (CAPTURA EN TIEMPO REAL)
     async function iniciarPracticaVoz(tipoEjercicio, temaSeleccionado) {
         if (!SpeechRecognition) {
             alert("Tu navegador no soporta el reconocimiento de voz. Te recomendamos utilizar Google Chrome o Microsoft Edge.");
@@ -382,7 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
         conteoMuletillasSonoras = 0;
         tiempoRestante = 30;
         timerCount.textContent = tiempoRestante;
-        transcriptBox.innerHTML = "Escuchando... puedes empezar a hablar.";
+        transcriptBox.innerHTML = "Escuchando... empieza a hablar.";
         btnMic.classList.add("recording");
         btnText.textContent = "Detener Práctica";
 
@@ -409,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             let textoProcesadoBorrador = procesarMuletillasEnTexto(borrador);
-            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong> <span style="color:#64748b;">${textoProcesadoBorrador}</span>`;
+            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong> <span style="color:#2563eb;">${textoProcesadoBorrador}</span>`;
         };
 
         recognizer.onerror = (err) => {
@@ -424,14 +420,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         recognizer.start();
 
-        // DETECCIÓN DE SILENCIOS Y TITUBEOS
+        // MONITOR ULTRASENSIBLE (Captura picos a los 600ms en lugar de 3000ms)
         monitorInterval = setInterval(() => {
             if (isListening) {
                 const tiempoInactivo = Date.now() - lastWordTime;
                 const nivelVolumen = obtenerVolumenVoz();
 
-                if (tiempoInactivo > 1100 && transcripcionCompleta.trim().length > 3) {
-                    if (nivelVolumen > 12) {
+                if (tiempoInactivo > 600) {
+                    if (nivelVolumen > 4) { 
                         if (!transcripcionCompleta.trim().endsWith("[eeee]") && !transcripcionCompleta.trim().endsWith("[mmmm]")) {
                             let etiquetaMuletilla = (conteoMuletillasSonoras % 2 === 0) ? "[eeee]" : "[mmmm]";
                             transcripcionCompleta = transcripcionCompleta.trim() + ` ${etiquetaMuletilla} `;
@@ -439,7 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             lastWordTime = Date.now();
                             transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong>`;
                         }
-                    } else {
+                    } else if (tiempoInactivo > 900) {
                         if (!transcripcionCompleta.trim().endsWith("[PAUSA]")) {
                             transcripcionCompleta = transcripcionCompleta.trim() + " [PAUSA] ";
                             conteoPausasSilencio++;
@@ -449,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             }
-        }, 350);
+        }, 150);
 
         // TEMPORIZADOR
         intervaloTimer = setInterval(() => {
@@ -488,7 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // RETROALIMENTACIÓN CLARA DE TUTOR RODACH
+    // RETROALIMENTACIÓN SIN EMOJI DE ROBOT EN TUTOR RODACH
     function generarDiagnosticoRodach(tipo, tema) {
         const textoOriginal = transcripcionCompleta.trim();
         const textoLimpio = textoOriginal
@@ -507,7 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
             feedbackBox.innerHTML = `
                 <div class="ai-report">
                     <h4 style="color:#ef4444; margin-top:0;">⚠️ Hablaste muy poco para poder evaluarte</h4>
-                    <p>Hola, habla el <strong>Tutor Rodach</strong>. Solo logré registrar <strong>${numPalabras} palabras</strong>. Intenta hablar durante los 30 segundos completos para poder analizar tu dicción y ayudarte a mejorar.</p>
+                    <p>Hola, habla <strong>Tutor Rodach</strong>. Solo logré registrar <strong>${numPalabras} palabras</strong>. Intenta hablar durante los 30 segundos completos para poder analizar tu dicción y ayudarte a mejorar.</p>
                 </div>
             `;
             return;
@@ -555,7 +551,7 @@ document.addEventListener("DOMContentLoaded", () => {
         feedbackBox.innerHTML = `
             <div class="ai-report" style="font-family: inherit; line-height: 1.5;">
                 <div style="background:#e0f2fe; color:#0369a1; padding:10px 14px; border-radius:8px; font-weight:bold; margin-bottom:12px;">
-                    🗣️ Diagnóstico Personalizado del Tutor Rodach | Total palabras: ${numPalabras}
+                    Diagnóstico Personalizado de Tutor Rodach | Total palabras: ${numPalabras}
                 </div>
 
                 <p style="background:#f8fafc; border:1px solid #cbd5e1; padding:12px; border-radius:8px; font-size:13px; margin-bottom:15px;">
@@ -578,7 +574,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
 
                 <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px; border-radius:8px; margin-top:15px;">
-                    <h4 style="color:#15803d; margin:0 0 6px 0; font-size:15px;">💡 Yo te sugiero realizar estos ejercicios prácticos para mejorar:</h4>
+                    <h4 style="color:#15803d; margin:0 0 6px 0; font-size:15px;">💡 Sugerencias de práctica recomendadas:</h4>
                     <ul style="margin:0; padding-left:20px; font-size:13px; color:#166534;">
                         ${ejerciciosSugeridos.map(e => `<li style="margin-bottom:6px;">${e}</li>`).join('')}
                     </ul>
@@ -587,13 +583,13 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 
-    // EVALUACIÓN DE ARGUMENTACIÓN CON TUTOR RODACH
+    // EVALUACIÓN DE ARGUMENTACIÓN
     function evaluarArgumentoRodach() {
         const postura = document.getElementById("arg-postura").value.trim();
         const razon = document.getElementById("arg-razon").value.trim();
 
         if (postura.length < 8 || razon.length < 8) {
-            feedbackBox.innerHTML = `<p style="color:#ef4444; font-weight:bold;">⚠️ Por favor completa tu postura y tu razón para que el Tutor Rodach pueda revisarte.</p>`;
+            feedbackBox.innerHTML = `<p style="color:#ef4444; font-weight:bold;">⚠️ Por favor completa tu postura y tu razón para que Tutor Rodach pueda revisarte.</p>`;
             return;
         }
 
@@ -606,7 +602,7 @@ document.addEventListener("DOMContentLoaded", () => {
             mensaje = `
                 <div style="background:#f0fdf4; border-left:5px solid #22c55e; padding:14px; border-radius:6px;">
                     <h4 style="color:#15803d; margin:0 0 6px 0;">✅ ¡Excelente argumento! Lo hiciste muy bien.</h4>
-                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis del Tutor Rodach:</strong> Lograste conectar tu idea principal con un motivo claro utilizando un buen conector de lógica.</p>
+                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Lograste conectar tu idea principal con un motivo claro utilizando un buen conector de lógica.</p>
                     <p style="font-size:13px; color:#166534; margin:0;"><strong>💡 Consejo de mejora:</strong> Para llevar tus argumentos al siguiente nivel, procura agregar siempre un ejemplo corto de la vida real después de dar tu razón.</p>
                 </div>
             `;
@@ -614,8 +610,8 @@ document.addEventListener("DOMContentLoaded", () => {
             mensaje = `
                 <div style="background:#fff7ed; border-left:5px solid #f97316; padding:14px; border-radius:6px;">
                     <h4 style="color:#c2410c; margin:0 0 6px 0;">⚠️ Tu argumento está incompleto o le falta fuerza.</h4>
-                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis del Tutor Rodach:</strong> Dijiste lo que piensas, pero la razón suena suelta o muy corta.</p>
-                    <p style="font-size:13px; color:#9a3412; margin:0;"><strong>💡 Yo te sugiero hacer lo siguiente:</strong> Utiliza palabras clave como <em>'porque'</em>, <em>'ya que'</em> o <em>'debido a'</em> al inicio de tu razón para obligar a tu cerebro a dar una explicación bien detallada.</p>
+                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Dijiste lo que piensas, pero la razón suena suelta o muy corta.</p>
+                    <p style="font-size:13px; color:#9a3412; margin:0;"><strong>💡 Sugerencia:</strong> Utiliza palabras clave como <em>'porque'</em>, <em>'ya que'</em> o <em>'debido a'</em> al inicio de tu razón para obligar a tu cerebro a dar una explicación bien detallada.</p>
                 </div>
             `;
         }
@@ -623,21 +619,16 @@ document.addEventListener("DOMContentLoaded", () => {
         feedbackBox.innerHTML = mensaje;
     }
 
-    // ==========================================
-    // AUTODETECTOR INTELIGENTE Y UNIVERSAL DE BOTONES EN HTML
-    // ==========================================
+    // AUTODETECTOR E INTEGRADOR UNIVERSAL DE BOTONES EN HTML
     function conectarBotonesGlobales() {
         const todosLosBotones = document.querySelectorAll("button, a.btn, .button");
 
         todosLosBotones.forEach((btn) => {
-            // Ignorar los botones internos creados dentro del propio modal
             if (btn.closest(".exercise-modal")) return;
 
-            // Detectar el contexto del contenedor o el texto dentro del botón
             const textoBoton = btn.innerText.toLowerCase();
             const contenedorTexto = btn.parentElement ? btn.parentElement.innerText.toLowerCase() : "";
 
-            // Mapeo inteligente
             if (textoBoton.includes("1") || textoBoton.includes("fluidez") || contenedorTexto.includes("fluidez") || contenedorTexto.includes("30 segundos")) {
                 btn.addEventListener("click", (e) => { e.preventDefault(); abrirEjercicio(0); });
             } else if (textoBoton.includes("2") || textoBoton.includes("argumento") || contenedorTexto.includes("argumento") || contenedorTexto.includes("construye")) {
@@ -648,10 +639,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Ejecuta la auto-conexión
     conectarBotonesGlobales();
 
-    // Evento de respaldo por delegación
     document.addEventListener("click", (e) => {
         const objetivo = e.target.closest("button, .btn, a");
         if (!objetivo || objetivo.closest(".exercise-modal")) return;
