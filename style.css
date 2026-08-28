@@ -2042,3 +2042,218 @@ body.exercise-open {
     }
 
 }
+/* ==========================================
+   ESTILOS DEL TUTOR IA Y MICRÓFONO AVANZADO
+========================================== */
+
+.speech-box, .argument-builder-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.topic-selector {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.topic-badge {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #2563eb;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.topic-selector h4 {
+    font-size: 1.2rem;
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+.timer-display {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.timer-display span {
+    font-size: 70px;
+    font-weight: 800;
+    color: #0f172a;
+    display: block;
+    line-height: 1;
+}
+
+.timer-display small {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.mic-controls {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.mic-button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    transition: all 0.3s ease;
+}
+
+.mic-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-3px);
+}
+
+.mic-button.recording {
+    background: #ef4444;
+    animation: pulseMic 1.5s infinite;
+}
+
+@keyframes pulseMic {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+    70% { box-shadow: 0 0 0 18px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.transcript-wrapper {
+    margin-top: 25px;
+}
+
+.transcript-wrapper label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.transcript-box {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 18px;
+    min-height: 100px;
+    max-height: 180px;
+    overflow-y: auto;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1e293b;
+}
+
+/* CAJA DEL TUTOR IA */
+.ai-feedback-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 25px;
+    margin-top: 15px;
+}
+
+.ai-placeholder {
+    color: #64748b;
+    font-style: italic;
+    margin: 0;
+}
+
+.ai-header-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.ppm-badge {
+    background: #f1f5f9;
+    color: #334155;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.ai-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    background: #f8fafc;
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.ai-science-note {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background: #eef4ff;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #1e3a8a;
+    line-height: 1.5;
+}
+
+.academic-backing-tag {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8fafc;
+    border-left: 4px solid #64748b;
+    font-size: 13px;
+    color: #475569;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.input-group textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.input-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
