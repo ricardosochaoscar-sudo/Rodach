@@ -218,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     function abrirEjercicio(numero) {
+        if (!ejercicios[numero]) return;
         const ejercicio = ejercicios[numero];
 
         etiqueta.textContent = ejercicio.etiqueta;
@@ -514,7 +515,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Detección de muletillas de texto habladas
         let conteoPorque = (textoLimpio.match(/porque|por que|por qué/g) || []).length;
-        let conteoDeQue = (textoLimpio.match/de que/g) || [].length;
+        let conteoDeQue = (textoLimpio.match(/de que/g) || []).length;
         let conteoQue = (textoLimpio.match(/\bque\b/g) || []).length;
 
         let fortalezas = [];
@@ -627,10 +628,23 @@ document.addEventListener("DOMContentLoaded", () => {
         feedbackBox.innerHTML = mensaje;
     }
 
-    // EVENTOS DE BOTONES
-    const botonesPractica = document.querySelectorAll(".practice-card button");
+    // VINCULACIÓN MEJORADA DE BOTONES (Garantiza la detección)
+    const botonesPractica = document.querySelectorAll(".practice-card button, .card button, [data-ejercicio]");
+    
     botonesPractica.forEach((boton, indice) => {
         boton.addEventListener("click", () => abrirEjercicio(indice));
+    });
+
+    // SISTEMA DE RESPALDO: Escuchador global por si el HTML utiliza ids o tarjetas con clases distintas
+    document.addEventListener("click", (e) => {
+        const objetivo = e.target.closest("button, .btn, .button");
+        if (!objetivo) return;
+
+        // Si el botón tiene un data-ejercicio="0", data-ejercicio="1", etc.
+        if (objetivo.hasAttribute("data-ejercicio")) {
+            const index = parseInt(objetivo.getAttribute("data-ejercicio"));
+            abrirEjercicio(index);
+        }
     });
 
     function cerrarEjercicio() {
