@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/\b(ah+|aa+|aaa+)\b/gi, "[aaaa]");
     }
 
-    // RECONOCIMIENTO DE VOZ Y SEPARACIÓN DE SILENCIOS Y TUBEOS
+    // RECONOCIMIENTO DE VOZ Y SEPARACIÓN DE SILENCIOS Y TITUBEOS
     async function iniciarPracticaVoz(tipoEjercicio, temaSeleccionado) {
         if (!SpeechRecognition) {
             alert("Tu navegador no soporta el reconocimiento de voz. Te recomendamos utilizar Google Chrome o Microsoft Edge.");
@@ -488,7 +488,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // RETROALIMENTACIÓN CLARA, PRÁCTICA Y COMPRENSIBLE DE TUTOR RODACH
+    // RETROALIMENTACIÓN CLARA DE TUTOR RODACH
     function generarDiagnosticoRodach(tipo, tema) {
         const textoOriginal = transcripcionCompleta.trim();
         const textoLimpio = textoOriginal
@@ -513,16 +513,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Detección de muletillas de texto habladas
         let conteoPorque = (textoLimpio.match(/porque|por que|por qué/g) || []).length;
-        let conteoDeQue = (textoLimpio.match(/de que/g) || []).length;
         let conteoQue = (textoLimpio.match(/\bque\b/g) || []).length;
 
         let fortalezas = [];
         let puntosAMejorar = [];
         let ejerciciosSugeridos = [];
 
-        // Evaluando lo que hizo bien
         if (numPalabras >= 25) {
             fortalezas.push("Tienes un excelente volumen de palabras y fluidez constante. No te quedaste congelado sin saber qué decir.");
         } else {
@@ -533,24 +530,22 @@ document.addEventListener("DOMContentLoaded", () => {
             fortalezas.push("Tu dicción fue sumamente limpia. Casi no usaste muletillas sonoras ni pausas largas.");
         }
 
-        // Evaluando lo que le falta o debe corregir
         if (conteoMuletillasSonoras >= 1) {
-            puntosAMejorar.push(`Dijiste sonidos de titubeo como <strong>[eeee]</strong> o <strong>[mmmm]</strong> un total de <strong>${conteoMuletillasSonoras} veces</strong>. Esto ocurre cuando tu mente piensa la palabra pero tu boca no deja de hacer sonido.`);
+            puntosAMejorar.push(`Dijiste sonidos de titubeo como <strong>[eeee]</strong> o <strong>[mmmm]</strong> un total de <strong>${conteoMuletillasSonoras} veces</strong>.`);
             ejerciciosSugeridos.push(BASE_DATOS_RODACH.reemplazoMuletillas[0]);
             ejerciciosSugeridos.push(BASE_DATOS_RODACH.reemplazoMuletillas[1]);
         }
 
         if (conteoPausasSilencio >= 2) {
-            puntosAMejorar.push(`Te quedaste en silencio completo en <strong>${conteoPausasSilencio} ocasiones [PAUSA]</strong>. Aunque estar en silencio es mejor que decir 'eeee', pausas de más de 2 segundos hacen que tu discurso pierda fuerza.`);
+            puntosAMejorar.push(`Te quedaste en silencio completo en <strong>${conteoPausasSilencio} ocasiones [PAUSA]</strong>.`);
             ejerciciosSugeridos.push(BASE_DATOS_RODACH.tecnicasRespiracion[0]);
         }
 
         if (conteoQue >= 4 || conteoPorque >= 3) {
-            puntosAMejorar.push(`Repetiste demasiado palabras como <strong>'que'</strong> (${conteoQue} veces) o <strong>'porque'</strong> (${conteoPorque} veces). Eso hace que tus oraciones se escuchen pesadas o enredadas.`);
+            puntosAMejorar.push(`Repetiste demasiado palabras como <strong>'que'</strong> (${conteoQue} veces) o <strong>'porque'</strong> (${conteoPorque} veces).`);
             ejerciciosSugeridos.push(BASE_DATOS_RODACH.estrategiasEstructura[0]);
         }
 
-        // Si habló bien sin fallas marcadas
         if (puntosAMejorar.length === 0) {
             puntosAMejorar.push("Ninguno grave. Mantuviste un ritmo bastante natural y comprensible.");
             ejerciciosSugeridos.push(BASE_DATOS_RODACH.ejerciciosDiccion[0]);
@@ -628,19 +623,39 @@ document.addEventListener("DOMContentLoaded", () => {
         feedbackBox.innerHTML = mensaje;
     }
 
-    // VINCULACIÓN MEJORADA DE BOTONES (Garantiza la detección)
-    const botonesPractica = document.querySelectorAll(".practice-card button, .card button, [data-ejercicio]");
-    
-    botonesPractica.forEach((boton, indice) => {
-        boton.addEventListener("click", () => abrirEjercicio(indice));
-    });
+    // ==========================================
+    // AUTODETECTOR INTELIGENTE Y UNIVERSAL DE BOTONES EN HTML
+    // ==========================================
+    function conectarBotonesGlobales() {
+        const todosLosBotones = document.querySelectorAll("button, a.btn, .button");
 
-    // SISTEMA DE RESPALDO: Escuchador global por si el HTML utiliza ids o tarjetas con clases distintas
+        todosLosBotones.forEach((btn) => {
+            // Ignorar los botones internos creados dentro del propio modal
+            if (btn.closest(".exercise-modal")) return;
+
+            // Detectar el contexto del contenedor o el texto dentro del botón
+            const textoBoton = btn.innerText.toLowerCase();
+            const contenedorTexto = btn.parentElement ? btn.parentElement.innerText.toLowerCase() : "";
+
+            // Mapeo inteligente
+            if (textoBoton.includes("1") || textoBoton.includes("fluidez") || contenedorTexto.includes("fluidez") || contenedorTexto.includes("30 segundos")) {
+                btn.addEventListener("click", (e) => { e.preventDefault(); abrirEjercicio(0); });
+            } else if (textoBoton.includes("2") || textoBoton.includes("argumento") || contenedorTexto.includes("argumento") || contenedorTexto.includes("construye")) {
+                btn.addEventListener("click", (e) => { e.preventDefault(); abrirEjercicio(1); });
+            } else if (textoBoton.includes("3") || textoBoton.includes("improvisacion") || textoBoton.includes("improvisación") || contenedorTexto.includes("improvisación") || contenedorTexto.includes("reto")) {
+                btn.addEventListener("click", (e) => { e.preventDefault(); abrirEjercicio(2); });
+            }
+        });
+    }
+
+    // Ejecuta la auto-conexión
+    conectarBotonesGlobales();
+
+    // Evento de respaldo por delegación
     document.addEventListener("click", (e) => {
-        const objetivo = e.target.closest("button, .btn, .button");
-        if (!objetivo) return;
+        const objetivo = e.target.closest("button, .btn, a");
+        if (!objetivo || objetivo.closest(".exercise-modal")) return;
 
-        // Si el botón tiene un data-ejercicio="0", data-ejercicio="1", etc.
         if (objetivo.hasAttribute("data-ejercicio")) {
             const index = parseInt(objetivo.getAttribute("data-ejercicio"));
             abrirEjercicio(index);
