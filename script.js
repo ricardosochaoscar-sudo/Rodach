@@ -328,7 +328,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // PROCESAMIENTO FONÉTICO EN TIEMPO REAL STRICTO
     function procesarMuleteosReales(texto) {
         return texto
-            // Normalizar muletillas de voz reales pronunciadas por el usuario
             .replace(/\b(e{2,}|e-e+|eh+)\b/gi, "[eeee]")
             .replace(/\b(m{2,}|m-m+|mm+|um+|umm+)\b/gi, "[mmmm]")
             .replace(/\b(a{2,}|a-a+|ah+)\b/gi, "[aaaa]")
@@ -389,9 +388,12 @@ document.addEventListener("DOMContentLoaded", () => {
             console.warn("Aviso Recognizer:", err.error);
         };
 
+        // MEJORA: RETRASO DE 100MS EN EL REINICIO PARA EVITAR CORRUPCIÓN DEL ESTADO DEL RECOGNIZER
         recognizer.onend = () => {
             if (isListening && tiempoRestante > 0) {
-                try { recognizer.start(); } catch(e){}
+                setTimeout(() => {
+                    try { recognizer.start(); } catch(e){}
+                }, 100);
             }
         };
 
@@ -455,7 +457,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function generarDiagnosticoRodach(tipo, tema) {
         const textoOriginal = transcripcionCompleta.trim();
 
-        // CONTEO DIRECTO Y EXACTO SOBRE EL TEXTO GENERADO POR EL TRANSCRIPTOR
         const coincidenciasEEEE = (textoOriginal.match(/\[eeee\]/g) || []).length;
         const coincidenciasMMMM = (textoOriginal.match(/\[mmmm\]/g) || []).length;
         const coincidenciasAAAA = (textoOriginal.match(/\[aaaa\]/g) || []).length;
@@ -464,7 +465,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const totalMuletillasSonoras = coincidenciasEEEE + coincidenciasMMMM + coincidenciasAAAA + coincidenciasOOOO;
 
-        // LIMPIEZA DEL TEXTO PARA ANÁLISIS DE PALABRAS REALES
         const textoLimpio = textoOriginal
             .replace(/\[PAUSA\]/g, "")
             .replace(/\[eeee\]/g, "")
@@ -476,7 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const palabras = textoLimpio.length > 0 ? textoLimpio.toLowerCase().split(/\s+/) : [];
         const numPalabras = palabras.length;
-        const ppm = Math.round(numPalabras * 2); // Proyección de Palabras Por Minuto (en 30 seg)
+        const ppm = Math.round(numPalabras * 2);
 
         if (numPalabras < 6) {
             feedbackBox.style.borderLeft = "5px solid #ef4444";
@@ -489,7 +489,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // DETECCIÓN DE REPETICIÓN DE PALABRAS CLAVE (MULETILLAS LÉXICAS)
         let conteoQue = (textoLimpio.match(/\bque\b/gi) || []).length;
         let conteoPorque = (textoLimpio.match(/\bpor\s*qué\b|\bporque\b/gi) || []).length;
         let conteoEste = (textoLimpio.match(/\beste\b|\bestee\b/gi) || []).length;
@@ -499,7 +498,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let puntosAMejorar = [];
         let poolConsejos = [];
 
-        // EVALUACIÓN DE FLUIDEZ Y VELOCIDAD
         if (ppm >= 80 && ppm <= 140) {
             fortalezas.push(`Tuviste un ritmo de vocalización excelente (${ppm} Palabras Por Minuto). Mantuviste un balance ideal entre velocidad y comprensión.`);
         } else if (ppm > 140) {
@@ -510,7 +508,6 @@ document.addEventListener("DOMContentLoaded", () => {
             poolConsejos.push(...BANCO_CONSEJOS_RODACH.pausasYLagunas);
         }
 
-        // EVALUACIÓN EXACTA DE MULETILLAS SONORAS
         if (totalMuletillasSonoras === 0) {
             fortalezas.push("¡Dicción impecable! No articulaste sonido alguno de vacilatorio como [eeee] o [mmmm].");
         } else {
@@ -524,7 +521,6 @@ document.addEventListener("DOMContentLoaded", () => {
             poolConsejos.push(...BANCO_CONSEJOS_RODACH.muletillasSonoras);
         }
 
-        // EVALUACIÓN DE PAUSAS LARGAS
         if (coincidenciasPAUSA > 0) {
             puntosAMejorar.push(`Se detectaron <strong>${coincidenciasPAUSA} pausas prolongadas [PAUSA]</strong> donde interrumpiste el flujo del habla.`);
             poolConsejos.push(...BANCO_CONSEJOS_RODACH.pausasYLagunas);
@@ -532,7 +528,6 @@ document.addEventListener("DOMContentLoaded", () => {
             fortalezas.push("Mantuviste una hilación continua sin interrupciones ni vacíos prolongados.");
         }
 
-        // EVALUACIÓN DE REPETICIÓN LÉXICA
         if (conteoQue >= 4 || conteoPorque >= 3 || conteoEste >= 2 || conteoOsea >= 2) {
             let repeticiones = [];
             if (conteoQue >= 4) repeticiones.push(`'que' (${conteoQue} veces)`);
@@ -548,7 +543,6 @@ document.addEventListener("DOMContentLoaded", () => {
             poolConsejos.push(...BANCO_CONSEJOS_RODACH.estructuraYVocabulario);
         }
 
-        // SELECCIÓN ALEATORIA Y ÚNICA DE 2 O 3 CONSEJOS CADA VEZ
         const consejosFinales = obtenerConsejosAleatorios(poolConsejos, 3);
 
         feedbackBox.style.borderLeft = `5px solid #2563eb`;
@@ -624,37 +618,40 @@ document.addEventListener("DOMContentLoaded", () => {
         feedbackBox.innerHTML = mensaje;
     }
 
-    // VINCULACIÓN GLOBAL DE BOTONES
+    // MEJORA: VINCULACIÓN ROBUSTA DE BOTONES CON ATRIBUTOS DATA O TEXTOS FLEXIBLES
     function conectarBotonesGlobales() {
-        const todosLosBotones = document.querySelectorAll("button, a.btn, .button");
+        const todosLosBotones = document.querySelectorAll("button, a.btn, .button, [data-ejercicio]");
 
         todosLosBotones.forEach((btn) => {
             if (btn.closest(".exercise-modal")) return;
 
-            const textoBoton = btn.innerText.toLowerCase();
-            const contenedorTexto = btn.parentElement ? btn.parentElement.innerText.toLowerCase() : "";
+            btn.addEventListener("click", (e) => {
+                const attrEjercicio = btn.getAttribute("data-ejercicio");
 
-            if (textoBoton.includes("1") || textoBoton.includes("fluidez") || contenedorTexto.includes("fluidez") || contenedorTexto.includes("30 segundos")) {
-                btn.addEventListener("click", (e) => { e.preventDefault(); abrirEjercicio(0); });
-            } else if (textoBoton.includes("2") || textoBoton.includes("argumento") || contenedorTexto.includes("argumento") || contenedorTexto.includes("construye")) {
-                btn.addEventListener("click", (e) => { e.preventDefault(); abrirEjercicio(1); });
-            } else if (textoBoton.includes("3") || textoBoton.includes("improvisacion") || textoBoton.includes("improvisación") || contenedorTexto.includes("improvisación") || contenedorTexto.includes("reto")) {
-                btn.addEventListener("click", (e) => { e.preventDefault(); abrirEjercicio(2); });
-            }
+                if (attrEjercicio !== null) {
+                    e.preventDefault();
+                    abrirEjercicio(parseInt(attrEjercicio, 10));
+                    return;
+                }
+
+                const textoBoton = btn.innerText.toLowerCase();
+                const contenedorTexto = btn.parentElement ? btn.parentElement.innerText.toLowerCase() : "";
+
+                if (textoBoton.includes("1") || textoBoton.includes("fluidez") || contenedorTexto.includes("fluidez") || contenedorTexto.includes("30 segundos")) {
+                    e.preventDefault();
+                    abrirEjercicio(0);
+                } else if (textoBoton.includes("2") || textoBoton.includes("argumento") || contenedorTexto.includes("argumento") || contenedorTexto.includes("construye")) {
+                    e.preventDefault();
+                    abrirEjercicio(1);
+                } else if (textoBoton.includes("3") || textoBoton.includes("improvisacion") || textoBoton.includes("improvisación") || contenedorTexto.includes("improvisación") || contenedorTexto.includes("reto")) {
+                    e.preventDefault();
+                    abrirEjercicio(2);
+                }
+            });
         });
     }
 
     conectarBotonesGlobales();
-
-    document.addEventListener("click", (e) => {
-        const objetivo = e.target.closest("button, .btn, a");
-        if (!objetivo || objetivo.closest(".exercise-modal")) return;
-
-        if (objetivo.hasAttribute("data-ejercicio")) {
-            const index = parseInt(objetivo.getAttribute("data-ejercicio"));
-            abrirEjercicio(index);
-        }
-    });
 
     function cerrarEjercicio() {
         detenerProcesos();
