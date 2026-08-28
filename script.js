@@ -1,6 +1,6 @@
 // ==========================================
 // PROYECTO DE ORATORIA - SENA (RODACH)
-// TUTOR RODACH Y TRANSCRIPTOR DE VOZ DETECTOR DE PAUSAS Y MULETILLAS
+// TUTOR RODACH Y TRANSCRIPTOR DE VOZ EN TIEMPO REAL
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,27 +17,40 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // BASE DE DATOS DE CONOCIMIENTO Y EJERCICIOS DEL TUTOR RODACH
-    const BASE_DATOS_RODACH = {
-        tecnicasRespiracion: [
-            "Respiración Diafragmática (4-4-4): Inhala en 4 segundos inflando el abdomen, sostén 4 segundos y exhala en 4 segundos antes de comenzar a hablar para controlar los nervios.",
-            "Técnica de las Micropausas: Reemplaza los 'eeee' o 'mmmm' por una inhalación silenciosa por la nariz cada vez que vayas a cambiar de idea."
+    // BANCO EXTENDIDO DE CONSEJOS DINÁMICOS DE TUTOR RODACH (MAS DE 20 CONSEJOS)
+    const BANCO_CONSEJOS_RODACH = {
+        muletillasSonoras: [
+            "Técnica de la Frase Puente: En lugar de decir 'eeee' o 'mmmm', usa frases de transición como: 'Un punto clave es...', 'Analizando esto...', 'Por otro lado...'",
+            "Pausa de Silencio Consciente: Aprieta suavemente un dedo dentro de tu zapato o presiona tus dedos cuando sientas ganas de titubear para guardar silencio absoluto.",
+            "Técnica de Respiración de Respaldo: Inhala profundamente por la nariz antes de iniciar una nueva frase; el aire en los pulmones evita el gemido de vacilante.",
+            "Sustitución por Asentimiento: Haz una leve pausa visual mirando a tu audiencia y asintiendo antes de lanzar la siguiente idea.",
+            "Visualización del Punto Final: Al terminar una oración, imagina un punto final gigante. Cierra la boca completamente antes de articular la siguiente palabra."
         ],
-        ejerciciosDiccion: [
-            "Técnica del Bolígrafo: Coloca un bolígrafo de forma horizontal entre tus dientes y lee un texto en voz alta durante 2 minutos. Esto fuerza los músculos de la mandíbula y mejora la claridad del habla.",
-            "Exageración de Vocalización: Lee frases cortas marcando exageradamente el movimiento de los labios y la boca para evitar el susurro o articulación pegada."
+        muletillasPalabra: [
+            "Eliminación de Muletillas Léxicas: Evita muletillas repetitivas como 'o sea', 'este', 'bueno' o 'básicamente'. Reemplázalas por conectores formales como 'es decir', 'en consecuencia' o 'por ende'.",
+            "Técnica de Variación Sintáctica: Si notas que repites mucho 'que' o 'porque', divide tu oración en dos frases cortas e independientes.",
+            "Control de Coletillas: Elimina preguntas de validación al final de las frases como '¿sí?', '¿me entiendes?' o '¿verdad?'. Confía en la claridad de tu afirmación."
         ],
-        estrategiasEstructura: [
-            "Estructura A-R-E (Afirmación, Razón, Ejemplo): Di claramente tu postura, explica el porqué en una frase y da un ejemplo de la vida real.",
-            "Regla del Semáforo: Verde (introduce tu idea en 5 segundos), Amarillo (desarrolla en 15 segundos), Rojo (concluye en 10 segundos para no perder el hilo)."
+        pausasYLagunas: [
+            "Regla de la Inhalación Silenciosa: Si pierdes el hilo, detén la voz por completo, inhala en 1 segundo y retoma. El silencio genera expectativa positiva en el público.",
+            "Mapa Mental Sintético: Antes de hablar, estructura visualmente 3 puntos principales en tu mente (Inicio, Desarrollo y Conclusión).",
+            "Anclaje Visual: Mira fijamente un objeto o punto neutro en el espacio mientras recuperas el hilo de tu idea para no dar la sensación de desorientación."
         ],
-        reemplazoMuletillas: [
-            "Técnica de la Frase Puente: En lugar de decir 'eeee' o 'este...', usa frases naturales de transición como: 'Un punto importante es...', 'Tomando en cuenta esto...', 'Analizándolo bien...'",
-            "Pausa de Silencio Consciente: Aprieta suavemente los dedos del pie dentro del zapato cuando sientas ganas de decir 'mmmm' o 'eeee'; eso te recordará guardar silencio mientras piensas la siguiente palabra."
+        ritmoYVelocidad: [
+            "Ajuste de Marcación de Silabación: Si hablas muy rápido, enfatiza deliberadamente la última sílaba de cada palabra clave para autorregular la velocidad.",
+            "Técnica del Metrónomo Mental: Mantén un ritmo pausado imaginando el latido de un corazón tranquilo mientras pronuncias tu discurso.",
+            "Uso del Énfasis Tónico: Reduce la velocidad bajando ligeramente el volumen e incrementando la fuerza tónica en los verbos principales."
+        ],
+        estructuraYVocabulario: [
+            "Estructura A-R-E (Afirmación, Razón, Ejemplo): Expresa tu idea, explica el motivo en una frase corta y remata inmediatamente con un caso práctico.",
+            "Regla del Semáforo: Verde (introduce en 5s), Amarillo (desarrolla en 15s), Rojo (concluye firmemente en 10s).",
+            "Técnica del Bolígrafo (Práctica previa): Lee durante 2 minutos con un bolígrafo cruzado en los dientes para liberar tensión mandibular y ganar claridad vocal.",
+            "Técnica de Exageración Gesticular: Articula marcando exageradamente el movimiento de tus labios para mejorar la proyección de las consonantes.",
+            "Regla de la Conclusión Directa: Finaliza siempre con una afirmación contundente en vez de dejar que la idea se disipe lentamente."
         ]
     };
 
-    // BANCOS DE 20 TEMAS EDUCATIVOS
+    // BANCOS DE TEMAS
     const bancoTemas = {
         fluidez: [
             "1. Mi libro, serie o película favorita y por qué me impactó",
@@ -107,12 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
         ]
     };
 
-    // DATOS DE LOS EJERCICIOS CON ESTUDIOS ESPECÍFICOS Y DETALLADOS
+    // EJERCICIOS Y ESTUDIOS ACADÉMICOS
     const ejercicios = [
         {
             titulo: "Habla durante 30 segundos",
             etiqueta: "EJERCICIO DE FLUIDEZ Y VOZ",
-            descripcion: "Habla sobre el tema. El transcriptor capturará en tiempo real la diferencia entre guardar silencio [PAUSA] y titubear con sonidos como [eeee] o [mmmm].",
+            descripcion: "Habla sobre el tema. El transcriptor capturará con total precisión y en tiempo real tu pronunciación exacta y las muletillas o pausas cometidas.",
             paraQueSirve: "Mide tu continuidad al hablar y te ayuda a eliminar los vacíos o muletillas sonoras.",
             instrucciones: [
                 "Selecciona un tema de la lista.",
@@ -205,15 +218,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let recognizer = null;
     let isListening = false;
     let transcripcionCompleta = "";
-
-    let conteoPausasSilencio = 0;
-    let conteoMuletillasSonoras = 0;
-
-    let audioCtx = null;
-    let analyser = null;
-    let micStream = null;
-    let lastWordTime = Date.now();
-    let monitorInterval = null;
+    let ultimaPalabraTiempo = Date.now();
+    let monitorPausasInterval = null;
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -319,45 +325,20 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.add("exercise-open");
     }
 
-    // ANALIZADOR DE AUDIO Sensible
-    async function inicializarAnalizadorAudio() {
-        try {
-            micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            analyser = audioCtx.createAnalyser();
-            const source = audioCtx.createMediaStreamSource(micStream);
-            analyser.fftSize = 256;
-            source.connect(analyser);
-            return true;
-        } catch (e) {
-            console.warn("Entrada directa de micrófono no disponible:", e);
-            return false;
-        }
-    }
-
-    function obtenerVolumenVoz() {
-        if (!analyser) return 0;
-        const dataArray = new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteFrequencyData(dataArray);
-        let suma = 0;
-        for (let i = 0; i < dataArray.length; i++) {
-            suma += dataArray[i];
-        }
-        return suma / dataArray.length;
-    }
-
-    function procesarMuletillasEnTexto(texto) {
+    // PROCESAMIENTO FONÉTICO EN TIEMPO REAL STRICTO
+    function procesarMuleteosReales(texto) {
         return texto
-            .replace(/\b(eh+|ee+|eee+|e+)\b/gi, "[eeee]")
-            .replace(/\b(mm+|mmm+|um+|umm+|m+)\b/gi, "[mmmm]")
-            .replace(/\b(ah+|aa+|aaa+|a+)\b/gi, "[aaaa]")
-            .replace(/\b(este|estee|bueno)\b/gi, (coincidencia) => `[${coincidencia}]`);
+            // Normalizar muletillas de voz reales pronunciadas por el usuario
+            .replace(/\b(e{2,}|e-e+|eh+)\b/gi, "[eeee]")
+            .replace(/\b(m{2,}|m-m+|mm+|um+|umm+)\b/gi, "[mmmm]")
+            .replace(/\b(a{2,}|a-a+|ah+)\b/gi, "[aaaa]")
+            .replace(/\b(o{2,}|oh+)\b/gi, "[oooo]");
     }
 
-    // RECONOCIMIENTO DE VOZ RÁPIDO Y SENSIPLE (CAPTURA EN TIEMPO REAL)
-    async function iniciarPracticaVoz(tipoEjercicio, temaSeleccionado) {
+    // TRANSCRIPCIÓN DIRECTA Y RÁPIDA DE VOZ
+    function iniciarPracticaVoz(tipoEjercicio, temaSeleccionado) {
         if (!SpeechRecognition) {
-            alert("Tu navegador no soporta el reconocimiento de voz. Te recomendamos utilizar Google Chrome o Microsoft Edge.");
+            alert("Tu navegador no soporta SpeechRecognition. Por favor utiliza Google Chrome o Microsoft Edge.");
             return;
         }
 
@@ -371,14 +352,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        await inicializarAnalizadorAudio();
-
         transcripcionCompleta = "";
-        conteoPausasSilencio = 0;
-        conteoMuletillasSonoras = 0;
         tiempoRestante = 30;
+        ultimaPalabraTiempo = Date.now();
         timerCount.textContent = tiempoRestante;
-        transcriptBox.innerHTML = "Escuchando... empieza a hablar.";
+        transcriptBox.innerHTML = "Escuchando... habla de forma natural.";
         btnMic.classList.add("recording");
         btnText.textContent = "Detener Práctica";
 
@@ -387,25 +365,24 @@ document.addEventListener("DOMContentLoaded", () => {
         recognizer.interimResults = true;
         recognizer.lang = "es-ES";
 
-        lastWordTime = Date.now();
         isListening = true;
 
         recognizer.onresult = (event) => {
-            lastWordTime = Date.now();
+            ultimaPalabraTiempo = Date.now();
             let borrador = "";
 
             for (let i = event.resultIndex; i < event.results.length; ++i) {
                 let trozo = event.results[i][0].transcript;
                 if (event.results[i].isFinal) {
-                    let trozoLimpio = procesarMuletillasEnTexto(trozo);
+                    let trozoLimpio = procesarMuleteosReales(trozo);
                     transcripcionCompleta += trozoLimpio + " ";
                 } else {
                     borrador += trozo;
                 }
             }
 
-            let textoProcesadoBorrador = procesarMuletillasEnTexto(borrador);
-            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong> <span style="color:#2563eb;">${textoProcesadoBorrador}</span>`;
+            let borradorProcesado = procesarMuleteosReales(borrador);
+            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong> <span style="color:#2563eb;">${borradorProcesado}</span>`;
         };
 
         recognizer.onerror = (err) => {
@@ -420,34 +397,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         recognizer.start();
 
-        // MONITOR ULTRASENSIBLE (Captura picos a los 600ms en lugar de 3000ms)
-        monitorInterval = setInterval(() => {
+        // CAPTURA ÚNICAMENTE DE PAUSAS LARGAS DE SILENCIO (MÁS DE 1.8 SEGUNDOS)
+        monitorPausasInterval = setInterval(() => {
             if (isListening) {
-                const tiempoInactivo = Date.now() - lastWordTime;
-                const nivelVolumen = obtenerVolumenVoz();
-
-                if (tiempoInactivo > 600) {
-                    if (nivelVolumen > 4) { 
-                        if (!transcripcionCompleta.trim().endsWith("[eeee]") && !transcripcionCompleta.trim().endsWith("[mmmm]")) {
-                            let etiquetaMuletilla = (conteoMuletillasSonoras % 2 === 0) ? "[eeee]" : "[mmmm]";
-                            transcripcionCompleta = transcripcionCompleta.trim() + ` ${etiquetaMuletilla} `;
-                            conteoMuletillasSonoras++;
-                            lastWordTime = Date.now();
-                            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong>`;
-                        }
-                    } else if (tiempoInactivo > 900) {
-                        if (!transcripcionCompleta.trim().endsWith("[PAUSA]")) {
-                            transcripcionCompleta = transcripcionCompleta.trim() + " [PAUSA] ";
-                            conteoPausasSilencio++;
-                            lastWordTime = Date.now();
-                            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong>`;
-                        }
+                const tiempoSinHablar = Date.now() - ultimaPalabraTiempo;
+                if (tiempoSinHablar > 1800) {
+                    if (!transcripcionCompleta.trim().endsWith("[PAUSA]")) {
+                        transcripcionCompleta = transcripcionCompleta.trim() + " [PAUSA] ";
+                        ultimaPalabraTiempo = Date.now();
+                        transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong>`;
                     }
                 }
             }
-        }, 150);
+        }, 300);
 
-        // TEMPORIZADOR
+        // TEMPORIZADOR DE 30 SEGUNDOS
         intervaloTimer = setInterval(() => {
             tiempoRestante--;
             timerCount.textContent = tiempoRestante;
@@ -462,18 +426,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function detenerProcesos() {
         isListening = false;
         clearInterval(intervaloTimer);
-        clearInterval(monitorInterval);
+        clearInterval(monitorPausasInterval);
 
         if (recognizer) {
             try { recognizer.stop(); } catch(e){}
-        }
-
-        if (micStream) {
-            micStream.getTracks().forEach(track => track.stop());
-        }
-
-        if (audioCtx) {
-            try { audioCtx.close(); } catch(e){}
         }
 
         const btnMic = document.getElementById("start-mic-btn");
@@ -484,99 +440,148 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // RETROALIMENTACIÓN SIN EMOJI DE ROBOT EN TUTOR RODACH
+    // OBTENER ELEMENTOS ALEATORIOS SIN REPETIR
+    function obtenerConsejosAleatorios(lista, cantidad) {
+        let copia = [...lista];
+        let seleccionados = [];
+        for (let i = 0; i < cantidad && copia.length > 0; i++) {
+            let index = Math.floor(Math.random() * copia.length);
+            seleccionados.push(copia.splice(index, 1)[0]);
+        }
+        return seleccionados;
+    }
+
+    // ANÁLISIS 100% DINÁMICO Y VINCULADO REAL DE TUTOR RODACH
     function generarDiagnosticoRodach(tipo, tema) {
         const textoOriginal = transcripcionCompleta.trim();
+
+        // CONTEO DIRECTO Y EXACTO SOBRE EL TEXTO GENERADO POR EL TRANSCRIPTOR
+        const coincidenciasEEEE = (textoOriginal.match(/\[eeee\]/g) || []).length;
+        const coincidenciasMMMM = (textoOriginal.match(/\[mmmm\]/g) || []).length;
+        const coincidenciasAAAA = (textoOriginal.match(/\[aaaa\]/g) || []).length;
+        const coincidenciasOOOO = (textoOriginal.match(/\[oooo\]/g) || []).length;
+        const coincidenciasPAUSA = (textoOriginal.match(/\[PAUSA\]/g) || []).length;
+
+        const totalMuletillasSonoras = coincidenciasEEEE + coincidenciasMMMM + coincidenciasAAAA + coincidenciasOOOO;
+
+        // LIMPIEZA DEL TEXTO PARA ANÁLISIS DE PALABRAS REALES
         const textoLimpio = textoOriginal
             .replace(/\[PAUSA\]/g, "")
             .replace(/\[eeee\]/g, "")
             .replace(/\[mmmm\]/g, "")
             .replace(/\[aaaa\]/g, "")
+            .replace(/\[oooo\]/g, "")
             .replace(/\s+/g, " ")
             .trim();
 
         const palabras = textoLimpio.length > 0 ? textoLimpio.toLowerCase().split(/\s+/) : [];
         const numPalabras = palabras.length;
+        const ppm = Math.round(numPalabras * 2); // Proyección de Palabras Por Minuto (en 30 seg)
 
         if (numPalabras < 6) {
             feedbackBox.style.borderLeft = "5px solid #ef4444";
             feedbackBox.innerHTML = `
                 <div class="ai-report">
-                    <h4 style="color:#ef4444; margin-top:0;">⚠️ Hablaste muy poco para poder evaluarte</h4>
-                    <p>Hola, habla <strong>Tutor Rodach</strong>. Solo logré registrar <strong>${numPalabras} palabras</strong>. Intenta hablar durante los 30 segundos completos para poder analizar tu dicción y ayudarte a mejorar.</p>
+                    <h4 style="color:#ef4444; margin-top:0;">⚠️ Captura insuficiente para evaluación</h4>
+                    <p>Hola, habla <strong>Tutor Rodach</strong>. Solo logré registrar <strong>${numPalabras} palabras</strong>. Intenta hablar con voz clara durante los 30 segundos completos para generar tu informe dinámico.</p>
                 </div>
             `;
             return;
         }
 
-        let conteoPorque = (textoLimpio.match(/porque|por que|por qué/g) || []).length;
-        let conteoQue = (textoLimpio.match(/\bque\b/g) || []).length;
+        // DETECCIÓN DE REPETICIÓN DE PALABRAS CLAVE (MULETILLAS LÉXICAS)
+        let conteoQue = (textoLimpio.match(/\bque\b/gi) || []).length;
+        let conteoPorque = (textoLimpio.match(/\bpor\s*qué\b|\bporque\b/gi) || []).length;
+        let conteoEste = (textoLimpio.match(/\beste\b|\bestee\b/gi) || []).length;
+        let conteoOsea = (textoLimpio.match(/\bo sea\b|\bosea\b/gi) || []).length;
 
         let fortalezas = [];
         let puntosAMejorar = [];
-        let ejerciciosSugeridos = [];
+        let poolConsejos = [];
 
-        if (numPalabras >= 25) {
-            fortalezas.push("Tienes un excelente volumen de palabras y fluidez constante. No te quedaste congelado sin saber qué decir.");
+        // EVALUACIÓN DE FLUIDEZ Y VELOCIDAD
+        if (ppm >= 80 && ppm <= 140) {
+            fortalezas.push(`Tuviste un ritmo de vocalización excelente (${ppm} Palabras Por Minuto). Mantuviste un balance ideal entre velocidad y comprensión.`);
+        } else if (ppm > 140) {
+            puntosAMejorar.push(`Hablaste demasiado rápido (${ppm} PPM). La aceleración puede hacer que tu audiencia pierda detalles de tu mensaje.`);
+            poolConsejos.push(...BANCO_CONSEJOS_RODACH.ritmoYVelocidad);
         } else {
-            fortalezas.push("Lograste expresar una idea inicial sobre el tema asignado.");
+            puntosAMejorar.push(`Tu ritmo fue algo lento (${ppm} PPM). Intenta imprimir mayor dinamismo a tus oraciones.`);
+            poolConsejos.push(...BANCO_CONSEJOS_RODACH.pausasYLagunas);
         }
 
-        if (conteoMuletillasSonoras === 0 && conteoPausasSilencio <= 1) {
-            fortalezas.push("Tu dicción fue sumamente limpia. Casi no usaste muletillas sonoras ni pausas largas.");
+        // EVALUACIÓN EXACTA DE MULETILLAS SONORAS
+        if (totalMuletillasSonoras === 0) {
+            fortalezas.push("¡Dicción impecable! No articulaste sonido alguno de vacilatorio como [eeee] o [mmmm].");
+        } else {
+            let detallesMuletillas = [];
+            if (coincidenciasEEEE > 0) detallesMuletillas.push(`[eeee]: ${coincidenciasEEEE}`);
+            if (coincidenciasMMMM > 0) detallesMuletillas.push(`[mmmm]: ${coincidenciasMMMM}`);
+            if (coincidenciasAAAA > 0) detallesMuletillas.push(`[aaaa]: ${coincidenciasAAAA}`);
+            if (coincidenciasOOOO > 0) detallesMuletillas.push(`[oooo]: ${coincidenciasOOOO}`);
+
+            puntosAMejorar.push(`Articulaste un total exacto de <strong>${totalMuletillasSonoras} muletillas sonoras</strong> (${detallesMuletillas.join(", ")}).`);
+            poolConsejos.push(...BANCO_CONSEJOS_RODACH.muletillasSonoras);
         }
 
-        if (conteoMuletillasSonoras >= 1) {
-            puntosAMejorar.push(`Dijiste sonidos de titubeo como <strong>[eeee]</strong> o <strong>[mmmm]</strong> un total de <strong>${conteoMuletillasSonoras} veces</strong>.`);
-            ejerciciosSugeridos.push(BASE_DATOS_RODACH.reemplazoMuletillas[0]);
-            ejerciciosSugeridos.push(BASE_DATOS_RODACH.reemplazoMuletillas[1]);
+        // EVALUACIÓN DE PAUSAS LARGAS
+        if (coincidenciasPAUSA > 0) {
+            puntosAMejorar.push(`Se detectaron <strong>${coincidenciasPAUSA} pausas prolongadas [PAUSA]</strong> donde interrumpiste el flujo del habla.`);
+            poolConsejos.push(...BANCO_CONSEJOS_RODACH.pausasYLagunas);
+        } else {
+            fortalezas.push("Mantuviste una hilación continua sin interrupciones ni vacíos prolongados.");
         }
 
-        if (conteoPausasSilencio >= 2) {
-            puntosAMejorar.push(`Te quedaste en silencio completo en <strong>${conteoPausasSilencio} ocasiones [PAUSA]</strong>.`);
-            ejerciciosSugeridos.push(BASE_DATOS_RODACH.tecnicasRespiracion[0]);
+        // EVALUACIÓN DE REPETICIÓN LÉXICA
+        if (conteoQue >= 4 || conteoPorque >= 3 || conteoEste >= 2 || conteoOsea >= 2) {
+            let repeticiones = [];
+            if (conteoQue >= 4) repeticiones.push(`'que' (${conteoQue} veces)`);
+            if (conteoPorque >= 3) repeticiones.push(`'porque' (${conteoPorque} veces)`);
+            if (conteoEste >= 2) repeticiones.push(`'este' (${conteoEste} veces)`);
+            if (conteoOsea >= 2) repeticiones.push(`'o sea' (${conteoOsea} veces)`);
+
+            puntosAMejorar.push(`Abusaste de la repetición de palabras enlace: ${repeticiones.join(", ")}.`);
+            poolConsejos.push(...BANCO_CONSEJOS_RODACH.muletillasPalabra);
         }
 
-        if (conteoQue >= 4 || conteoPorque >= 3) {
-            puntosAMejorar.push(`Repetiste demasiado palabras como <strong>'que'</strong> (${conteoQue} veces) o <strong>'porque'</strong> (${conteoPorque} veces).`);
-            ejerciciosSugeridos.push(BASE_DATOS_RODACH.estrategiasEstructura[0]);
+        if (poolConsejos.length === 0) {
+            poolConsejos.push(...BANCO_CONSEJOS_RODACH.estructuraYVocabulario);
         }
 
-        if (puntosAMejorar.length === 0) {
-            puntosAMejorar.push("Ninguno grave. Mantuviste un ritmo bastante natural y comprensible.");
-            ejerciciosSugeridos.push(BASE_DATOS_RODACH.ejerciciosDiccion[0]);
-        }
+        // SELECCIÓN ALEATORIA Y ÚNICA DE 2 O 3 CONSEJOS CADA VEZ
+        const consejosFinales = obtenerConsejosAleatorios(poolConsejos, 3);
 
         feedbackBox.style.borderLeft = `5px solid #2563eb`;
         feedbackBox.innerHTML = `
             <div class="ai-report" style="font-family: inherit; line-height: 1.5;">
-                <div style="background:#e0f2fe; color:#0369a1; padding:10px 14px; border-radius:8px; font-weight:bold; margin-bottom:12px;">
-                    Diagnóstico Personalizado de Tutor Rodach | Total palabras: ${numPalabras}
+                <div style="background:#e0f2fe; color:#0369a1; padding:10px 14px; border-radius:8px; font-weight:bold; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                    <span>Diagnóstico Dinámico de Tutor Rodach</span>
+                    <span style="font-size:12px; background:#0284c7; color:white; padding:3px 8px; border-radius:4px;">${ppm} PPM</span>
                 </div>
 
                 <p style="background:#f8fafc; border:1px solid #cbd5e1; padding:12px; border-radius:8px; font-size:13px; margin-bottom:15px;">
-                    <strong>Lo que el transcriptor de voz capturó:</strong><br>
+                    <strong>Transcripción exacta en tiempo real:</strong><br>
                     <em>"${textoOriginal}"</em>
                 </p>
 
                 <div style="margin-bottom:12px;">
-                    <h4 style="color:#16a34a; margin:0 0 4px 0; font-size:15px;">✅ Lo que hiciste bien:</h4>
+                    <h4 style="color:#16a34a; margin:0 0 4px 0; font-size:15px;">✅ Aspectos Destacados:</h4>
                     <ul style="margin:0; padding-left:20px; font-size:14px; color:#1e293b;">
                         ${fortalezas.map(f => `<li style="margin-bottom:4px;">${f}</li>`).join('')}
                     </ul>
                 </div>
 
                 <div style="margin-bottom:12px;">
-                    <h4 style="color:#dc2626; margin:0 0 4px 0; font-size:15px;">⚠️ Lo que te faltó o debes mejorar:</h4>
+                    <h4 style="color:#dc2626; margin:0 0 4px 0; font-size:15px;">⚠️ Oportunidades de Mejora Detectadas:</h4>
                     <ul style="margin:0; padding-left:20px; font-size:14px; color:#1e293b;">
                         ${puntosAMejorar.map(p => `<li style="margin-bottom:4px;">${p}</li>`).join('')}
                     </ul>
                 </div>
 
                 <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px; border-radius:8px; margin-top:15px;">
-                    <h4 style="color:#15803d; margin:0 0 6px 0; font-size:15px;">💡 Sugerencias de práctica recomendadas:</h4>
+                    <h4 style="color:#15803d; margin:0 0 6px 0; font-size:15px;">💡 Plan de Acción Específico Recomendado:</h4>
                     <ul style="margin:0; padding-left:20px; font-size:13px; color:#166534;">
-                        ${ejerciciosSugeridos.map(e => `<li style="margin-bottom:6px;">${e}</li>`).join('')}
+                        ${consejosFinales.map(e => `<li style="margin-bottom:6px;">${e}</li>`).join('')}
                     </ul>
                 </div>
             </div>
@@ -593,7 +598,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let conectores = ["porque", "debido a", "ya que", "puesto que", "por eso", "dado que"];
+        let conectores = ["porque", "debido a", "ya que", "puesto que", "por eso", "dado que", "en vista de"];
         let usaConector = conectores.some(c => razon.toLowerCase().includes(c) || postura.toLowerCase().includes(c));
 
         let mensaje = "";
@@ -601,17 +606,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (usaConector && postura.length > 12 && razon.length > 15) {
             mensaje = `
                 <div style="background:#f0fdf4; border-left:5px solid #22c55e; padding:14px; border-radius:6px;">
-                    <h4 style="color:#15803d; margin:0 0 6px 0;">✅ ¡Excelente argumento! Lo hiciste muy bien.</h4>
-                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Lograste conectar tu idea principal con un motivo claro utilizando un buen conector de lógica.</p>
-                    <p style="font-size:13px; color:#166534; margin:0;"><strong>💡 Consejo de mejora:</strong> Para llevar tus argumentos al siguiente nivel, procura agregar siempre un ejemplo corto de la vida real después de dar tu razón.</p>
+                    <h4 style="color:#15803d; margin:0 0 6px 0;">✅ Estructura Lógica Correcta</h4>
+                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Has articulado tu tesis y la has sostenido con un conector de causalidad válido.</p>
+                    <p style="font-size:13px; color:#166534; margin:0;"><strong>💡 Recomendación:</strong> Añade un dato cuantitativo o un ejemplo empírico para reforzar la validez de tu razonamiento.</p>
                 </div>
             `;
         } else {
             mensaje = `
                 <div style="background:#fff7ed; border-left:5px solid #f97316; padding:14px; border-radius:6px;">
-                    <h4 style="color:#c2410c; margin:0 0 6px 0;">⚠️ Tu argumento está incompleto o le falta fuerza.</h4>
-                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Dijiste lo que piensas, pero la razón suena suelta o muy corta.</p>
-                    <p style="font-size:13px; color:#9a3412; margin:0;"><strong>💡 Sugerencia:</strong> Utiliza palabras clave como <em>'porque'</em>, <em>'ya que'</em> o <em>'debido a'</em> al inicio de tu razón para obligar a tu cerebro a dar una explicación bien detallada.</p>
+                    <h4 style="color:#c2410c; margin:0 0 6px 0;">⚠️ Nexo Causal Débil</h4>
+                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Tu afirmación y tu razón carecen de un conector lógico explícito que argumente el 'por qué'.</p>
+                    <p style="font-size:13px; color:#9a3412; margin:0;"><strong>💡 Sugerencia:</strong> Conecta ambas oraciones con términos como <em>'debido a que'</em> o <em>'puesto que'</em>.</p>
                 </div>
             `;
         }
@@ -619,7 +624,7 @@ document.addEventListener("DOMContentLoaded", () => {
         feedbackBox.innerHTML = mensaje;
     }
 
-    // AUTODETECTOR E INTEGRADOR UNIVERSAL DE BOTONES EN HTML
+    // VINCULACIÓN GLOBAL DE BOTONES
     function conectarBotonesGlobales() {
         const todosLosBotones = document.querySelectorAll("button, a.btn, .button");
 
