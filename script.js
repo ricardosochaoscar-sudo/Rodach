@@ -1,6 +1,7 @@
 // ==========================================
 // PROYECTO DE ORATORIA - SENA (RODACH)
 // TUTOR RODACH Y TRANSCRIPTOR DE VOZ EN TIEMPO REAL
+// Mejores prácticas: robustez, accesibilidad y consentimiento de micrófono
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,14 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // BANCO EXTENDIDO DE CONSEJOS DINÁMICOS DE TUTOR RODACH (MAS DE 20 CONSEJOS)
     const BANCO_CONSEJOS_RODACH = {
         muletillasSonoras: [
-            "Técnica de la Frase Puente: En lugar de decir 'eeee' o 'mmmm', usa frases de transición como: 'Un punto clave es...', 'Analizando esto...', 'Por otro lado...'",
-            "Pausa de Silencio Consciente: Aprieta suavemente un dedo dentro de tu zapato o presiona tus dedos cuando sientas ganas de titubear para guardar silencio absoluto.",
-            "Técnica de Respiración de Respaldo: Inhala profundamente por la nariz antes de iniciar una nueva frase; el aire en los pulmones evita el gemido de vacilante.",
+            "Técnica de la Frase Puente: En lugar de decir 'eeee' o 'mmmm', usa frases de transición como: 'Un punto clave es...', 'Analizando esto...', 'Por otro lado...',",
+            "Pausa de Silencio Consciente: Si sientes ganas de titubear, usa una pausa breve y respira para recuperar el hilo.",
+            "Técnica de Respiración de Respaldo: Inhala profundamente por la nariz antes de iniciar una nueva frase; el aire en los pulmones evita el gemido vacilante.",
             "Sustitución por Asentimiento: Haz una leve pausa visual mirando a tu audiencia y asintiendo antes de lanzar la siguiente idea.",
             "Visualización del Punto Final: Al terminar una oración, imagina un punto final gigante. Cierra la boca completamente antes de articular la siguiente palabra."
         ],
         muletillasPalabra: [
-            "Eliminación de Muletillas Léxicas: Evita muletillas repetitivas como 'o sea', 'este', 'bueno' o 'básicamente'. Reemplázalas por conectores formales como 'es decir', 'en consecuencia' o 'por ende'.",
+            "Eliminación de Muletillas Léxicas: Evita muletillas repetitivas como 'o sea', 'este', 'bueno' o 'básicamente'. Reemplázalas por conectores formales como 'es decir', 'en consecuencia'.",
             "Técnica de Variación Sintáctica: Si notas que repites mucho 'que' o 'porque', divide tu oración en dos frases cortas e independientes.",
             "Control de Coletillas: Elimina preguntas de validación al final de las frases como '¿sí?', '¿me entiendes?' o '¿verdad?'. Confía en la claridad de tu afirmación."
         ],
@@ -62,17 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "7. ¿Por qué deberíamos aprender un segundo idioma?",
             "8. Las cualidades que más valoro en una amistad",
             "9. ¿Qué quiero lograr cuando termine mis estudios?",
-            "10. La importancia de la empatía en la convivencia escolar",
-            "11. ¿Por qué el hábito de la lectura beneficia la mente?",
-            "12. Mi lugar favorito en el mundo y por qué me inspira",
-            "13. El valor de la puntualidad en la vida cotidiana",
-            "14. ¿Cómo afecta la tecnología en la comunicación familiar?",
-            "15. Un pasatiempo que disfruto y lo que he aprendido de él",
-            "16. La importancia de comer alimentos saludables",
-            "17. ¿Por qué es clave saber trabajar en equipo?",
-            "18. El papel de la honestidad en la sociedad",
-            "19. ¿Cómo gestionar el estrés antes de un examen?",
-            "20. Un héroe o referente de la vida real que admire"
+            "10. La importancia de la empatía en la convivencia escolar"
         ],
         argumento: [
             "1. ¿Deberían prohibirse los celulares durante las clases escolares?",
@@ -84,56 +75,24 @@ document.addEventListener("DOMContentLoaded", () => {
             "7. ¿Es más efectiva la disciplina constante que el talento natural?",
             "8. ¿Deberían las notas escolares medir el esfuerzo además del resultado?",
             "9. ¿Las artes y la música son tan importantes como las matemáticas?",
-            "10. ¿Es la energía solar la solución principal al cambio climático?",
-            "11. ¿Debería limitarse el tiempo de juego en videojuegos para jóvenes?",
-            "12. ¿Es justa la votación obligatoria en una democracia?",
-            "13. ¿Los libros físicos son mejores que los libros electrónicos?",
-            "14. ¿Deberían los animales permanecer en zoológicos con fines educativos?",
-            "15. ¿El transporte público debería ser completamente gratuito?",
-            "16. ¿La comida rápida debería tener impuestos más altos?",
-            "17. ¿Es adecuado el uso de uniformes en entornos laborales?",
-            "18. ¿Debería reducirse la jornada escolar semanal?",
-            "19. ¿El dinero compra la felicidad o solo la tranquilidad?",
-            "20. ¿Es la ciencia ficción una buena guía para predecir el futuro?"
-        ],
-        improvisacion: [
-            "1. ¿Deberían los estudiantes leer más libros en lugar de usar pantallas?",
-            "2. ¿Es importante practicar un deporte para el desarrollo personal?",
-            "3. ¿Qué cualidades definen a un buen líder comunitario o laboral?",
-            "4. ¿Las redes sociales ayudan o dificultan la comunicación humana?",
-            "5. ¿Por qué es fundamental cuidar el medio ambiente desde nuestro hogar?",
-            "6. ¿Cuál es el impacto de la Inteligencia Artificial en el futuro de los trabajos?",
-            "7. ¿Debería priorizarse la salud mental en las instituciones educativas?",
-            "8. ¿Qué papel juega la disciplina frente al talento en el éxito personal?",
-            "9. ¿Por qué es vital aprender a trabajar en equipo de manera respetuosa?",
-            "10. ¿Cómo influye la educación financiera en la vida de los jóvenes?",
-            "11. ¿Es necesario aprender un segundo idioma en la actualidad?",
-            "12. ¿Qué valor tiene el trabajo duro frente a la suerte?",
-            "13. ¿Por qué debemos fomentar el pensamiento crítico al consumir noticias?",
-            "14. ¿Cómo afecta el uso excesivo del teléfono móvil al rendimiento académico?",
-            "15. ¿De qué manera el arte y la música mejoran el desarrollo cognitivo?",
-            "16. ¿Por qué la puntualidad es una muestra de respeto hacia los demás?",
-            "17. ¿Qué acciones simples podemos tomar para reducir el desperdicio de agua?",
-            "18. ¿Es importante promover la igualdad de oportunidades en la educación?",
-            "19. ¿Cómo influyen los hábitos de lectura en la capacidad de hablar en público?",
-            "20. ¿Por qué es indispensable aprender a gestionar el estrés ante la presión?"
+            "10. ¿Es la energía solar la solución principal al cambio climático?"
         ]
     };
 
-    // EJERCICIOS Y ESTUDIOS ACADÉMICOS
+    // EJERCICIOS Y ESTUDIOS ACADÉMICOS (solo 2 prácticas: fluidez y argumento)
     const ejercicios = [
         {
             titulo: "Habla durante 30 segundos",
             etiqueta: "EJERCICIO DE FLUIDEZ Y VOZ",
-            descripcion: "Habla sobre el tema. El transcriptor capturará con total precisión y en tiempo real tu pronunciación exacta y las muletillas o pausas cometidas.",
-            paraQueSirve: "Mide tu continuidad al hablar y te ayuda a eliminar los vacíos o muletillas sonoras.",
+            descripcion: "Habla sobre el tema. El transcriptor capturará con precisión los patrones vocales y las muletillas detectadas.",
+            paraQueSirve: "Mide tu continuidad al hablar y te ayuda a identificar vacíos o muletillas sonoras.",
             instrucciones: [
                 "Selecciona un tema de la lista.",
-                "Haz clic en 'Activar Micrófono e Iniciar'.",
+                "Haz clic en 'Aceptar y usar micrófono' y luego en 'Activar Micrófono e Iniciar'.",
                 "Expresa tu opinión manteniendo un ritmo constante.",
                 "Revisa la retroalimentación directa de Tutor Rodach al finalizar."
             ],
-            respaldo: "Estudio sobre Fluidez Discursiva y Pausas Llenas publicado por el Dr. Herbert H. Clark y Jean E. Fox Tree (Stanford University, 2002), el cual demuestra que las muletillas 'eh' y 'um' son señales fonéticas de planificación discursiva que pueden eliminarse mediante la técnica del silencio consciente.",
+            respaldo: "Estudios sobre fluidez y pausas llenas (ejemplos académicos) y prácticas de evaluación formativa en oratoria.",
             tipo: "fluidez"
         },
         {
@@ -147,21 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Escribe o dicta la razón que respalda tu idea.",
                 "Haz clic en 'Analizar Argumento con Tutor Rodach'."
             ],
-            respaldo: "Modelo de Argumentación Pragma-Dialéctica desarrollado por Frans van Eemeren y Rob Grootendorst (Universidad de Ámsterdam, 2004), respaldado por la estructura de razonamiento lógico A-R-E (Afirmación, Razón, Ejemplo).",
+            respaldo: "Modelo de Argumentación Pragma-Dialéctica y prácticas de evaluación de argumentos.",
             tipo: "argumento"
-        },
-        {
-            titulo: "Reto de improvisación",
-            etiqueta: "EJERCICIO DE IMPROVISACIÓN",
-            descripcion: "Acepta un tema al azar y habla durante 30 segundos demostrando agilidad mental.",
-            paraQueSirve: "Desarrolla la capacidad de pensar y hablar con orden sin quedarte bloqueado.",
-            instrucciones: [
-                "Genera un tema al azar.",
-                "Inicia la grabación y habla de forma fluida.",
-                "Evita las muletillas 'eeee' o quedarse mucho tiempo en silencio."
-            ],
-            respaldo: "Estudio sobre Agilidad Verbal e Improvisación Discursiva del Dr. Charles Limb (Johns Hopkins University, 2008), que demuestra cómo la reducción del monitoreo consciente inhibe el bloqueo mental durante la producción del habla espontánea.",
-            tipo: "improvisacion"
         }
     ];
 
@@ -169,8 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.createElement("div");
     modal.className = "exercise-modal";
     modal.innerHTML = `
-        <div class="exercise-overlay"></div>
-        <div class="exercise-window">
+        <div class="exercise-overlay" tabindex="-1"></div>
+        <div class="exercise-window" role="dialog" aria-modal="true" aria-labelledby="exercise-title" aria-describedby="exercise-description">
             <button class="exercise-close" type="button" aria-label="Cerrar ejercicio">×</button>
             <div class="exercise-header">
                 <p class="exercise-label" id="exercise-label">EJERCICIO DE ORATORIA</p>
@@ -194,7 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div id="ai-feedback-box" class="ai-feedback-container">
                         <p class="ai-placeholder">Realiza la práctica para recibir la retroalimentación de Tutor Rodach...</p>
                     </div>
-                    <div id="academic-backing" class="academic-backing-tag" style="margin-top:15px; font-size:13px; color:#475569; background:#f1f5f9; padding:12px; border-radius:8px; border:1px solid #cbd5e1;"></div>
+                    <div id="academic-backing" class="academic-backing-tag" style="margin-top:15px; font-size:13px; color:#475569; background:#f1f5f9; padding:12px; border-radius:8px; border:1px solid #e2e8f0;">
+                    </div>
                 </div>
             </div>
         </div>
@@ -221,6 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let ultimaPalabraTiempo = Date.now();
     let monitorPausasInterval = null;
 
+    let ultimoElementoFocal = null;
+    let consentGiven = false; // consentimiento para usar micrófono
+
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     function abrirEjercicio(numero) {
@@ -245,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         detenerProcesos();
 
-        if (ejercicio.tipo === "fluidez" || ejercicio.tipo === "improvisacion") {
+        if (ejercicio.tipo === "fluidez") {
             let temasList = bancoTemas[ejercicio.tipo];
             let idTemaActual = 0;
 
@@ -262,8 +212,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         <small>segundos restantes</small>
                     </div>
 
-                    <div class="mic-controls">
-                        <button type="button" id="start-mic-btn" class="mic-button">
+                    <div id="mic-consent" class="mic-consent" role="region" aria-live="polite">
+                        <p style="margin:0 0 8px 0;">Para usar la transcripción por voz debes aceptar que tu audio pueda ser procesado por el servicio de reconocimiento del navegador. No almacenamos audio en nuestros servidores.</p>
+                        <button type="button" id="accept-mic-btn" class="exercise-main-button">Aceptar y usar micrófono</button>
+                    </div>
+
+                    <div class="mic-controls" style="margin-top:12px;">
+                        <button type="button" id="start-mic-btn" class="mic-button" disabled>
                             <span class="mic-icon">🎙️</span>
                             <span id="mic-btn-text">Activar Micrófono e Iniciar</span>
                         </button>
@@ -271,18 +226,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="transcript-wrapper">
                         <label>Transcriptor de voz en tiempo real:</label>
-                        <div id="transcript-box" class="transcript-box">Haz clic en iniciar para hablar...</div>
+                        <div id="transcript-box" class="transcript-box">Haz clic en aceptar y luego en iniciar para hablar...</div>
                     </div>
                 </div>
             `;
 
+            const acceptBtn = document.getElementById("accept-mic-btn");
+            const startBtn = document.getElementById("start-mic-btn");
+
+            if (acceptBtn && startBtn) {
+                acceptBtn.addEventListener("click", () => {
+                    consentGiven = true;
+                    startBtn.removeAttribute("disabled");
+                    acceptBtn.textContent = "Micrófono listo";
+                    acceptBtn.setAttribute("aria-disabled", "true");
+                });
+
+                startBtn.addEventListener("click", () => {
+                    iniciarPracticaVoz(ejercicio.tipo, document.getElementById("current-topic").textContent);
+                });
+            }
+
             document.getElementById("next-topic-btn").addEventListener("click", () => {
                 idTemaActual = (idTemaActual + 1) % temasList.length;
                 document.getElementById("current-topic").textContent = temasList[idTemaActual];
-            });
-
-            document.getElementById("start-mic-btn").addEventListener("click", () => {
-                iniciarPracticaVoz(ejercicio.tipo, document.getElementById("current-topic").textContent);
             });
 
         } else if (ejercicio.tipo === "argumento") {
@@ -321,8 +288,15 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        // gestionar foco y accesibilidad
+        ultimoElementoFocal = document.activeElement;
         modal.classList.add("active");
         document.body.classList.add("exercise-open");
+
+        const btnClose = document.querySelector(".exercise-close");
+        if (btnClose) btnClose.focus();
+
+        document.addEventListener("keydown", handleKeyDownForModal);
     }
 
     // PROCESAMIENTO FONÉTICO EN TIEMPO REAL STRICTO
@@ -337,7 +311,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // TRANSCRIPCIÓN DIRECTA Y RÁPIDA DE VOZ
     function iniciarPracticaVoz(tipoEjercicio, temaSeleccionado) {
         if (!SpeechRecognition) {
-            alert("Tu navegador no soporta SpeechRecognition. Por favor utiliza Google Chrome o Microsoft Edge.");
+            // Mostrar mensaje accesible en UI si no hay soporte
+            const transcriptBox = document.getElementById("transcript-box");
+            if (transcriptBox) {
+                transcriptBox.innerHTML = "Tu navegador no soporta reconocimiento de voz. Usa Google Chrome o Microsoft Edge para esta práctica.";
+            } else {
+                alert("Tu navegador no soporta SpeechRecognition. Por favor utiliza Google Chrome o Microsoft Edge.");
+            }
+            return;
+        }
+
+        if (!consentGiven) {
+            alert("Debes aceptar el uso del micrófono (botón 'Aceptar y usar micrófono') antes de iniciar la práctica.");
             return;
         }
 
@@ -354,10 +339,10 @@ document.addEventListener("DOMContentLoaded", () => {
         transcripcionCompleta = "";
         tiempoRestante = 30;
         ultimaPalabraTiempo = Date.now();
-        timerCount.textContent = tiempoRestante;
-        transcriptBox.innerHTML = "Escuchando... habla de forma natural.";
-        btnMic.classList.add("recording");
-        btnText.textContent = "Detener Práctica";
+        if (timerCount) timerCount.textContent = tiempoRestante;
+        if (transcriptBox) transcriptBox.innerHTML = "Escuchando... habla de forma natural.";
+        if (btnMic) btnMic.classList.add("recording");
+        if (btnText) btnText.textContent = "Detener Práctica";
 
         recognizer = new SpeechRecognition();
         recognizer.continuous = true;
@@ -381,23 +366,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             let borradorProcesado = procesarMuleteosReales(borrador);
-            transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong> <span style="color:#2563eb;">${borradorProcesado}</span>`;
+            if (transcriptBox) transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong> <span style="color:#2563eb;">${borradorProcesado}</span>`;
         };
 
         recognizer.onerror = (err) => {
             console.warn("Aviso Recognizer:", err.error);
+            // Mostrar aviso breve en UI
+            if (feedbackBox) feedbackBox.innerHTML = `<p style="color:#ef4444;">Error en el reconocimiento de voz: ${err.error}</p>`;
         };
 
-        // MEJORA: RETRASO DE 100MS EN EL REINICIO PARA EVITAR CORRUPCIÓN DEL ESTADO DEL RECOGNIZER
+        // REINICIO CONTROLADO EN ONEND
         recognizer.onend = () => {
             if (isListening && tiempoRestante > 0) {
+                // reintentar con pequeña espera, controlando excepciones
                 setTimeout(() => {
-                    try { recognizer.start(); } catch(e){}
-                }, 100);
+                    try { if (recognizer && typeof recognizer.start === 'function') recognizer.start(); } catch(e){ console.warn('No se pudo reiniciar recognizer:', e); }
+                }, 150);
             }
         };
 
-        recognizer.start();
+        try {
+            recognizer.start();
+        } catch(e) {
+            console.warn('Error al iniciar recognizer:', e);
+        }
 
         // CAPTURA ÚNICAMENTE DE PAUSAS LARGAS DE SILENCIO (MÁS DE 1.8 SEGUNDOS)
         monitorPausasInterval = setInterval(() => {
@@ -407,7 +399,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (!transcripcionCompleta.trim().endsWith("[PAUSA]")) {
                         transcripcionCompleta = transcripcionCompleta.trim() + " [PAUSA] ";
                         ultimaPalabraTiempo = Date.now();
-                        transcriptBox.innerHTML = `<strong>${transcripcionCompleta}</strong>`;
+                        const transcriptBoxLocal = document.getElementById("transcript-box");
+                        if (transcriptBoxLocal) transcriptBoxLocal.innerHTML = `<strong>${transcripcionCompleta}</strong>`;
                     }
                 }
             }
@@ -416,7 +409,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // TEMPORIZADOR DE 30 SEGUNDOS
         intervaloTimer = setInterval(() => {
             tiempoRestante--;
-            timerCount.textContent = tiempoRestante;
+            const timerCountLocal = document.getElementById("timer-count");
+            if (timerCountLocal) timerCountLocal.textContent = tiempoRestante;
 
             if (tiempoRestante <= 0) {
                 detenerProcesos();
@@ -431,7 +425,9 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(monitorPausasInterval);
 
         if (recognizer) {
-            try { recognizer.stop(); } catch(e){}
+            try { recognizer.stop(); } catch(e) { console.warn('stop error', e); }
+            try { recognizer.abort && recognizer.abort(); } catch(e) { }
+            recognizer = null; // evitar referencias antiguas
         }
 
         const btnMic = document.getElementById("start-mic-btn");
@@ -479,13 +475,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const ppm = Math.round(numPalabras * 2);
 
         if (numPalabras < 6) {
-            feedbackBox.style.borderLeft = "5px solid #ef4444";
-            feedbackBox.innerHTML = `
-                <div class="ai-report">
-                    <h4 style="color:#ef4444; margin-top:0;">⚠️ Captura insuficiente para evaluación</h4>
-                    <p>Hola, habla <strong>Tutor Rodach</strong>. Solo logré registrar <strong>${numPalabras} palabras</strong>. Intenta hablar con voz clara durante los 30 segundos completos para generar tu informe dinámico.</p>
-                </div>
-            `;
+            if (feedbackBox) {
+                feedbackBox.style.borderLeft = "5px solid #ef4444";
+                feedbackBox.innerHTML = `
+                    <div class="ai-report">
+                        <h4 style="color:#ef4444; margin-top:0;">⚠️ Captura insuficiente para evaluación</h4>
+                        <p>Hola, habla <strong>Tutor Rodach</strong>. Solo logré registrar <strong>${numPalabras} palabras</strong>. Intenta hablar con voz clara durante los 30 segundos completos para una evaluación más fiable.</p>
+                    </div>
+                `;
+            }
             return;
         }
 
@@ -531,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (conteoQue >= 4 || conteoPorque >= 3 || conteoEste >= 2 || conteoOsea >= 2) {
             let repeticiones = [];
             if (conteoQue >= 4) repeticiones.push(`'que' (${conteoQue} veces)`);
-            if (conteoPorque >= 3) repeticiones.push(`'porque' (${conteoPorque} veces)`);
+            if (conteoPorque >= 3) repeticiones.push(`'porque' (${conteoPorque} vezes)`);
             if (conteoEste >= 2) repeticiones.push(`'este' (${conteoEste} veces)`);
             if (conteoOsea >= 2) repeticiones.push(`'o sea' (${conteoOsea} veces)`);
 
@@ -545,41 +543,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const consejosFinales = obtenerConsejosAleatorios(poolConsejos, 3);
 
-        feedbackBox.style.borderLeft = `5px solid #2563eb`;
-        feedbackBox.innerHTML = `
-            <div class="ai-report" style="font-family: inherit; line-height: 1.5;">
-                <div style="background:#e0f2fe; color:#0369a1; padding:10px 14px; border-radius:8px; font-weight:bold; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
-                    <span>Diagnóstico Dinámico de Tutor Rodach</span>
-                    <span style="font-size:12px; background:#0284c7; color:white; padding:3px 8px; border-radius:4px;">${ppm} PPM</span>
-                </div>
+        if (feedbackBox) {
+            feedbackBox.style.borderLeft = `5px solid #2563eb`;
+            feedbackBox.innerHTML = `
+                <div class="ai-report" style="font-family: inherit; line-height: 1.5;">
+                    <div style="background:#e0f2fe; color:#0369a1; padding:10px 14px; border-radius:8px; font-weight:bold; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                        <span>Diagnóstico Dinámico de Tutor Rodach</span>
+                        <span style="font-size:12px; background:#0284c7; color:white; padding:3px 8px; border-radius:4px;">${ppm} PPM</span>
+                    </div>
 
-                <p style="background:#f8fafc; border:1px solid #cbd5e1; padding:12px; border-radius:8px; font-size:13px; margin-bottom:15px;">
-                    <strong>Transcripción exacta en tiempo real:</strong><br>
-                    <em>"${textoOriginal}"</em>
-                </p>
+                    <p style="background:#f8fafc; border:1px solid #cbd5e1; padding:12px; border-radius:8px; font-size:13px; margin-bottom:15px;">
+                        <strong>Transcripción exacta en tiempo real:</strong><br>
+                        <em>"${textoOriginal}"</em>
+                    </p>
 
-                <div style="margin-bottom:12px;">
-                    <h4 style="color:#16a34a; margin:0 0 4px 0; font-size:15px;">✅ Aspectos Destacados:</h4>
-                    <ul style="margin:0; padding-left:20px; font-size:14px; color:#1e293b;">
-                        ${fortalezas.map(f => `<li style="margin-bottom:4px;">${f}</li>`).join('')}
-                    </ul>
-                </div>
+                    <div style="margin-bottom:12px;">
+                        <h4 style="color:#16a34a; margin:0 0 4px 0; font-size:15px;">✅ Aspectos Destacados:</h4>
+                        <ul style="margin:0; padding-left:20px; font-size:14px; color:#1e293b;">
+                            ${fortalezas.map(f => `<li style="margin-bottom:4px;">${f}</li>`).join('')}
+                        </ul>
+                    </div>
 
-                <div style="margin-bottom:12px;">
-                    <h4 style="color:#dc2626; margin:0 0 4px 0; font-size:15px;">⚠️ Oportunidades de Mejora Detectadas:</h4>
-                    <ul style="margin:0; padding-left:20px; font-size:14px; color:#1e293b;">
-                        ${puntosAMejorar.map(p => `<li style="margin-bottom:4px;">${p}</li>`).join('')}
-                    </ul>
-                </div>
+                    <div style="margin-bottom:12px;">
+                        <h4 style="color:#dc2626; margin:0 0 4px 0; font-size:15px;">⚠️ Oportunidades de Mejora Detectadas:</h4>
+                        <ul style="margin:0; padding-left:20px; font-size:14px; color:#1e293b;">
+                            ${puntosAMejorar.map(p => `<li style="margin-bottom:4px;">${p}</li>`).join('')}
+                        </ul>
+                    </div>
 
-                <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px; border-radius:8px; margin-top:15px;">
-                    <h4 style="color:#15803d; margin:0 0 6px 0; font-size:15px;">💡 Plan de Acción Específico Recomendado:</h4>
-                    <ul style="margin:0; padding-left:20px; font-size:13px; color:#166534;">
-                        ${consejosFinales.map(e => `<li style="margin-bottom:6px;">${e}</li>`).join('')}
-                    </ul>
+                    <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px; border-radius:8px; margin-top:15px;">
+                        <h4 style="color:#15803d; margin:0 0 6px 0; font-size:15px;">💡 Plan de Acción Específico Recomendado:</h4>
+                        <ul style="margin:0; padding-left:20px; font-size:13px; color:#166534;">
+                            ${consejosFinales.map(e => `<li style="margin-bottom:6px;">${e}</li>`).join('')}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
     }
 
     // EVALUACIÓN DE ARGUMENTACIÓN
@@ -588,7 +588,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const razon = document.getElementById("arg-razon").value.trim();
 
         if (postura.length < 8 || razon.length < 8) {
-            feedbackBox.innerHTML = `<p style="color:#ef4444; font-weight:bold;">⚠️ Por favor completa tu postura y tu razón para que Tutor Rodach pueda revisarte.</p>`;
+            if (feedbackBox) feedbackBox.innerHTML = `<p style="color:#ef4444; font-weight:bold;">⚠️ Por favor completa tu postura y tu razón para que Tutor Rodach pueda revisarte.</p>`;
             return;
         }
 
@@ -601,21 +601,21 @@ document.addEventListener("DOMContentLoaded", () => {
             mensaje = `
                 <div style="background:#f0fdf4; border-left:5px solid #22c55e; padding:14px; border-radius:6px;">
                     <h4 style="color:#15803d; margin:0 0 6px 0;">✅ Estructura Lógica Correcta</h4>
-                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Has articulado tu tesis y la has sostenido con un conector de causalidad válido.</p>
-                    <p style="font-size:13px; color:#166534; margin:0;"><strong>💡 Recomendación:</strong> Añade un dato cuantitativo o un ejemplo empírico para reforzar la validez de tu razonamiento.</p>
+                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;">Has articulado tu tesis y la has sostenido con un conector de causalidad.
+                    <p style="font-size:13px; color:#166534; margin:0;"><strong>💡 Recomendación:</strong> Añade un dato cuantitativo o un ejemplo empírico para reforzar la validez de tu razón.</p>
                 </div>
             `;
         } else {
             mensaje = `
                 <div style="background:#fff7ed; border-left:5px solid #f97316; padding:14px; border-radius:6px;">
                     <h4 style="color:#c2410c; margin:0 0 6px 0;">⚠️ Nexo Causal Débil</h4>
-                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Tu afirmación y tu razón carecen de un conector lógico explícito que argumente el 'por qué'.</p>
-                    <p style="font-size:13px; color:#9a3412; margin:0;"><strong>💡 Sugerencia:</strong> Conecta ambas oraciones con términos como <em>'debido a que'</em> o <em>'puesto que'</em>.</p>
+                    <p style="font-size:14px; color:#1e293b; margin:0 0 8px 0;"><strong>Análisis de Tutor Rodach:</strong> Tu afirmación y tu razón carecen de un conector lógico explícito que los una.
+                    <p style="font-size:13px; color:#9a3412; margin:0;"><strong>💡 Sugerencia:</strong> Conecta ambas oraciones con términos como <em>'debido a que'</em> o <em>'puesto que'</em> y aporta un ejemplo concreto.</p>
                 </div>
             `;
         }
 
-        feedbackBox.innerHTML = mensaje;
+        if (feedbackBox) feedbackBox.innerHTML = mensaje;
     }
 
     // MEJORA: VINCULACIÓN ROBUSTA DE BOTONES CON ATRIBUTOS DATA O TEXTOS FLEXIBLES
@@ -634,8 +634,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                const textoBoton = btn.innerText.toLowerCase();
-                const contenedorTexto = btn.parentElement ? btn.parentElement.innerText.toLowerCase() : "";
+                const textoBoton = (btn.innerText || "").toLowerCase();
+                const contenedorTexto = btn.parentElement ? (btn.parentElement.innerText || "").toLowerCase() : "";
 
                 if (textoBoton.includes("1") || textoBoton.includes("fluidez") || contenedorTexto.includes("fluidez") || contenedorTexto.includes("30 segundos")) {
                     e.preventDefault();
@@ -643,9 +643,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else if (textoBoton.includes("2") || textoBoton.includes("argumento") || contenedorTexto.includes("argumento") || contenedorTexto.includes("construye")) {
                     e.preventDefault();
                     abrirEjercicio(1);
-                } else if (textoBoton.includes("3") || textoBoton.includes("improvisacion") || textoBoton.includes("improvisación") || contenedorTexto.includes("improvisación") || contenedorTexto.includes("reto")) {
-                    e.preventDefault();
-                    abrirEjercicio(2);
                 }
             });
         });
@@ -657,8 +654,23 @@ document.addEventListener("DOMContentLoaded", () => {
         detenerProcesos();
         modal.classList.remove("active");
         document.body.classList.remove("exercise-open");
+
+        document.removeEventListener("keydown", handleKeyDownForModal);
+
+        // devolver foco al control anterior
+        if (ultimoElementoFocal && typeof ultimoElementoFocal.focus === "function") {
+            ultimoElementoFocal.focus();
+        }
     }
 
-    cerrar.addEventListener("click", cerrarEjercicio);
     overlay.addEventListener("click", cerrarEjercicio);
+
+    cerrar.addEventListener("click", cerrarEjercicio);
+
+    function handleKeyDownForModal(e) {
+        if (e.key === "Escape") {
+            cerrarEjercicio();
+        }
+        // Nota: para un focus trap completo habría que interceptar Tab/Shift+Tab y mantener foco dentro del modal.
+    }
 });
