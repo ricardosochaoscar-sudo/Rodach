@@ -1,46 +1,112 @@
-            <div class="video-grid">
-                <article class="video-card">
-                    <span>01</span>
-                    <h3>¿Qué es realmente la oratoria?</h3>
-                    <p>Introducción a la oratoria y su importancia.</p>
-                    <a href="#" class="video-button">Próximamente</a>
-                </article>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rodach: curso de oratoria para estudiantes.">
+  <title>Rodach | Oratoria</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="navbar">
+    <a href="#inicio" class="logo">RODACH</a>
+    <nav aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#curso">Curso</a>
+      <a href="#practica">Práctica</a>
+      <a href="#recursos">Recursos</a>
+    </nav>
+  </header>
 
-                <article class="video-card">
-                    <span>02</span>
-                    <h3>Título y tema: la diferencia</h3>
-                    <p>Video 2 · Comprende qué es un título y cómo se diferencia del tema.</p>
-                    <div class="video-embed">
-                        <iframe
-                            width="100%"
-                            height="220"
-                            src="https://www.youtube.com/embed/pT6tWYZOR0g?rel=0"
-                            title="Título y tema: la diferencia"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <button type="button" class="video-button" onclick="window.open('https://www.youtube.com/watch?v=pT6tWYZOR0g', '_blank');">Ver video</button>
-                </article>
+  <main id="contenido">
+    <section id="inicio" class="hero">
+      <div class="hero-content">
+        <p class="hero-tag">CURSO DE ORATORIA PARA ESTUDIANTES</p>
+        <h1>Tu voz también se entrena.</h1>
+        <p class="hero-text">Rodach te ayuda a comprender la oratoria, organizar tus ideas y practicar para hablar con más claridad y confianza frente a otras personas.</p>
+        <div class="hero-buttons">
+          <a class="button primary-button" href="#curso">Comenzar el curso</a>
+          <a class="button secondary-button" href="#practica">Ir a prácticas</a>
+        </div>
+      </div>
+    </section>
 
-                <article class="video-card">
-                    <span>03</span>
-                    <h3>Comunicación y expresión oral</h3>
-                    <p>Video 3 · Desarrollo de la comunicación y la expresión oral en público.</p>
-                    <div class="video-embed">
-                        <iframe
-                            width="100%"
-                            height="220"
-                            src="https://www.youtube.com/embed/nsytT2-cems?rel=0"
-                            title="Comunicación y expresión oral"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <button type="button" class="video-button" onclick="window.open('https://www.youtube.com/watch?v=nsytT2-cems', '_blank');">Ver video</button>
-                </article>
-            </div>
+    <section id="curso" class="section videos-section">
+      <div class="section-heading">
+        <p class="section-tag">CURSO RODACH · 4 MÓDULOS</p>
+        <h2>Aprende, responde y avanza</h2>
+        <p>Los mini-tests se habilitarán al finalizar cada video. Para continuar al siguiente módulo deberás obtener mínimo 60/100.</p>
+      </div>
+      <div class="video-grid course-grid">
+        <article class="video-card course-card" data-module="1">
+          <span>01</span><h3>¿Qué es realmente la oratoria?</h3>
+          <p>Discurso, persuasión, ethos, pathos y logos.</p>
+          <div class="course-status" id="course-status-1">Video pendiente de grabación</div>
+          <button class="video-button" type="button" disabled>Video próximamente</button>
+          <button class="quiz-button" type="button" data-quiz="1" disabled>Mini-test bloqueado</button>
+        </article>
+        <article class="video-card course-card" data-module="2">
+          <span>02</span><h3>¿Cómo funciona la comunicación?</h3>
+          <p>Mensaje, público, contexto y propósito.</p>
+          <div class="course-status" id="course-status-2">Bloqueado hasta aprobar el módulo 1</div>
+          <button class="video-button" type="button" disabled>Video bloqueado</button>
+          <button class="quiz-button" type="button" data-quiz="2" disabled>Mini-test bloqueado</button>
+        </article>
+        <article class="video-card course-card" data-module="3">
+          <span>03</span><h3>El miedo a hablar en público</h3>
+          <p>Nervios, pausas llenas, práctica y exposición progresiva.</p>
+          <div class="course-status" id="course-status-3">Bloqueado hasta aprobar el módulo 2</div>
+          <button class="video-button" type="button" disabled>Video bloqueado</button>
+          <button class="quiz-button" type="button" data-quiz="3" disabled>Mini-test bloqueado</button>
+        </article>
+        <article class="video-card course-card" data-module="4">
+          <span>04</span><h3>¿Cómo construir un discurso?</h3>
+          <p>Introducción, desarrollo y conclusión.</p>
+          <div class="course-status" id="course-status-4">Bloqueado hasta aprobar el módulo 3</div>
+          <button class="video-button" type="button" disabled>Video bloqueado</button>
+          <button class="quiz-button" type="button" data-quiz="4" disabled>Mini-test bloqueado</button>
+        </article>
+      </div>
+      <p class="course-note">Los guiones ya están definidos. Los videos deben grabarse y subirse antes de activar el avance automático y los mini-tests.</p>
+    </section>
+
+    <section id="practica" class="section practice-section">
+      <div class="section-heading">
+        <p class="section-tag">ENTRENAMIENTO</p>
+        <h2>Practica tu oratoria</h2>
+        <p>Dos actividades para aplicar lo aprendido: habla durante 30 segundos y construye un argumento.</p>
+      </div>
+      <div class="practice-grid practice-grid-two">
+        <article class="practice-card">
+          <span class="card-number">01</span>
+          <h3>Habla durante 30 segundos</h3>
+          <p>Habla sobre un tema y revisa la transcripción y los indicadores de tu práctica.</p>
+          <button type="button" data-ejercicio="0">Comenzar práctica</button>
+        </article>
+        <article class="practice-card">
+          <span class="card-number">02</span>
+          <h3>Construye un argumento</h3>
+          <p>Organiza una postura y una razón para expresar una idea de forma clara.</p>
+          <button type="button" data-ejercicio="1">Comenzar práctica</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="recursos" class="section">
+      <div class="section-heading">
+        <p class="section-tag">TUTOR RODACH</p>
+        <h2>Retroalimentación responsable</h2>
+        <p>Las referencias se mostrarán con autor, obra, año y enlace verificable. Si una afirmación no tiene una fuente comprobada, se presentará como orientación de práctica y no como hecho científico.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content"><h2>RODACH</h2><p>Proyecto de oratoria para estudiantes del SENA.</p></div>
+    <p class="copyright">© 2026 Rodach. Proyecto académico.</p>
+  </footer>
+  <script src="script.js" defer></script>
+  <script src="course.js" defer></script>
+</body>
+</html>
