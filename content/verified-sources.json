@@ -1,0 +1,23 @@
+{
+  "policy": "verified-sources-only",
+  "description": "Tutor Rodach solo puede mostrar una referencia cuando existe un registro bibliográfico comprobable.",
+  "required_fields": [
+    "authors",
+    "title",
+    "year",
+    "publication",
+    "doi_or_official_url",
+    "supported_claim"
+  ],
+  "sources": [
+    {
+      "authors": ["Herbert H. Clark", "Jean E. Fox Tree"],
+      "title": "Using uh and um in spontaneous speaking",
+      "year": 2002,
+      "publication": "Cognition, 84(1), 73–111",
+      "doi_or_official_url": "https://doi.org/10.1016/S0010-0277(02)00017-3",
+      "supported_claim": "Analiza el uso de uh y um en el habla espontánea y su relación con la planificación del discurso.",
+      "usage_rule": "No usar esta fuente para afirmar una puntuación exacta ni para evaluar por sí sola el desempeño de un estudiante."
+    }
+  ]
+}
