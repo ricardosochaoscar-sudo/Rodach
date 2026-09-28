@@ -1,0 +1,51 @@
+/* Theme overrides for mini-test navigation buttons and result actions */
+
+.nav-row .primary-button, .result-actions .primary-button, #next-q {
+  background: linear-gradient(90deg,#7c3aed,#06b6d4);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 12px 32px rgba(124,58,237,0.18);
+  transition: transform .16s ease, box-shadow .16s ease, opacity .12s ease;
+}
+
+.nav-row .primary-button::after, #next-q::after {
+  content: "➜";
+  display: inline-block;
+  transform: translateX(2px);
+  transition: transform .18s ease;
+  font-size: 1rem;
+}
+
+.nav-row .primary-button:hover, #next-q:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(124,58,237,0.22);
+}
+
+.nav-row .primary-button:hover::after, #next-q:hover::after {
+  transform: translateX(6px);
+}
+
+.nav-row .secondary-button, .result-actions .secondary-button, #prev-q {
+  background: #fff;
+  color: #374151;
+  border: 1px solid #e6edf8;
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.04);
+}
+
+.nav-row .secondary-button:hover, .result-actions .secondary-button:hover, #prev-q:hover {
+  transform: translateY(-2px);
+}
+
+/* Small responsive tweak */
+@media (max-width: 600px) {
+  .nav-row .primary-button, #next-q { width: 100%; justify-content: center; }
+  .nav-row .secondary-button, #prev-q { width: 100%; }
+}
