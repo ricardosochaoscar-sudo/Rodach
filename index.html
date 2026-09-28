@@ -49,16 +49,22 @@
         <article class="video-card course-card" data-module="2">
           <span>02</span><h3>¿Cómo funciona la comunicación?</h3>
           <p>Mensaje, público, contexto y propósito.</p>
-          <div class="course-status" id="course-status-2">Bloqueado hasta aprobar el módulo 1</div>
-          <button class="video-button" type="button" disabled>Video bloqueado</button>
-          <button class="quiz-button" type="button" data-quiz="2" disabled>Mini-test bloqueado</button>
+          <div class="course-status" id="course-status-2">Video pendiente (sube el archivo o comparte enlace público)</div>
+          <div class="video-embed" id="video-2-embed" style="display:none;">
+            <!-- Inserta aquí el <video> o iframe del módulo 2 cuando el archivo esté disponible -->
+          </div>
+          <button class="video-button" type="button" id="open-video-2" disabled>Video bloqueado</button>
+          <button class="quiz-button" type="button" data-quiz="2">Abrir mini-test (disponible)</button>
         </article>
         <article class="video-card course-card" data-module="3">
           <span>03</span><h3>El miedo a hablar en público</h3>
           <p>Nervios, pausas llenas, práctica y exposición progresiva.</p>
-          <div class="course-status" id="course-status-3">Bloqueado hasta aprobar el módulo 2</div>
-          <button class="video-button" type="button" disabled>Video bloqueado</button>
-          <button class="quiz-button" type="button" data-quiz="3" disabled>Mini-test bloqueado</button>
+          <div class="course-status" id="course-status-3">Video incorporado</div>
+          <div class="video-embed">
+            <iframe id="player-3" width="100%" height="220" src="https://www.youtube.com/embed/nsytT2-cems?enablejsapi=1" title="El miedo a hablar en público" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <button class="video-button" type="button" data-open-player="3">Ver video en página</button>
+          <button class="quiz-button" type="button" data-quiz="3">Abrir mini-test (disponible)</button>
         </article>
         <article class="video-card course-card" data-module="4">
           <span>04</span><h3>¿Cómo construir un discurso?</h3>
@@ -106,6 +112,9 @@
     <div class="footer-content"><h2>RODACH</h2><p>Proyecto de oratoria para estudiantes del SENA.</p></div>
     <p class="copyright">© 2026 Rodach. Proyecto académico.</p>
   </footer>
+
+  <!-- YouTube IFrame API needed to detect video end -->
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js" defer></script>
   <script src="course.js" defer></script>
 </body>
