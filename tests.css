@@ -1,37 +1,7 @@
-/* tests.css — styles for immersive mini-test modal and improved button visuals */
-
-/* Buttons are already styled in style.css; the modal styles here are focused on the test UI */
-
-.test-overlay{display:none}
-.test-window{position:relative}
-
-/* The tests overlay and card styles are included in style.css previously, but we add refinements here */
-
-.test-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:14px}
-.test-title{font-weight:800;color:#0f172a;font-size:1.15rem;display:flex;gap:12px;align-items:center}
-.test-score-badge{background:#f1f5f9;color:#0f172a;padding:6px 10px;border-radius:999px;font-weight:700;border:1px solid #dbeafe}
-.test-progress{flex:1;margin-left:12px}
-.progress-bar{height:10px;background:#eef2ff;border-radius:999px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,#34d399,#06b6d4);width:0%}
-
-.test-body{min-height:240px}
-.question-card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,0.08);}
-.q-number{font-size:0.9rem;color:#475569;margin:0 0 6px}
-.q-prompt{margin:0 0 12px;color:#0f172a}
-.options{display:flex;flex-direction:column;gap:8px}
-.option{display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;border:1px solid #eef2ff}
-.option input{transform:scale(1.05)}
-.long-text,.option-text{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef8;background:#fbfdff}
-.ordering-list{list-style:decimal inside;margin:8px 0;padding-left:18px}
-.matching-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.match-row{display:flex;gap:8px;align-items:center}
-.hotspot-select select{padding:8px;border-radius:8px}
-.nav-row{display:flex;justify-content:space-between;gap:12px;margin-top:14px}
-
-.result-screen{background:#fff;padding:20px;border-radius:12px;text-align:center}
-.result-details{margin-top:12px;text-align:left}
-.res-row{padding:6px 0;border-bottom:1px solid #f1f5f9}
-.result-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
-
-/* mobile tweaks */
-@media (max-width:720px){ .test-window{width:94%;padding:14px} .test-title{font-size:1rem} }
+/* Modal de mini-tests Rodach: siempre se muestra dentro de la página */
+#test-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(5,10,28,.78);backdrop-filter:blur(8px);z-index:20000}
+#test-overlay[style*="display: flex"]{display:flex!important}
+.test-window{position:relative;width:min(760px,96vw);max-height:92vh;overflow:auto;padding:30px;background:linear-gradient(145deg,#fff,#f5f7ff);border:1px solid rgba(139,92,246,.25);border-radius:26px;box-shadow:0 30px 90px rgba(0,0,0,.35);color:#172033}
+.test-close{position:absolute;right:18px;top:14px;width:40px;height:40px;border:0;border-radius:50%;background:#eef2ff;color:#4338ca;font-size:25px;cursor:pointer}.test-close:hover{background:#ddd6fe;transform:rotate(90deg)}
+.test-header{padding-right:45px}.test-title{font-size:clamp(1.15rem,3vw,1.7rem);font-weight:800;color:#172033;display:flex;justify-content:space-between;gap:12px;align-items:center}.test-score-badge{white-space:nowrap;background:#ede9fe;color:#6d28d9;padding:7px 11px;border-radius:99px;font-size:.78rem}.test-progress{margin:18px 0}.progress-bar{height:9px;background:#e2e8f0;border-radius:99px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,#8b5cf6,#06b6d4);transition:width .25s ease}.test-body{min-height:220px}.question-card{padding:22px;border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(15,23,42,.08)}.q-number{margin:0 0 8px;color:#7c3aed;font-size:.9rem}.q-prompt{margin:0 0 18px;font-size:1.12rem;color:#172033}.options{display:grid;gap:10px}.option{display:flex;gap:10px;align-items:center;padding:13px 15px;border:1px solid #e2e8f0;border-radius:12px;cursor:pointer;transition:.2s}.option:hover{border-color:#8b5cf6;background:#f5f3ff}.option input{accent-color:#7c3aed}.long-text,.option-text,.match-row input,.question-card>input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;font:inherit;resize:vertical}.tf-list,.matching-grid{display:grid;gap:10px}.tf-row,.match-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px;background:#f8fafc;border-radius:10px}.tf-row select,.hotspot-select select{padding:9px;border:1px solid #cbd5e1;border-radius:9px}.nav-row,.result-actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}.result-screen{text-align:center;padding:22px}.res-row{padding:8px;border-bottom:1px solid #e2e8f0}.muted,.audio-instruction{color:#64748b}.course-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.course-actions .video-button,.course-actions .quiz-button{margin:0}.quiz-button{display:inline-flex;align-items:center;justify-content:center;padding:10px 15px;border:1px solid #a78bfa;border-radius:10px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);color:#5b21b6;font-weight:800;cursor:pointer;box-shadow:0 5px 14px rgba(124,58,237,.13);transition:.2s}.quiz-button:hover{transform:translateY(-2px);background:#ddd6fe}.quiz-button:disabled{opacity:.45;cursor:not-allowed;transform:none}.video-button{cursor:pointer}.video-button:disabled{cursor:not-allowed}
+@media(max-width:600px){#test-overlay{padding:10px}.test-window{padding:20px 15px;border-radius:18px}.test-title{display:block}.test-score-badge{display:inline-block;margin-top:8px}.tf-row,.match-row{display:block}.tf-row select{margin-top:7px}.nav-row{flex-direction:column}.nav-row button{width:100%}}
