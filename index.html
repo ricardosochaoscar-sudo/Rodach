@@ -43,19 +43,23 @@
           <span>01</span><h3>¿Qué es realmente la oratoria?</h3>
           <p>Discurso, persuasión, ethos, pathos y logos.</p>
           <div class="course-status" id="course-status-1">Video pendiente de grabación</div>
-          <button class="video-button" type="button" disabled>Video próximamente</button>
+          <button class="video-button" type="button" disabled>Ver video</button>
           <button class="quiz-button" type="button" data-quiz="1" disabled>Mini-test bloqueado</button>
         </article>
+
+        <!-- Módulo 2: debe ir antes del 3 -->
         <article class="video-card course-card" data-module="2">
           <span>02</span><h3>¿Cómo funciona la comunicación?</h3>
           <p>Mensaje, público, contexto y propósito.</p>
-          <div class="course-status" id="course-status-2">Video pendiente (sube el archivo o comparte enlace público)</div>
-          <div class="video-embed" id="video-2-embed" style="display:none;">
-            <!-- Inserta aquí el <video> o iframe del módulo 2 cuando el archivo esté disponible -->
+          <div class="course-status" id="course-status-2">Video incorporado</div>
+          <div class="video-embed">
+            <!-- YouTube embedded player for module 2 -->
+            <iframe id="player-2" width="100%" height="220" src="https://www.youtube.com/embed/pT6tWYZOR0g?enablejsapi=1" title="¿Cómo funciona la comunicación?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-          <button class="video-button" type="button" id="open-video-2" disabled>Video bloqueado</button>
-          <button class="quiz-button" type="button" data-quiz="2">Abrir mini-test (disponible)</button>
+          <button class="video-button" type="button">Ver video</button>
+          <button class="quiz-button" type="button" data-quiz="2">Abrir mini-test</button>
         </article>
+
         <article class="video-card course-card" data-module="3">
           <span>03</span><h3>El miedo a hablar en público</h3>
           <p>Nervios, pausas llenas, práctica y exposición progresiva.</p>
@@ -63,14 +67,15 @@
           <div class="video-embed">
             <iframe id="player-3" width="100%" height="220" src="https://www.youtube.com/embed/nsytT2-cems?enablejsapi=1" title="El miedo a hablar en público" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-          <button class="video-button" type="button" data-open-player="3">Ver video en página</button>
-          <button class="quiz-button" type="button" data-quiz="3">Abrir mini-test (disponible)</button>
+          <button class="video-button" type="button">Ver video</button>
+          <button class="quiz-button" type="button" data-quiz="3">Abrir mini-test</button>
         </article>
+
         <article class="video-card course-card" data-module="4">
           <span>04</span><h3>¿Cómo construir un discurso?</h3>
           <p>Introducción, desarrollo y conclusión.</p>
           <div class="course-status" id="course-status-4">Bloqueado hasta aprobar el módulo 3</div>
-          <button class="video-button" type="button" disabled>Video bloqueado</button>
+          <button class="video-button" type="button" disabled>Ver video</button>
           <button class="quiz-button" type="button" data-quiz="4" disabled>Mini-test bloqueado</button>
         </article>
       </div>
@@ -117,5 +122,6 @@
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js" defer></script>
   <script src="course.js" defer></script>
+  <script src="tests.js" defer></script>
 </body>
 </html>

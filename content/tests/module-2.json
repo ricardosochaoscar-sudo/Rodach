@@ -1,0 +1,17 @@
+{
+  "module_id": 2,
+  "title": "¿Cómo funciona la comunicación?",
+  "passing_score": 60,
+  "questions": [
+    {"id": "q1", "type": "single_choice", "weight": 12, "prompt": "¿Cuál NO forma parte básica del proceso de comunicación?", "options": ["Emisor","Mensaje","Refrigerador","Receptor"], "correct": 2},
+    {"id": "q2", "type": "matching", "weight": 8, "prompt": "Relaciona cada elemento con su ejemplo correcto (4 pares).", "pairs": [{"left":"Mensaje","right":["una propuesta de proyecto","una gráfica"]},{"left":"Público","right":["compañeros de clase","público general"]},{"left":"Contexto","right":["auditorio escolar","chat de WhatsApp"]},{"left":"Propósito","right":["informar","persuadir"]}]},
+    {"id": "q3", "type": "single_choice_with_text", "weight": 12, "prompt": "Caso: quieres convencer al colegio de reciclar. ¿Qué combinación es más efectiva?", "options": ["Solo facts","Facts + emociones","Solo pathos","Solo autoridad"], "correct": 1, "bonus_keywords": ["compañeros","datos","beneficio","emocion","ejemplo"]},
+    {"id": "q4", "type": "ordering", "weight": 10, "prompt": "Ordena las preguntas que debe hacerse el orador antes de hablar.", "items": ["¿Qué quiero comunicar?","¿A quién?","¿Por qué importa?","¿Qué canal usar?"], "correct_order": [0,1,2,3]},
+    {"id": "q5", "type": "short_text", "weight": 8, "prompt": "En 1‑2 frases, diferencia 'título' y 'tema'.", "scoring": {"keywords_title":["específico","breve","título"], "keywords_tema":["amplio","tema","contexto"], "full":8, "partial":4}},
+    {"id": "q6", "type": "single_choice", "weight": 10, "prompt": "En la frase de ejemplo, ¿cuál es el problema principal?", "options": ["Mala elección de palabras","Público objetivo incorrecto","Falta de evidencia","Problema de tono"], "correct": 2},
+    {"id": "q7", "type": "true_false_set", "weight": 8, "prompt": "Marca Verdadero/Falso sobre ethos, pathos, logos y contexto.", "items": [{"text":"Ethos está relacionado con la credibilidad.","answer":true},{"text":"Pathos se refiere a datos estadísticos.","answer":false},{"text":"Logos implica argumentos racionales.","answer":true},{"text":"Contexto no influye en la interpretación del mensaje.","answer":false}]},
+    {"id": "q8", "type": "constructive_short", "weight": 12, "prompt": "Redacta 2 frases: una con logos (dato/razón) y otra con pathos (elemento emocional) para convencer sobre reciclar.", "scoring": {"require_logo":true,"require_pathos":true,"full":12,"partial":6}},
+    {"id": "q9", "type": "image_hotspot", "weight": 10, "prompt": "Selecciona en la imagen qué falla en la comunicación (marca el hotspot correcto).", "hotspots": [{"id":"A","desc":"Mensaje mal ubicado"},{"id":"B","desc":"Público equivocado"},{"id":"C","desc":"Falta de evidencia"}], "correct": "B"},
+    {"id": "q10", "type": "open_reflection", "weight": 10, "prompt": "Reflexión: ¿Qué cambiarías mañana en tu forma de comunicar?", "manual_review": true}
+  ]
+}

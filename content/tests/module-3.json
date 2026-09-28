@@ -1,0 +1,17 @@
+{
+  "module_id": 3,
+  "title": "El miedo a hablar en público",
+  "passing_score": 60,
+  "questions": [
+    {"id":"q1","type":"single_choice","weight":10,"prompt":"¿Cuál es una respuesta fisiológica típica ante nervios?","options":["Corazón acelerado","Ganas de dormir","Verborrea"],"correct":0},
+    {"id":"q2","type":"audio_analysis","weight":10,"prompt":"Sube o graba 30s de tu práctica. Detectaremos muletillas y pausas.","rules":{"muletillas_full":2,"score_map":{"<=2":10,"3-5":6,">5":2}}},
+    {"id":"q3","type":"true_false_set","weight":8,"prompt":"Verdadero/Falso sobre ansiedad y pausas.","items":[{"text":"Más pausas = siempre más ansiedad.","answer":false},{"text":"Entrenar reduce la frecuencia de muletillas.","answer":true},{"text":"Una pausa ocasional no significa mal orador.","answer":true},{"text":"El público nunca nota las pausas breves.","answer":false}]},
+    {"id":"q4","type":"single_choice_with_text","weight":12,"prompt":"Mejor estrategia para reducir ansiedad en una exposición breve","options":["Respiración + ensayar","Improvisar sin ensayo","Memorizar palabra por palabra","Solo notas"],"correct":0,"bonus_keywords":["respira","ensayar","practica"]},
+    {"id":"q5","type":"self_scale","weight":10,"prompt":"Autoevalúa del 1 al 5 cuánto nervioso te sentiste antes de hablar."},
+    {"id":"q6","type":"matching","weight":10,"prompt":"Empareja técnica con efecto.","pairs":[{"left":"Respiración diafragmática","right":"Controla ritmo"},{"left":"Anclaje visual","right":"Reduce vacilación"},{"left":"Ensayo escalonado","right":"Aumenta confianza"}]},
+    {"id":"q7","type":"ordering","weight":12,"prompt":"Ordena 3 pasos para responder si te quedas en blanco.","items":["Respira","Reformula la pregunta","Pide un momento"],"correct_order":[2,0,1]},
+    {"id":"q8","type":"constructive_short","weight":8,"prompt":"Construye una mini‑rutina de preparación de 30s antes de hablar (3 pasos).","scoring":{"keywords":["respira","visualiza","ensaya"],"full":8,"partial":4}},
+    {"id":"q9","type":"audio_quality","weight":10,"prompt":"Auto‑grabación: se analizará PPM y muletillas. (Si integras servidor de transcripción, devolverá timestamps y puntaje)."},
+    {"id":"q10","type":"action_plan","weight":10,"prompt":"Plan de mejora 2 semanas — escribe 2 acciones concretas (manual review).","manual_review":true}
+  ]
+}
