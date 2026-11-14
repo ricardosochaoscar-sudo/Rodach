@@ -35,6 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
             <button type="button" data-pitch-timer="reset">Reiniciar</button>
           </div>
         </div>`
+    },
+    "everyday-analogies": {
+      category: "CREATIVIDAD COMUNICATIVA",
+      title: "La explicación con analogías",
+      description: `<p class="practice-intro"><strong>Objetivo:</strong> Hacer comprensibles las ideas difíciles.</p>
+        <ol>
+          <li>Escoge un concepto complicado, como la inteligencia artificial, la inflación o la gravedad.</li>
+          <li>Explícalo utilizando tres comparaciones con situaciones cotidianas.</li>
+        </ol>
+        <img class="story-example-image" src="https://muyinteresante.okdiario.com/wp-content/uploads/sites/5/2023/10/17/652ebd6cbf532.jpeg" alt="Imagen para inspirar explicaciones de ideas complejas mediante analogías" loading="lazy">
+        <p class="story-challenge"><strong>Desafío:</strong> Que alguien sin conocimientos del tema pueda comprenderlo gracias a tus explicaciones.</p>`
     }
   };
 
