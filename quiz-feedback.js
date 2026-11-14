@@ -10,6 +10,7 @@
     .quiz-answer-feedback.is-correct { color: #15803d; }
     .quiz-answer-feedback.is-incorrect { color: #b91c1c; }
     .test-score-badge { white-space: nowrap; }
+    .course-status { display: none !important; }
   `;
   document.head.appendChild(feedbackStyles);
 
