@@ -1,0 +1,168 @@
+/* Practice card for the featured storytelling exercise. */
+.story-practice-card {
+  width: min(100%, 1050px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.9fr);
+  align-items: center;
+  gap: 34px;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #e1e5ed;
+  border-radius: 20px;
+  box-shadow: 0 16px 38px rgba(17, 24, 39, 0.07);
+}
+
+.story-practice-copy h3 {
+  margin: 10px 0 14px;
+  color: #172033;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+
+.story-practice-tag {
+  color: #5b4bdb;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.story-objective {
+  margin-bottom: 22px;
+  color: #697386;
+}
+
+.story-practice-start,
+.story-practice-dialog button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 19px;
+  background: #172033;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.story-practice-start:hover,
+.story-practice-dialog button:hover {
+  background: #5b4bdb;
+  transform: translateY(-2px);
+}
+
+.story-example-image {
+  display: block;
+  width: 100%;
+  max-height: 310px;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #eef1f7;
+}
+
+.story-practice-dialog[hidden] {
+  display: none;
+}
+
+.story-practice-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 10020;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.story-practice-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 16, 32, 0.72);
+}
+
+.story-practice-panel {
+  position: relative;
+  z-index: 1;
+  width: min(680px, 100%);
+  max-height: min(90vh, 850px);
+  overflow: auto;
+  padding: clamp(22px, 5vw, 38px);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+}
+
+.story-practice-panel h2 {
+  margin: 8px 0 10px;
+  color: #172033;
+}
+
+.story-practice-panel p,
+.story-practice-panel li {
+  color: #596579;
+}
+
+.story-practice-panel ol {
+  padding-left: 22px;
+}
+
+.story-practice-panel li {
+  margin: 8px 0;
+}
+
+.story-practice-dialog .story-dialog-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 7px 12px;
+  background: #eef1f7;
+  color: #172033;
+  font-size: 1.25rem;
+}
+
+.story-timer {
+  margin: 20px 0;
+  padding: 14px;
+  border-radius: 12px;
+  background: #f1f3f9;
+  color: #172033;
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-challenge {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border-left: 4px solid #5b4bdb;
+  border-radius: 8px;
+  background: #f5f4ff;
+}
+
+.story-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.story-practice-dialog .story-dialog-actions .story-secondary-button {
+  background: #eef1f7;
+  color: #172033;
+}
+
+body.story-dialog-open {
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .story-practice-card {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .story-example-image {
+    max-height: 260px;
+    grid-row: 1;
+  }
+}

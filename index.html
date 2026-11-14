@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="tests.css">
   <link rel="stylesheet" href="tests-theme.css">
   <link rel="stylesheet" href="sources.css">
+  <link rel="stylesheet" href="practice.css">
 </head>
 <body>
   <header class="navbar">
@@ -38,7 +39,18 @@
       </div>
     </section>
 
-    <section id="practica" class="section practice-section"><div class="section-heading"><p class="section-tag">ENTRENAMIENTO</p><h2>Practica tu oratoria</h2><p>Dos actividades para aplicar lo aprendido.</p></div><div class="practice-grid practice-grid-two"><article class="practice-card"><span class="card-number">01</span><h3>Habla durante 30 segundos</h3><p>Habla sobre el tema. El transcriptor capturará con precisión los patrones vocales y las muletillas detectadas.</p><button type="button" data-ejercicio="0">Comenzar práctica</button></article><article class="practice-card"><span class="card-number">02</span><h3>Construye un argumento</h3><p>Organiza una postura y una razón con claridad para mejorar tu estructura oral.</p><button type="button" data-ejercicio="1">Comenzar práctica</button></article></div></section>
+    <section id="practica" class="section practice-section">
+      <div class="section-heading"><p class="section-tag">ENTRENAMIENTO</p><h2>Practica tu oratoria</h2><p>Convierte una idea cotidiana en una historia que atrape a quien la escucha.</p></div>
+      <div class="story-practice-card">
+        <div class="story-practice-copy">
+          <span class="story-practice-tag">EXPRESIÓN Y CREATIVIDAD</span>
+          <h3>El narrador de lo cotidiano</h3>
+          <p class="story-objective"><strong>Objetivo:</strong> convertir una situación sencilla en una historia interesante.</p>
+          <button type="button" class="story-practice-start" data-story-practice>Comenzar práctica</button>
+        </div>
+        <img class="story-example-image" src="https://images.openai.com/static-rsc-4/o0NrI-eEVv-5pwmuHaZECJAXXWcH13qNSTUpQnRNoyDtJnL70aKUMrV20oG_9ePWsOyXXZgOHz8EiKuze53E1SPUiJNW8mYoAL9tJaK7UTrcQrCpRZsMlylr-HmKm329GBd5NqyzTvRgDbO8UkBUtDOk-YvUFIlG-hkCFDkjf5TsM0qAY7EtNmmcu10t-eCP?purpose=fullsize" alt="Ejemplo visual para inspirar una historia sobre un objeto cotidiano" loading="lazy">
+      </div>
+    </section>
 
     <section id="fuentes" class="section sources-section">
       <div class="section-heading"><p class="section-tag">BIBLIOTECA DE ORATORIA</p><h2>Fuentes</h2><p>Obras clásicas y actuales para aprender sobre retórica y expresión oral.</p></div>
@@ -59,5 +71,6 @@
   <script src="video-quizzes.js" defer></script>
   <script src="tests.js" defer></script>
   <script src="quiz-feedback.js" defer></script>
+  <script src="story-practice.js" defer></script>
 </body>
 </html>
