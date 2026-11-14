@@ -40,14 +40,33 @@ document.addEventListener("DOMContentLoaded", () => {
       category: "CREATIVIDAD COMUNICATIVA",
       title: "La explicación con analogías",
       description: `<p class="practice-intro"><strong>Objetivo:</strong> Hacer comprensibles las ideas difíciles.</p>
-        <ol>
-          <li>Escoge un concepto complicado, como la inteligencia artificial, la inflación o la gravedad.</li>
-          <li>Explícalo utilizando tres comparaciones con situaciones cotidianas.</li>
-        </ol>
+        <p class="practice-intro">Escoge un concepto complicado, como la inteligencia artificial, la inflación o la gravedad, y explícalo utilizando tres comparaciones con situaciones cotidianas.</p>
         <img class="story-example-image" src="https://muyinteresante.okdiario.com/wp-content/uploads/sites/5/2023/10/17/652ebd6cbf532.jpeg" alt="Imagen para inspirar explicaciones de ideas complejas mediante analogías" loading="lazy">
-        <p class="story-challenge"><strong>Desafío:</strong> Que alguien sin conocimientos del tema pueda comprenderlo gracias a tus explicaciones.</p>`
+        <p class="story-challenge"><strong>Desafío:</strong> Que alguien sin conocimientos del tema pueda comprenderlo gracias a tus explicaciones.</p>
+        <div class="analogy-topic-picker" role="group" aria-label="Temas aleatorios para practicar">
+          <span class="analogy-topic-label">Tema para explicar</span>
+          <p class="analogy-topic" aria-live="polite" aria-atomic="true"></p>
+          <div class="analogy-topic-controls">
+            <button type="button" data-topic-navigation="previous" aria-label="Tema anterior">Atrás</button>
+            <span class="analogy-topic-count" aria-live="polite"></span>
+            <button type="button" data-topic-navigation="next" aria-label="Siguiente tema">Siguiente</button>
+          </div>
+        </div>`
     }
   };
+
+  const analogyTopics = [
+    "La administración del dinero y el presupuesto personal",
+    "El manejo de las emociones y la inteligencia emocional",
+    "La toma de decisiones bajo presión",
+    "El hábito de la constancia y la disciplina diaria",
+    "La comunicación asertiva en las relaciones",
+    "El equilibrio entre el trabajo, el estudio y el tiempo libre",
+    "La gestión del tiempo y la procrastinación",
+    "El pensamiento crítico frente a la información en redes sociales",
+    "La resolución de conflictos de forma pacífica",
+    "La creación de hábitos saludables sostenibles"
+  ];
 
   const openButtons = document.querySelectorAll("[data-story-practice]");
   if (!openButtons.length) return;
@@ -71,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastOpenButton = null;
   let timerInterval = null;
   let timerSeconds = 40;
+  let currentTopicIndex = 0;
 
   function updateTimerDisplay() {
     const display = modal.querySelector(".pitch-timer-display");
@@ -83,6 +103,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function stopTimer() {
     window.clearInterval(timerInterval);
     timerInterval = null;
+  }
+
+  function updateAnalogyTopic() {
+    const topic = modal.querySelector(".analogy-topic");
+    const count = modal.querySelector(".analogy-topic-count");
+    if (!topic || !count) return;
+    topic.textContent = analogyTopics[currentTopicIndex];
+    count.textContent = `${currentTopicIndex + 1} / ${analogyTopics.length}`;
   }
 
   function closeModal() {
@@ -100,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
       lastOpenButton = button;
       stopTimer();
       timerSeconds = 40;
+      currentTopicIndex = 0;
       modal.querySelector("#story-practice-category").textContent = details.category;
       modal.querySelector("#story-practice-title").textContent = details.title;
       modal.querySelector("#story-practice-content").innerHTML = details.description;
@@ -107,8 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("story-dialog-open");
       modal.querySelector(".story-dialog-close").focus();
 
-      const timerDisplay = modal.querySelector(".pitch-timer-display");
-      if (timerDisplay) {
+      if (modal.querySelector(".pitch-timer-display")) {
         updateTimerDisplay();
         modal.querySelector('[data-pitch-timer="start"]').addEventListener("click", () => {
           if (timerInterval || timerSeconds <= 0) return;
@@ -123,6 +151,18 @@ document.addEventListener("DOMContentLoaded", () => {
           stopTimer();
           timerSeconds = 40;
           updateTimerDisplay();
+        });
+      }
+
+      if (modal.querySelector(".analogy-topic-picker")) {
+        updateAnalogyTopic();
+        modal.querySelector('[data-topic-navigation="previous"]').addEventListener("click", () => {
+          currentTopicIndex = (currentTopicIndex - 1 + analogyTopics.length) % analogyTopics.length;
+          updateAnalogyTopic();
+        });
+        modal.querySelector('[data-topic-navigation="next"]').addEventListener("click", () => {
+          currentTopicIndex = (currentTopicIndex + 1) % analogyTopics.length;
+          updateAnalogyTopic();
         });
       }
     });
