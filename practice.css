@@ -108,7 +108,6 @@
   color: #596579;
 }
 
-/* Give the elevator-pitch overview sections clear separation and breathing room. */
 .story-practice-panel .practice-intro {
   margin: 0 0 18px;
   line-height: 1.65;
@@ -158,7 +157,6 @@
   color: #172033;
 }
 
-/* Elegant circular countdown inspired by the supplied timer reference. */
 .pitch-timer {
   display: grid;
   justify-items: center;
@@ -199,6 +197,98 @@
   min-width: 88px;
 }
 
+/* A clear, polished topic card with centered controls and a readable progress marker. */
+.analogy-topic-picker {
+  display: grid;
+  gap: 14px;
+  margin: 26px 0 8px;
+  padding: 22px;
+  border: 1px solid #e2e7f0;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #f8f9ff 0%, #f1f3fc 100%);
+  box-shadow: 0 12px 28px rgba(23, 32, 51, 0.08);
+  text-align: center;
+}
+
+.analogy-topic-label {
+  justify-self: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e9e7ff;
+  color: #5545ca;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.story-practice-panel .analogy-topic {
+  display: grid;
+  min-height: 88px;
+  place-items: center;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid #e8eaf3;
+  border-radius: 14px;
+  background: #fff;
+  color: #172033;
+  font-size: clamp(1.05rem, 2.8vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(23, 32, 51, 0.04);
+}
+
+.analogy-topic-controls {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.story-practice-dialog .analogy-topic-controls button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid #dfe3ed;
+  border-radius: 11px;
+  background: #fff;
+  color: #263248;
+  font-weight: 700;
+}
+
+.story-practice-dialog .analogy-topic-controls button:last-child {
+  border-color: #5545ca;
+  background: #5b4bdb;
+  color: #fff;
+}
+
+.story-practice-dialog .analogy-topic-controls button:hover {
+  border-color: #5545ca;
+  background: #eeeaff;
+  color: #3e32a6;
+}
+
+.story-practice-dialog .analogy-topic-controls button:last-child:hover {
+  background: #4939c5;
+  color: #fff;
+}
+
+.analogy-topic-count {
+  min-width: 54px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #e9edf5;
+  color: #596579;
+  font-size: 0.82rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-practice-dialog button:focus-visible {
+  outline: 3px solid rgba(91, 75, 219, 0.35);
+  outline-offset: 3px;
+}
+
 body.story-dialog-open {
   overflow: hidden;
 }
@@ -221,5 +311,26 @@ body.story-dialog-open {
   .pitch-timer-display {
     width: 116px;
     font-size: 1.75rem;
+  }
+
+  .analogy-topic-picker {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .story-practice-panel .analogy-topic {
+    min-height: 100px;
+    padding: 14px;
+  }
+
+  .analogy-topic-controls {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .analogy-topic-count {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
   }
 }
