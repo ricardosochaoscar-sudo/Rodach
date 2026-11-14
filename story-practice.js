@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <ol>
         <li>Escoge un objeto que tengas cerca.</li>
         <li>Inventa una historia sobre su origen, su importancia o un supuesto pasado.</li>
-        <li>Cuéntala durante 3 minutos.</li>
         <li>Utiliza pausas, cambios de entonación y descripciones.</li>
+        <li>Practica y ejercita este ejercicio una y otra vez hasta que consigas dominar plenamente el arte de improvisar y así, no te quedarás atascado mentalmente en un discurso.</li>
       </ol>
       <img class="story-example-image" src="https://images.openai.com/static-rsc-4/o0NrI-eEVv-5pwmuHaZECJAXXWcH13qNSTUpQnRNoyDtJnL70aKUMrV20oG_9ePWsOyXXZgOHz8EiKuze53E1SPUiJNW8mYoAL9tJaK7UTrcQrCpRZsMlylr-HmKm329GBd5NqyzTvRgDbO8UkBUtDOk-YvUFIlG-hkCFDkjf5TsM0qAY7EtNmmcu10t-eCP?purpose=fullsize" alt="Ejemplo visual para inspirar una historia sobre un objeto cotidiano" loading="lazy">
       <p class="story-challenge"><strong>Desafío:</strong> Conseguir que alguien quiera escuchar la historia hasta el final.</p>
