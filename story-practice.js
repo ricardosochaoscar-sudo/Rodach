@@ -10,15 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
           <li>Utiliza pausas, cambios de entonación y descripciones.</li>
           <li>Practica y ejercita este ejercicio una y otra vez hasta que consigas dominar plenamente el arte de improvisar y así, no te quedarás atascado mentalmente en un discurso.</li>
         </ol>
-        <img class="story-example-image" src="https://images.openai.com/static-rsc-4/o0NrI-eEVv-5pwmuHaZECJAXXWcH13qNSTUpQnRNoyDtJnL70aKUMrV20oG_9ePWsOyXXZgOHz8EiKuze53E1SPUiJNW8mYoAL9tJaK7UTrcQrCpRZsMlylr-HmKm329GBd5NqyzTvRgDbO8UkBUtDOk-YvUFIlG-hkCFDkjf5TsM0qAY7EtNmmcu10t-eCP?purpose=fullsize" alt="Personas conversando y compartiendo historias" loading="lazy">
+        <img class="story-example-image" src="https://images.openai.com/static-rsc-4/o0NrI-eEVv-5pwmuHaZECJAXXWcH13qNSTUpQnRNoyDtJnL70aKUMrV20oG_9ePWsOyXXZgOHz8EiKuze53E1SPUiJNW8mYoAL9tJaK7UTrcQrRZsMlylr-HmKm329GBd5NqyzTvRgDbO8UkBUtDOk-YvUFIlG-hkCFDkjf5TsM0qAY7EtNmmcu10t-eCP?purpose=fullsize" alt="Personas conversando y compartiendo historias" loading="lazy">
         <p class="story-challenge"><strong>Desafío:</strong> Conseguir que alguien quiera escuchar la historia hasta el final.</p>`
     },
     "elevator-pitch": {
       category: "ORATORIA Y PERSUASIÓN",
       title: "El discurso del ascensor",
-      description: `<p><strong>Situación hipotética:</strong> Imagínate que estás en un ascensor con un alto directivo o un inversor clave y solo tienes el tiempo que dura el trayecto (entre 30 y 45 segundos) para presentarle tu proyecto y captar toda su atención.</p>
-        <p><strong>Qué es:</strong> Es una técnica de oratoria y persuasión diseñada para condensar la esencia de una idea, proyecto o propuesta de valor en muy poco tiempo, eliminando rodeos y yendo directo al grano.</p>
-        <p><strong>Objetivo:</strong> Sintetizar y presentar un proyecto o idea clave de forma atractiva en menos de un minuto.</p>
+      description: `<p class="practice-intro"><strong>Situación hipotética:</strong> Imagínate que estás en un ascensor con un alto directivo o un inversor clave y solo tienes el tiempo que dura el trayecto (entre 30 y 45 segundos) para presentarle tu proyecto y captar toda su atención.</p>
+        <p class="practice-intro"><strong>Qué es:</strong> Es una técnica de oratoria y persuasión diseñada para condensar la esencia de una idea, proyecto o propuesta de valor en muy poco tiempo, eliminando rodeos y yendo directo al grano.</p>
+        <p class="practice-intro"><strong>Objetivo:</strong> Sintetizar y presentar un proyecto o idea clave de forma atractiva en menos de un minuto.</p>
         <ol>
           <li>Diseña un gancho potente para captar la atención de inmediato, en los primeros segundos.</li>
           <li>Explica la solución de tu proyecto de manera clara, directa y sin rodeos innecesarios.</li>
@@ -26,7 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
           <li>Practica y repite el ejercicio hasta dominar la capacidad de persuadir bajo presión de tiempo.</li>
         </ol>
         <img class="story-example-image" src="https://www.hiringourheroes.org/wp-content/uploads/2021/03/Elevator-Pitch-Tips-2.png" alt="Consejos visuales para preparar un discurso del ascensor" loading="lazy">
-        <p class="story-challenge"><strong>Desafío:</strong> Lograr que la otra persona quiera saber más y pida tu contacto al terminar el trayecto.</p>`
+        <p class="story-challenge"><strong>Desafío:</strong> Lograr que tu mensaje sea tan claro y magnético que cualquier idea tuya tenga el máximo impacto en tiempo récord.</p>
+        <div class="pitch-timer" role="group" aria-label="Cronómetro de 40 segundos">
+          <div class="pitch-timer-display" aria-live="polite" aria-atomic="true">00:40</div>
+          <div class="pitch-timer-controls">
+            <button type="button" data-pitch-timer="start">Iniciar</button>
+            <button type="button" data-pitch-timer="stop">Detener</button>
+            <button type="button" data-pitch-timer="reset">Reiniciar</button>
+          </div>
+        </div>`
     }
   };
 
@@ -50,8 +58,25 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(modal);
 
   let lastOpenButton = null;
+  let timerInterval = null;
+  let timerSeconds = 40;
+
+  function updateTimerDisplay() {
+    const display = modal.querySelector(".pitch-timer-display");
+    if (!display) return;
+    const minutes = Math.floor(timerSeconds / 60).toString().padStart(2, "0");
+    const seconds = (timerSeconds % 60).toString().padStart(2, "0");
+    display.textContent = `${minutes}:${seconds}`;
+  }
+
+  function stopTimer() {
+    window.clearInterval(timerInterval);
+    timerInterval = null;
+  }
 
   function closeModal() {
+    stopTimer();
+    timerSeconds = 40;
     modal.hidden = true;
     document.body.classList.remove("story-dialog-open");
     if (lastOpenButton) lastOpenButton.focus();
@@ -62,12 +87,33 @@ document.addEventListener("DOMContentLoaded", () => {
       const details = practiceDetails[button.dataset.storyPractice];
       if (!details) return;
       lastOpenButton = button;
+      stopTimer();
+      timerSeconds = 40;
       modal.querySelector("#story-practice-category").textContent = details.category;
       modal.querySelector("#story-practice-title").textContent = details.title;
       modal.querySelector("#story-practice-content").innerHTML = details.description;
       modal.hidden = false;
       document.body.classList.add("story-dialog-open");
       modal.querySelector(".story-dialog-close").focus();
+
+      const timerDisplay = modal.querySelector(".pitch-timer-display");
+      if (timerDisplay) {
+        updateTimerDisplay();
+        modal.querySelector('[data-pitch-timer="start"]').addEventListener("click", () => {
+          if (timerInterval || timerSeconds <= 0) return;
+          timerInterval = window.setInterval(() => {
+            timerSeconds -= 1;
+            updateTimerDisplay();
+            if (timerSeconds <= 0) stopTimer();
+          }, 1000);
+        });
+        modal.querySelector('[data-pitch-timer="stop"]').addEventListener("click", stopTimer);
+        modal.querySelector('[data-pitch-timer="reset"]').addEventListener("click", () => {
+          stopTimer();
+          timerSeconds = 40;
+          updateTimerDisplay();
+        });
+      }
     });
   });
 
