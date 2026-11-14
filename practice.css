@@ -108,12 +108,23 @@
   color: #596579;
 }
 
+/* Give the elevator-pitch overview sections clear separation and breathing room. */
+.story-practice-panel .practice-intro {
+  margin: 0 0 18px;
+  line-height: 1.65;
+}
+
+.story-practice-panel .practice-intro + .practice-intro {
+  margin-top: 18px;
+}
+
 .story-practice-panel ol {
   padding-left: 22px;
 }
 
 .story-practice-panel li {
   margin: 8px 0;
+  line-height: 1.55;
 }
 
 .story-practice-dialog .story-dialog-close {
@@ -132,6 +143,7 @@
   border-left: 4px solid #5b4bdb;
   border-radius: 8px;
   background: #f5f4ff;
+  line-height: 1.6;
 }
 
 .story-dialog-actions {
@@ -144,6 +156,47 @@
 .story-practice-dialog .story-dialog-actions .story-secondary-button {
   background: #eef1f7;
   color: #172033;
+}
+
+/* Elegant circular countdown inspired by the supplied timer reference. */
+.pitch-timer {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  margin: 28px auto 8px;
+  padding: 24px 20px;
+  border: 1px solid #263a32;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 35%, #202e29 0%, #111a17 72%);
+  box-shadow: 0 14px 34px rgba(12, 24, 19, 0.22);
+}
+
+.pitch-timer-display {
+  display: grid;
+  width: 132px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 3px solid #57a982;
+  border-radius: 50%;
+  color: #f0f5f2;
+  font-size: 2rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 16px rgba(87, 169, 130, 0.25);
+  box-shadow: 0 0 0 5px rgba(87, 169, 130, 0.08), inset 0 0 22px rgba(87, 169, 130, 0.08);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pitch-timer-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pitch-timer-controls button {
+  min-width: 88px;
 }
 
 body.story-dialog-open {
@@ -159,5 +212,14 @@ body.story-dialog-open {
   .story-example-image {
     max-height: 260px;
     grid-row: 1;
+  }
+
+  .pitch-timer {
+    padding: 20px 14px;
+  }
+
+  .pitch-timer-display {
+    width: 116px;
+    font-size: 1.75rem;
   }
 }
