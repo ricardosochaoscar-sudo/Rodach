@@ -1,0 +1,137 @@
+{
+  "module_id": 1,
+  "title": "La Oratoria: Origen, Historia y Proposito",
+  "passing_score": 60,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿Qué es la oratoria?",
+      "options": [
+        "El arte de hablar en público para comunicar ideas",
+        "Una técnica para escribir novelas",
+        "Un tipo de lenguaje corporal sin palabras",
+        "La lectura silenciosa de un texto"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q2",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿En qué civilización de la Antigüedad se desarrolló especialmente la oratoria como arte público?",
+      "options": [
+        "En la Grecia antigua",
+        "En la era espacial",
+        "En la Edad Media únicamente",
+        "En la antigua China como deporte olímpico"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q3",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿Cuál era uno de los propósitos de la oratoria en la vida pública?",
+      "options": [
+        "Comunicar ideas y persuadir a una audiencia",
+        "Evitar que las personas compartieran opiniones",
+        "Reemplazar toda forma de escritura",
+        "Hablar sin considerar a quién escucha"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q4",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿Qué significa que la oratoria tenga una historia ligada a la participación pública?",
+      "options": [
+        "Que se usaba para presentar ideas y argumentos ante otras personas",
+        "Que solo se practicaba en conversaciones privadas",
+        "Que consistía únicamente en memorizar poemas",
+        "Que no tenía relación con la comunicación"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q5",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿Cuál de estas opciones describe mejor el propósito de un buen discurso?",
+      "options": [
+        "Transmitir un mensaje de forma comprensible y adecuada al público",
+        "Usar palabras difíciles aunque nadie las entienda",
+        "Hablar el mayor tiempo posible sin organizar las ideas",
+        "Leer rápido sin comunicar una idea central"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q6",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿Por qué es importante organizar las ideas antes de hablar?",
+      "options": [
+        "Para que el mensaje tenga claridad y llegue mejor a la audiencia",
+        "Para evitar que exista un propósito en el discurso",
+        "Para hacer que el público ignore el tema",
+        "Para reemplazar la expresión oral por gestos"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q7",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿Qué relación tiene la audiencia con la oratoria?",
+      "options": [
+        "El orador debe considerar a quién dirige su mensaje",
+        "La audiencia no influye en la forma de comunicar",
+        "El discurso debe ser idéntico en toda situación",
+        "El propósito es hablar sin que nadie escuche"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q8",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿Cuál de estas situaciones es un ejemplo de oratoria?",
+      "options": [
+        "Exponer una idea ante un grupo de estudiantes",
+        "Leer un mensaje en silencio y a solas",
+        "Escribir una nota sin compartirla",
+        "Escuchar música sin hablar"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q9",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "¿Qué elemento ayuda a que una intervención oral cumpla su propósito?",
+      "options": [
+        "Un mensaje claro y apropiado para la situación",
+        "Cambiar de tema sin explicación",
+        "Hablar sin pensar en el público",
+        "Evitar expresar las ideas principales"
+      ],
+      "correct": 0
+    },
+    {
+      "id": "q10",
+      "type": "single_choice",
+      "weight": 10,
+      "prompt": "Según el tema del video, ¿qué resume mejor la importancia de la oratoria?",
+      "options": [
+        "Permite comunicar ideas y cumplir un propósito al hablar en público",
+        "Sirve solamente para hablar más fuerte",
+        "Consiste en hablar sin preparar ni estructurar el mensaje",
+        "Es una habilidad que solo se usaba en la Antigüedad"
+      ],
+      "correct": 0
+    }
+  ]
+}
